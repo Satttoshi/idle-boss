@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useStore from "~/src/zustand/store";
 
 const StyledContainer = styled.div`
   background-color: blue;
@@ -34,9 +33,8 @@ const StyledBar = styled.div`
   }
 `;
 
-export default function ProgressBar() {
-  const { tier } = useStore();
-  const { isFilling, delay } = tier[0];
+export default function ProgressBar({ tier, isFilling }) {
+  const { delay } = tier;
 
   return (
     <StyledContainer>

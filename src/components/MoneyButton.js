@@ -1,8 +1,12 @@
-import useStore from "~/src/zustand/store";
+import { useState } from "react";
 
-export default function MoneyButton() {
-  const { addMoney, tier } = useStore();
-  const { isFilling, changeFilling, delay } = tier[0];
+export default function MoneyButton({
+  addMoney,
+  tier,
+  isFilling,
+  changeFilling,
+}) {
+  const { delay } = tier;
 
   return (
     <button
