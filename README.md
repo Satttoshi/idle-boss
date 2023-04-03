@@ -1,4 +1,4 @@
-# idle boss
+# IDLE BOSS
 
 Welcome to IDLE BOSS
 
