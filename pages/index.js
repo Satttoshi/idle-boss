@@ -1,4 +1,4 @@
-import MoneyDisplay from "@/src/components/MoneyDisplay";
+import MoneyDisplay from "~/src/components/MoneyDisplay";
 
 export default function HomePage() {
   return (
