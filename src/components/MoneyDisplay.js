@@ -1,4 +1,4 @@
-import useStore from "../zustand/store";
+import useStore from "~/src/zustand/store";
 
 export default function MoneyDisplay() {
   const { money } = useStore();
