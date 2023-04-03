@@ -4,7 +4,7 @@ export default function ProgressBar({ tier, isFilling }) {
   const { delay } = tier;
 
   return (
-    <StyledContainer>
+    <StyledContainer data-testid="progress-bar">
       {isFilling ? <StyledBar delay={delay} /> : null}
     </StyledContainer>
   );

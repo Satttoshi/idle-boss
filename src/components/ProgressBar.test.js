@@ -12,7 +12,7 @@ const tier = {
 };
 
 test("renders progress bar", () => {
-  render(<ProgressBar tier={tier} isFilling={tier} />);
-  const progressBar = screen.getByRole("region");
+  render(<ProgressBar tier={tier} isFilling={true} />);
+  const progressBar = screen.getByTestId("progress-bar");
   expect(progressBar).toBeInTheDocument();
 });
