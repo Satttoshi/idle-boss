@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  background-color: aqua;
+  background-color: blue;
   width: 400px;
   height: 50px;
   position: relative;
@@ -23,12 +23,12 @@ const StyledBar = styled.div`
   @keyframes load {
     0% {
       width: 0;
-      background: green;
+      background: aqua;
     }
 
     100% {
       width: 100%;
-      background: green;
+      background: aqua;
     }
   }
 `;
