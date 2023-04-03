@@ -1,24 +1,24 @@
-# New Project
+# idle boss
 
-This project was created from the neue fische next template.
+Welcome to IDLE BOSS
+
+- An Idle game where you get to step into the shoes of an ENTREPRENEUR 
+who just started a brand new company!
+
+- In this game, your main objective is to create products, sell them and
+to hire WORKERS & MANAGERS, who take care of that
+  
+- As the BOSS, you are challenged with a small set of precise business decisions
+for maximising YOUR PROFITS
+  
+- But don't worry, as a true BOSS you only have to play in short bursts, allowing you
+to manage your company and grow PROFITS even when you're not actively playing
+
+![image](https://user-images.githubusercontent.com/109807794/229628658-29413191-29e9-4a29-946f-471d9d38f582.png)
+
 
 ## Development
 
-### CodeSandbox
+project still under development
 
-Select the "Browser" tab to view this project. If this project contains tests, select the "Tests" tab to check your progress.
-
-> 💡 Please note that Next.js support on CodeSandbox is not great.
-
-### Local development
-
-To run project commands locally, you need to install the dependencies using `npm i` first.
-
-You can then use the following commands:
-
-- `npm run dev` to start the development server
-- `npm run build` to create a production build
-- `npm run start` to start the production build
-- `npm run test` to run the tests in watch mode (if available)
-
-> 💡 This project requires a bundler. You can use `npm run dev` to start the development server. You can then view the project in the browser at `http://localhost:3000`. The Live Preview Extension for Visual Studio Code will **not** work for this project.
+current version 0.0.0 unreleased
