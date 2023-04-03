@@ -6,6 +6,8 @@ const useStore = createZustand((set) => ({
     {
       id: "tier1",
       isUnlocked: false,
+      isFilling: false,
+      changeFilling: () => set((state) => ({ isFilling: !state.isFilling })),
       name: "sell Wordpress Website",
       income: 15,
       delay: 3000,

@@ -2,19 +2,17 @@ import useStore from "~/src/zustand/store";
 
 export default function MoneyButton() {
   const { addMoney, tier } = useStore();
-  const { delay } = tier[0];
+  const { isFilling, changeFilling, delay } = tier[0];
 
-  let disabled = false;
   return (
     <button
       type="button"
-      disabled={disabled}
+      disabled={isFilling}
       onClick={() => {
-        disabled = true;
-        addMoney();
+        changeFilling();
         setTimeout(() => {
           addMoney();
-          disabled = false;
+          changeFilling();
         }, delay);
       }}
     >

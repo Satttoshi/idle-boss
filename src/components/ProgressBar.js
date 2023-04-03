@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useStore from "~/src/zustand/store";
 
 const StyledContainer = styled.div`
   background-color: blue;
@@ -16,7 +17,7 @@ const StyledBar = styled.div`
   display: inline-block;
   overflow: hidden;
   animation-name: load;
-  animation-duration: ${({ speed }) => speed}ms;
+  animation-duration: ${({ delay }) => delay}ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
 
@@ -34,9 +35,12 @@ const StyledBar = styled.div`
 `;
 
 export default function ProgressBar() {
+  const { tier } = useStore();
+  const { isFilling, delay } = tier[0];
+
   return (
     <StyledContainer>
-      {isActive ? <StyledBar speed={speed} /> : null}
+      {isFilling ? <StyledBar speed={delay} /> : null}
     </StyledContainer>
   );
 }
