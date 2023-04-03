@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "idle-boss",
   "version": "0.0.0-unreleased",
   "private": true,
   "scripts": {
@@ -16,7 +16,8 @@
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
