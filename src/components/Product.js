@@ -5,19 +5,24 @@ import { useState } from "react";
 
 export default function Product() {
   const { addMoney, tier } = useStore();
-  const [isFilling, changeFilling] = useState(false);
+  const [isFilling, setIsFilling] = useState(false);
 
-  function handleChangeFilling() {
-    changeFilling((prev) => !prev);
+  function handleTimerStart() {
+    setIsFilling(true);
+  }
+
+  function handleTimerEnd() {
+    setIsFilling(false);
+    addMoney();
   }
 
   return (
     <>
       <MoneyButton
-        addMoney={addMoney}
         tier={tier[0]}
         isFilling={isFilling}
-        changeFilling={handleChangeFilling}
+        onTimerStart={handleTimerStart}
+        onTimerEnd={handleTimerEnd}
       />
       <ProgressBar isFilling={isFilling} tier={tier[0]} />
     </>

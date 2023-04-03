@@ -1,10 +1,8 @@
-import { useState } from "react";
-
 export default function MoneyButton({
-  addMoney,
   tier,
   isFilling,
-  changeFilling,
+  onTimerStart,
+  onTimerEnd,
 }) {
   const { delay } = tier;
 
@@ -13,10 +11,9 @@ export default function MoneyButton({
       type="button"
       disabled={isFilling}
       onClick={() => {
-        changeFilling();
+        onTimerStart();
         setTimeout(() => {
-          addMoney();
-          changeFilling();
+          onTimerEnd();
         }, delay);
       }}
     >

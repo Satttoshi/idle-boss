@@ -1,6 +1,6 @@
-import { create as createZustand } from "zustand";
+import { create as createStore } from "zustand";
 
-const useStore = createZustand((set) => ({
+const useStore = createStore((set) => ({
   money: 0,
   tier: [
     {
