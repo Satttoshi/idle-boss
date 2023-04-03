@@ -1,7 +1,17 @@
 import styled from "styled-components";
 
+export default function ProgressBar({ tier, isFilling }) {
+  const { delay } = tier;
+
+  return (
+    <StyledContainer>
+      {isFilling ? <StyledBar delay={delay} /> : null}
+    </StyledContainer>
+  );
+}
+
 const StyledContainer = styled.div`
-  background-color: blue;
+  background-color: aqua;
   width: 400px;
   height: 50px;
   position: relative;
@@ -23,22 +33,12 @@ const StyledBar = styled.div`
   @keyframes load {
     0% {
       width: 0;
-      background: aqua;
+      background: hotpink;
     }
 
     100% {
       width: 100%;
-      background: aqua;
+      background: hotpink;
     }
   }
 `;
-
-export default function ProgressBar({ tier, isFilling }) {
-  const { delay } = tier;
-
-  return (
-    <StyledContainer>
-      {isFilling ? <StyledBar speed={delay} /> : null}
-    </StyledContainer>
-  );
-}
