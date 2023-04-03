@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const path = require("path");
+
 const nextConfig = {
   compiler: {
     styledComponents: true,
@@ -10,6 +13,8 @@ const nextConfig = {
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
+
+    config.resolve.alias["~"] = path.resolve(__dirname);
 
     return config;
   },
