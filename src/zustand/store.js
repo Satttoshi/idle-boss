@@ -6,9 +6,10 @@ const useStore = createZustand((set) => ({
     {
       id: "tier1",
       isUnlocked: false,
+      isActive: false,
       name: "sell Wordpress Website",
       income: 15,
-      delay: 3000,
+      delay: 2000,
     },
   ],
   addMoney: () => set((state) => ({ money: state.money + 15 })),
