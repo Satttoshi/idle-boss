@@ -58,7 +58,6 @@ export default function Product() {
         id: "tier1",
         delay: currentTier.delay - 800,
       });
-      console.log(currentTier.delay);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [investCount]);
