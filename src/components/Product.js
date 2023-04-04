@@ -1,7 +1,7 @@
 import MoneyButton from "./MoneyButton";
 import ProgressBar from "./ProgressBar";
 import useStore from "~/src/zustand/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
 
@@ -9,10 +9,6 @@ export default function Product() {
   const { setMoney, tiers, setTier, money } = useStore();
 
   const [isFilling, setIsFilling] = useState(false);
-  const [selector, setSelector] = useState(0);
-
-  const milestones = [15, 30, 50, 75, 100, 200, "max"];
-  const currentMilestone = milestones[selector];
 
   // in preperation for multiple tiers
   function getTierById(id) {
@@ -46,9 +42,26 @@ export default function Product() {
 
   const { investPrice, investCount } = getTierById("tier1");
 
-  if (investCount >= milestones[selector] && selector < milestones.length - 1) {
-    setSelector(selector + 1);
-  }
+  // Milestone logic
+  const [selector, setSelector] = useState(0);
+  const milestones = [15, 30, 50, 75, 100, 200, "max"];
+  const currentMilestone = milestones[selector];
+
+  useEffect(() => {
+    if (
+      investCount >= milestones[selector] &&
+      selector < milestones.length - 1
+    ) {
+      setSelector(selector + 1);
+      const currentTier = getTierById("tier1");
+      setTier({
+        id: "tier1",
+        delay: currentTier.delay - 800,
+      });
+      console.log(currentTier.delay);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [investCount]);
 
   return (
     <>

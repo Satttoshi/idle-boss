@@ -1,7 +1,7 @@
 import { create as createStore } from "zustand";
 
 const useStore = createStore((set) => ({
-  money: 500000,
+  money: 10000,
   tiers: [
     {
       id: "tier1",
