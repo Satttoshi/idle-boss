@@ -17,7 +17,7 @@ export default function MoneyButton({
         }, delay);
       }}
     >
-      Click me
+      Make Money
     </button>
   );
 }

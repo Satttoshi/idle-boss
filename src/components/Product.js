@@ -2,6 +2,7 @@ import MoneyButton from "./MoneyButton";
 import ProgressBar from "./ProgressBar";
 import useStore from "~/src/zustand/store";
 import { useState } from "react";
+import InvestButton from "./InvestButton";
 
 export default function Product() {
   const { addMoney, tier } = useStore();
@@ -25,6 +26,7 @@ export default function Product() {
         onTimerEnd={handleTimerEnd}
       />
       <ProgressBar isFilling={isFilling} tier={tier[0]} />
+      <InvestButton />
     </>
   );
 }
