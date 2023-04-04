@@ -18,6 +18,7 @@ export default function InvestButton() {
     setTier({
       id: "tier1",
       income: currentTier.income + 5,
+      investPrice: currentTier.investPrice + 50,
     });
   }
 
