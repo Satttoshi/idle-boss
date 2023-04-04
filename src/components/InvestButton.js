@@ -1,36 +1,13 @@
-import useStore from "~/src/zustand/store";
-
-export default function InvestButton() {
-  const { money, tiers, setTier, setMoney } = useStore();
-
-  // in preperation for multiple tiers
-  function getTierById(id) {
-    return tiers.find((tier) => tier.id === id);
-  }
-
-  function handleInvest() {
-    const currentTier = getTierById("tier1");
-    if (currentTier.investPrice > money) {
-      return;
-    }
-    setMoney(-currentTier.investPrice);
-
-    setTier({
-      id: "tier1",
-      income: currentTier.income + 5,
-      investPrice: currentTier.investPrice + 50,
-    });
-  }
-
+export default function InvestButton({ onInvest, money, investPrice }) {
   return (
     <button
       type="button"
-      disabled={money < getTierById("tier1").investPrice}
+      disabled={money < investPrice}
       onClick={() => {
-        handleInvest();
+        onInvest();
       }}
     >
-      {"Invest! price: " + getTierById("tier1").investPrice + " €"}
+      {"Invest! price: " + investPrice + " €"}
     </button>
   );
 }
