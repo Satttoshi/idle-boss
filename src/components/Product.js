@@ -8,6 +8,7 @@ export default function Product() {
   const { setMoney, tiers } = useStore();
   const [isFilling, setIsFilling] = useState(false);
 
+  // in preperation for multiple tiers
   function getTierById(id) {
     return tiers.find((tier) => tier.id === id);
   }

@@ -10,7 +10,7 @@ const useStore = createStore((set) => ({
       name: "sell Wordpress Website",
       income: 10,
       delay: 2000,
-      investPrice: 100,
+      investPrice: 50,
     },
     {
       id: "tier2",
