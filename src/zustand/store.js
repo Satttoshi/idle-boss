@@ -10,6 +10,7 @@ const useStore = createStore((set) => ({
       name: "sell Wordpress Website",
       income: 15,
       delay: 2000,
+      investPrice: 100,
     },
   ],
   addMoney: () => set((state) => ({ money: state.money + 15 })),
