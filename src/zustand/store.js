@@ -22,8 +22,7 @@ const useStore = createStore((set) => ({
       investPrice: 200,
     },
   ],
-  addMoney: () =>
-    set((state) => ({ money: state.money + state.tiers[0].income })),
+  setMoney: (amount) => set((state) => ({ money: state.money + amount })),
 
   setTier: (updatedTier) =>
     set((state) => ({

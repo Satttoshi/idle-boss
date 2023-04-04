@@ -3,7 +3,9 @@ import useStore from "~/src/zustand/store";
 export default function InvestButton() {
   const { tiers, setTier } = useStore();
 
-  const getTierById = (id) => tiers.find((tier) => tier.id === id);
+  function getTierById(id) {
+    return tiers.find((tier) => tier.id === id);
+  }
 
   function handleInvest() {
     const currentTier = getTierById("tier1");

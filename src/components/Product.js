@@ -5,8 +5,12 @@ import { useState } from "react";
 import InvestButton from "./InvestButton";
 
 export default function Product() {
-  const { addMoney, tiers } = useStore();
+  const { setMoney, tiers } = useStore();
   const [isFilling, setIsFilling] = useState(false);
+
+  function getTierById(id) {
+    return tiers.find((tier) => tier.id === id);
+  }
 
   function handleTimerStart() {
     setIsFilling(true);
@@ -14,7 +18,8 @@ export default function Product() {
 
   function handleTimerEnd() {
     setIsFilling(false);
-    addMoney();
+    const currentTier = getTierById("tier1");
+    setMoney(currentTier.income);
   }
 
   return (
