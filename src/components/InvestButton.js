@@ -25,6 +25,7 @@ export default function InvestButton() {
   return (
     <button
       type="button"
+      disabled={money < getTierById("tier1").investPrice}
       onClick={() => {
         handleInvest();
       }}
