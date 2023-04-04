@@ -2,7 +2,7 @@ import { create as createStore } from "zustand";
 
 const useStore = createStore((set) => ({
   money: 0,
-  tier: [
+  tiers: [
     {
       id: "tier1",
       isUnlocked: false,
@@ -24,6 +24,8 @@ const useStore = createStore((set) => ({
   ],
   addMoney: () =>
     set((state) => ({ money: state.money + state.tier[0].income })),
+
+  getTierById: (id) => state.tiers.find((tier) => tier.id === id),
 
   setTier: (updatedTier) =>
     set((state) => ({

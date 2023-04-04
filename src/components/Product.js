@@ -5,7 +5,7 @@ import { useState } from "react";
 import InvestButton from "./InvestButton";
 
 export default function Product() {
-  const { addMoney, tier } = useStore();
+  const { addMoney, tiers } = useStore();
   const [isFilling, setIsFilling] = useState(false);
 
   function handleTimerStart() {
@@ -20,12 +20,12 @@ export default function Product() {
   return (
     <>
       <MoneyButton
-        tier={tier[0]}
+        tier={tiers[0]}
         isFilling={isFilling}
         onTimerStart={handleTimerStart}
         onTimerEnd={handleTimerEnd}
       />
-      <ProgressBar isFilling={isFilling} tier={tier[0]} />
+      <ProgressBar isFilling={isFilling} tier={tiers[0]} />
       <InvestButton />
     </>
   );
