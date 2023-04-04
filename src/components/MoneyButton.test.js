@@ -13,6 +13,6 @@ const tier = {
 
 test("renders money button", () => {
   render(<MoneyButton tier={tier} />);
-  const moneyDisplayElement = screen.getByRole("button");
-  expect(moneyDisplayElement).toBeInTheDocument();
+  const moneyButton = screen.getByRole("button");
+  expect(moneyButton).toBeInTheDocument();
 });
