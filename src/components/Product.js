@@ -7,7 +7,12 @@ import Milestones from "./Milestones";
 
 export default function Product() {
   const { setMoney, tiers, setTier, money } = useStore();
+
   const [isFilling, setIsFilling] = useState(false);
+  const [selector, setSelector] = useState(0);
+
+  const milestones = [15, 30, 50, 75, 100, 200, "max"];
+  const currentMilestone = milestones[selector];
 
   // in preperation for multiple tiers
   function getTierById(id) {
@@ -41,6 +46,10 @@ export default function Product() {
 
   const { investPrice, investCount } = getTierById("tier1");
 
+  if (investCount >= milestones[selector] && selector < milestones.length - 1) {
+    setSelector(selector + 1);
+  }
+
   return (
     <>
       <MoneyButton
@@ -55,7 +64,10 @@ export default function Product() {
         money={money}
         investPrice={investPrice}
       />
-      <Milestones investCount={investCount} />
+      <Milestones
+        investCount={investCount}
+        currentMilestone={currentMilestone}
+      />
     </>
   );
 }
