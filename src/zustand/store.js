@@ -1,7 +1,17 @@
-import { create as createZustand } from "zustand";
+import { create as createStore } from "zustand";
 
-const useStore = createZustand((set) => ({
+const useStore = createStore((set) => ({
   money: 0,
+  tier: [
+    {
+      id: "tier1",
+      isUnlocked: false,
+      isActive: false,
+      name: "sell Wordpress Website",
+      income: 15,
+      delay: 2000,
+    },
+  ],
   addMoney: () => set((state) => ({ money: state.money + 15 })),
 }));
 

@@ -1,11 +1,11 @@
 import MoneyDisplay from "~/src/components/MoneyDisplay";
-import MoneyButton from "~/src/components/MoneyButton";
+import Product from "~/src/components/Product";
 
 export default function HomePage() {
   return (
     <div>
       <MoneyDisplay />
-      <MoneyButton />
+      <Product />
     </div>
   );
 }
