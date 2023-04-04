@@ -3,6 +3,7 @@ import ProgressBar from "./ProgressBar";
 import useStore from "~/src/zustand/store";
 import { useState } from "react";
 import InvestButton from "./InvestButton";
+import Milestones from "./Milestones";
 
 export default function Product() {
   const { setMoney, tiers, setTier, money } = useStore();
@@ -34,10 +35,11 @@ export default function Product() {
       id: "tier1",
       income: currentTier.income + 5,
       investPrice: currentTier.investPrice + 50,
+      investCount: currentTier.investCount + 1,
     });
   }
 
-  const { investPrice } = getTierById("tier1");
+  const { investPrice, investCount } = getTierById("tier1");
 
   return (
     <>
@@ -53,6 +55,7 @@ export default function Product() {
         money={money}
         investPrice={investPrice}
       />
+      <Milestones investCount={investCount} />
     </>
   );
 }
