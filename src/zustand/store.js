@@ -1,7 +1,9 @@
 import { create as createStore } from "zustand";
 
-const useStore = createStore((set) => ({
-  money: 0,
+export const milestones = [15, 30, 50, 75, 100, 200, "max"];
+
+const useStore = createStore((set, get) => ({
+  money: 100000,
   tiers: [
     {
       id: "tier1",
@@ -11,6 +13,8 @@ const useStore = createStore((set) => ({
       income: 10,
       delay: 2000,
       investPrice: 50,
+      investCount: 0,
+      milestoneIndex: 0,
     },
     {
       id: "tier2",
@@ -20,6 +24,8 @@ const useStore = createStore((set) => ({
       income: 20,
       delay: 3000,
       investPrice: 200,
+      investCount: 0,
+      milestoneIndex: 0,
     },
   ],
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
@@ -30,6 +36,31 @@ const useStore = createStore((set) => ({
         tier.id === updatedTier.id ? { ...tier, ...updatedTier } : tier
       ),
     })),
+
+  invest: (tierId) => {
+    const { money, tiers, setTier, setMoney } = get();
+    const currentTier = tiers.find((tier) => tier.id === tierId);
+
+    if (currentTier.investPrice > money) {
+      throw new Error("not enough money");
+    }
+
+    setMoney(-currentTier.investPrice);
+
+    const didReachMilestone =
+      currentTier.investCount + 1 >= milestones[currentTier.milestoneIndex];
+
+    setTier({
+      id: tierId,
+      income: currentTier.income + 5,
+      investPrice: currentTier.investPrice + 50,
+      investCount: currentTier.investCount + 1,
+      delay: didReachMilestone ? currentTier.delay - 800 : currentTier.delay,
+      milestoneIndex: didReachMilestone
+        ? currentTier.milestoneIndex + 1
+        : currentTier.milestoneIndex,
+    });
+  },
 }));
 
 export default useStore;

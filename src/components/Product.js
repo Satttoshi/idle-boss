@@ -1,17 +1,17 @@
 import MoneyButton from "./MoneyButton";
 import ProgressBar from "./ProgressBar";
-import useStore from "~/src/zustand/store";
+import useStore, { milestones } from "~/src/zustand/store";
 import { useState } from "react";
 import InvestButton from "./InvestButton";
+import Milestones from "./Milestones";
 
 export default function Product() {
-  const { setMoney, tiers, setTier, money } = useStore();
+  const { setMoney, tiers, money, invest } = useStore();
+
   const [isFilling, setIsFilling] = useState(false);
 
-  // in preperation for multiple tiers
-  function getTierById(id) {
-    return tiers.find((tier) => tier.id === id);
-  }
+  // replace tier1 with variable tierId
+  const currentTier = tiers.find((tier) => tier.id === "tier1");
 
   function handleTimerStart() {
     setIsFilling(true);
@@ -19,39 +19,37 @@ export default function Product() {
 
   function handleTimerEnd() {
     setIsFilling(false);
-    const currentTier = getTierById("tier1");
     setMoney(currentTier.income);
   }
 
   function handleInvest() {
-    const currentTier = getTierById("tier1");
-    if (currentTier.investPrice > money) {
-      return;
+    try {
+      invest(currentTier.id);
+    } catch (error) {
+      // mby implement not enough money popup in a later US
+      console.error(error.message);
     }
-    setMoney(-currentTier.investPrice);
-
-    setTier({
-      id: "tier1",
-      income: currentTier.income + 5,
-      investPrice: currentTier.investPrice + 50,
-    });
   }
 
-  const { investPrice } = getTierById("tier1");
+  const { investCount, investPrice, milestoneIndex } = currentTier;
 
   return (
     <>
       <MoneyButton
-        tier={tiers[0]}
+        tier={currentTier}
         isFilling={isFilling}
         onTimerStart={handleTimerStart}
         onTimerEnd={handleTimerEnd}
       />
-      <ProgressBar isFilling={isFilling} tier={tiers[0]} />
+      <ProgressBar isFilling={isFilling} tier={currentTier} />
       <InvestButton
         onInvest={handleInvest}
         money={money}
         investPrice={investPrice}
+      />
+      <Milestones
+        investCount={investCount}
+        currentMilestone={milestones[milestoneIndex]}
       />
     </>
   );
