@@ -18,6 +18,7 @@ const useStore = createStore((set, get) => ({
     },
     {
       id: "tier2",
+      unlockPrice: 10000,
       isUnlocked: false,
       isActive: false,
       name: "sell React Website",
@@ -29,6 +30,7 @@ const useStore = createStore((set, get) => ({
     },
     {
       id: "tier3",
+      unlockPrice: 50000,
       isUnlocked: false,
       isActive: false,
       name: "sell Next-js Website",
@@ -47,6 +49,22 @@ const useStore = createStore((set, get) => ({
         tier.id === updatedTier.id ? { ...tier, ...updatedTier } : tier
       ),
     })),
+
+  unlock: (tierId) => {
+    const { money, tiers, setTier } = get();
+    const currentTier = tiers.find((tier) => tier.id === tierId);
+
+    if (currentTier.unlockPrice > money) {
+      throw new Error("not enough money");
+    }
+
+    setMoney(-currentTier.unlockPrice);
+
+    setTier({
+      id: tierId,
+      isUnlocked: true,
+    });
+  },
 
   invest: (tierId) => {
     const { money, tiers, setTier, setMoney } = get();
