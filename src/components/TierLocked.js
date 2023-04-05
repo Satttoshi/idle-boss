@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
 
-export default function TierLocked() {
+export default function TierLocked({ tierId }) {
   //dummy data
-  const tierId = "tier2";
 
   const { unlock } = useStore();
 
