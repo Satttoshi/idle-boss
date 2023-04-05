@@ -4,8 +4,9 @@ import TierLocked from "./TierLocked";
 import useStore from "~/src/zustand/store";
 
 export default function Product({ tierId }) {
-  const { tiers } = useStore();
-  const currentTier = tiers.find((tier) => tier.id === tierId);
+  const { getTierById } = useStore();
+  const currentTier = getTierById(tierId);
+
   return (
     <StyledSection>
       {currentTier.isUnlocked ? (

@@ -44,6 +44,11 @@ const useStore = createStore((set, get) => ({
   ],
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
 
+  getTierById: (tierId) => {
+    const { tiers } = get();
+    return tiers.find((tier) => tier.id === tierId);
+  },
+
   setTier: (updatedTier) =>
     set((state) => ({
       tiers: state.tiers.map((tier) =>
@@ -52,8 +57,8 @@ const useStore = createStore((set, get) => ({
     })),
 
   unlock: (tierId) => {
-    const { money, tiers, setTier, setMoney } = get();
-    const currentTier = tiers.find((tier) => tier.id === tierId);
+    const { money, getTierById, setTier, setMoney } = get();
+    const currentTier = getTierById(tierId);
 
     if (currentTier.unlockPrice > money) {
       throw new Error("not enough money");
@@ -68,8 +73,8 @@ const useStore = createStore((set, get) => ({
   },
 
   invest: (tierId) => {
-    const { money, tiers, setTier, setMoney } = get();
-    const currentTier = tiers.find((tier) => tier.id === tierId);
+    const { money, setTier, setMoney, getTierById } = get();
+    const currentTier = getTierById(tierId);
 
     if (currentTier.investPrice > money) {
       throw new Error("not enough money");
