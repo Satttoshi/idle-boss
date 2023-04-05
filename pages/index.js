@@ -5,7 +5,9 @@ export default function HomePage() {
   return (
     <div>
       <MoneyDisplay />
-      <Product />
+      <Product tierId="tier1" />
+      <Product tierId="tier2" />
+      <Product tierId="tier3" />
     </div>
   );
 }

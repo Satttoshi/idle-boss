@@ -5,13 +5,13 @@ import { useState } from "react";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
 
-export default function Product() {
+export default function Product({ tierId }) {
   const { setMoney, tiers, money, invest } = useStore();
 
   const [isFilling, setIsFilling] = useState(false);
 
   // replace tier1 with variable tierId
-  const currentTier = tiers.find((tier) => tier.id === "tier1");
+  const currentTier = tiers.find((tier) => tier.id === tierId);
 
   function handleTimerStart() {
     setIsFilling(true);
