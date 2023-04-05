@@ -38,6 +38,7 @@ const StyledContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  border-radius: 5px;
 `;
 
 const StyledBar = styled.div`

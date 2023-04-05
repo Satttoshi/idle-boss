@@ -14,6 +14,7 @@ const StyledBox = styled.div`
   height: 40px;
   display: grid;
   place-items: center;
+  border-radius: 5px;
 
   h3 {
     margin: 0;
