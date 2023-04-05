@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
 
-export default function TierLocked({ tierId }) {
+export default function TierLocked({ tierId, currentTier }) {
   //dummy data
 
   const { unlock } = useStore();
@@ -15,6 +15,10 @@ export default function TierLocked({ tierId }) {
     }
   }
 
+  const formattedPrice =
+    currentTier.unlockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") +
+    ",00 €";
+
   return (
     <StyledButton
       type="button"
@@ -23,6 +27,7 @@ export default function TierLocked({ tierId }) {
       }}
     >
       <h2>Product Locked</h2>
+      <h3>Price: {formattedPrice}</h3>
     </StyledButton>
   );
 }

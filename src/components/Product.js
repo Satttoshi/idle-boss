@@ -11,7 +11,7 @@ export default function Product({ tierId }) {
       {currentTier.isUnlocked ? (
         <Tier tierId={tierId} />
       ) : (
-        <TierLocked tierId={tierId} />
+        <TierLocked tierId={tierId} currentTier={currentTier} />
       )}
     </StyledSection>
   );
