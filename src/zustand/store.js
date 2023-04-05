@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [15, 30, 50, 75, 100, 200, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 1000,
+  money: 100000,
   tiers: [
     {
       id: "tier1",
@@ -51,7 +51,7 @@ const useStore = createStore((set, get) => ({
     })),
 
   unlock: (tierId) => {
-    const { money, tiers, setTier } = get();
+    const { money, tiers, setTier, setMoney } = get();
     const currentTier = tiers.find((tier) => tier.id === tierId);
 
     if (currentTier.unlockPrice > money) {

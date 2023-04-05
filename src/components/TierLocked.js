@@ -5,10 +5,15 @@ export default function TierLocked() {
   //dummy data
   const tierId = "tier2";
 
-  const { unlockTier } = useStore();
+  const { unlock } = useStore();
 
   function handleUnlock(tierId) {
-    unlockTier(tierId);
+    try {
+      unlock(tierId);
+    } catch (error) {
+      // do something when not enough money
+      console.error(error.message);
+    }
   }
 
   return (
@@ -26,4 +31,5 @@ export default function TierLocked() {
 const StyledButton = styled.button`
   height: 150px;
   width: 500px;
+  cursor: pointer;
 `;

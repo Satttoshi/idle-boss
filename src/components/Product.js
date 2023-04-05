@@ -8,7 +8,6 @@ export default function Product({ tierId }) {
   const currentTier = tiers.find((tier) => tier.id === tierId);
   return (
     <StyledSection>
-      {" "}
       {currentTier.isUnlocked ? (
         <Tier tierId={tierId} />
       ) : (
