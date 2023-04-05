@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [15, 30, 50, 75, 100, 200, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 100000,
+  money: 1000,
   tiers: [
     {
       id: "tier1",
@@ -21,9 +21,20 @@ const useStore = createStore((set, get) => ({
       isUnlocked: false,
       isActive: false,
       name: "sell React Website",
-      income: 20,
-      delay: 3000,
+      income: 100,
+      delay: 5000,
       investPrice: 200,
+      investCount: 0,
+      milestoneIndex: 0,
+    },
+    {
+      id: "tier3",
+      isUnlocked: false,
+      isActive: false,
+      name: "sell Next-js Website",
+      income: 500,
+      delay: 10000,
+      investPrice: 500,
       investCount: 0,
       milestoneIndex: 0,
     },

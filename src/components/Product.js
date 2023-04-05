@@ -4,14 +4,15 @@ import useStore, { milestones } from "~/src/zustand/store";
 import { useState } from "react";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
+import styled from "styled-components";
 
-export default function Product() {
+export default function Product({ tierId }) {
   const { setMoney, tiers, money, invest } = useStore();
 
   const [isFilling, setIsFilling] = useState(false);
 
   // replace tier1 with variable tierId
-  const currentTier = tiers.find((tier) => tier.id === "tier1");
+  const currentTier = tiers.find((tier) => tier.id === tierId);
 
   function handleTimerStart() {
     setIsFilling(true);
@@ -35,22 +36,37 @@ export default function Product() {
 
   return (
     <>
-      <MoneyButton
-        tier={currentTier}
-        isFilling={isFilling}
-        onTimerStart={handleTimerStart}
-        onTimerEnd={handleTimerEnd}
-      />
-      <ProgressBar isFilling={isFilling} tier={currentTier} />
-      <InvestButton
-        onInvest={handleInvest}
-        money={money}
-        investPrice={investPrice}
-      />
-      <Milestones
-        investCount={investCount}
-        currentMilestone={milestones[milestoneIndex]}
-      />
+      <StyledHeader>{currentTier.name}</StyledHeader>
+      <StyledContainer>
+        <MoneyButton
+          tier={currentTier}
+          isFilling={isFilling}
+          onTimerStart={handleTimerStart}
+          onTimerEnd={handleTimerEnd}
+        />
+        <ProgressBar isFilling={isFilling} tier={currentTier} />
+      </StyledContainer>
+      <StyledContainer>
+        <Milestones
+          investCount={investCount}
+          currentMilestone={milestones[milestoneIndex]}
+        />
+        <InvestButton
+          onInvest={handleInvest}
+          money={money}
+          investPrice={investPrice}
+        />
+      </StyledContainer>
     </>
   );
 }
+
+const StyledHeader = styled.h2`
+  margin: 30px 0 0 0;
+`;
+
+const StyledContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+`;
