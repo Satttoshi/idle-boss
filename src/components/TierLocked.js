@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
 
-export default function TierLocked({ tierId, currentTier }) {
-  //dummy data
-
+export default function TierLocked({ currentTier }) {
   const { unlock } = useStore();
 
   function handleUnlock(tierId) {
@@ -23,7 +21,7 @@ export default function TierLocked({ tierId, currentTier }) {
     <StyledButton
       type="button"
       onClick={() => {
-        handleUnlock(tierId);
+        handleUnlock(currentTier.id);
       }}
     >
       <h2>Unlock {currentTier.name}!</h2>

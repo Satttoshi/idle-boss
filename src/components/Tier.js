@@ -6,13 +6,10 @@ import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
 import styled from "styled-components";
 
-export default function Tier({ tierId }) {
-  const { setMoney, tiers, money, invest } = useStore();
+export default function Tier({ currentTier }) {
+  const { setMoney, money, invest } = useStore();
 
   const [isFilling, setIsFilling] = useState(false);
-
-  // replace tier1 with variable tierId
-  const currentTier = tiers.find((tier) => tier.id === tierId);
 
   function handleTimerStart() {
     setIsFilling(true);
