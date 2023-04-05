@@ -19,7 +19,7 @@ export default function MoneyButton({
         }, delay);
       }}
     >
-      Make Money
+      Create & Sell
     </StyledButton>
   );
 }

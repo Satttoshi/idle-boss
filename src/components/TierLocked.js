@@ -26,7 +26,7 @@ export default function TierLocked({ tierId, currentTier }) {
         handleUnlock(tierId);
       }}
     >
-      <h2>Product Locked</h2>
+      <h2>Unlock {currentTier.name}!</h2>
       <h3>Price: {formattedPrice}</h3>
     </StyledButton>
   );
