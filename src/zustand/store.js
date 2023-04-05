@@ -7,7 +7,7 @@ const useStore = createStore((set, get) => ({
   tiers: [
     {
       id: "tier1",
-      isUnlocked: false,
+      isUnlocked: true,
       isActive: false,
       name: "sell Wordpress Website",
       income: 10,
