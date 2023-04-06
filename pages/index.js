@@ -8,6 +8,8 @@ export default function HomePage() {
       <Product tierId="tier1" />
       <Product tierId="tier2" />
       <Product tierId="tier3" />
+      <Product tierId="tier4" />
+      <Product tierId="tier5" />
     </div>
   );
 }

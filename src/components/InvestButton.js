@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export default function InvestButton({ onInvest, money, investPrice }) {
+  const displayPrice =
+    investPrice.toLocaleString("de-DE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }) + " €";
+
   return (
     <StyledButton
       type="button"
@@ -9,14 +15,14 @@ export default function InvestButton({ onInvest, money, investPrice }) {
         onInvest();
       }}
     >
-      {"Invest! price: " + investPrice + " €"}
+      {"Invest! price: " + displayPrice}
     </StyledButton>
   );
 }
 
 const StyledButton = styled.button`
   height: 40px;
-  width: 170px;
+  width: 240px;
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 5px;
