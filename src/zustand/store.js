@@ -91,7 +91,9 @@ const useStore = createStore((set, get) => ({
     setTier({
       id: tierId,
       income: currentTier.income + 5,
-      investPrice: currentTier.investPrice * currentTier.coefficient,
+      investPrice: (currentTier.investPrice * currentTier.coefficient)
+        .toFixed(2)
+        .toLocaleString("de-DE"),
       investCount: currentTier.investCount + 1,
       delay: didReachMilestone ? currentTier.delay - 800 : currentTier.delay,
       milestoneIndex: didReachMilestone

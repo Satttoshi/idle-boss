@@ -4,7 +4,10 @@ export default function MoneyDisplay() {
   const { money } = useStore();
 
   const moneyString =
-    money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ",00 €";
+    money.toLocaleString("de-DE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }) + " €";
 
   return (
     <div>
