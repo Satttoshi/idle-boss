@@ -3,13 +3,14 @@ import { create as createStore } from "zustand";
 export const milestones = [15, 30, 50, 75, 100, 200, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 1000,
+  money: 15000,
   tiers: [
     {
       id: "tier1",
-      isUnlocked: false,
+      unlockPrice: 0,
+      isUnlocked: true,
       isActive: false,
-      name: "sell Wordpress Website",
+      name: "Wordpress Website",
       income: 10,
       delay: 2000,
       investPrice: 50,
@@ -18,9 +19,10 @@ const useStore = createStore((set, get) => ({
     },
     {
       id: "tier2",
+      unlockPrice: 10000,
       isUnlocked: false,
       isActive: false,
-      name: "sell React Website",
+      name: "React Website",
       income: 100,
       delay: 5000,
       investPrice: 200,
@@ -29,9 +31,10 @@ const useStore = createStore((set, get) => ({
     },
     {
       id: "tier3",
+      unlockPrice: 50000,
       isUnlocked: false,
       isActive: false,
-      name: "sell Next-js Website",
+      name: "Next-js Website",
       income: 500,
       delay: 10000,
       investPrice: 500,
@@ -41,6 +44,11 @@ const useStore = createStore((set, get) => ({
   ],
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
 
+  getTierById: (tierId) => {
+    const { tiers } = get();
+    return tiers.find((tier) => tier.id === tierId);
+  },
+
   setTier: (updatedTier) =>
     set((state) => ({
       tiers: state.tiers.map((tier) =>
@@ -48,9 +56,25 @@ const useStore = createStore((set, get) => ({
       ),
     })),
 
+  unlock: (tierId) => {
+    const { money, getTierById, setTier, setMoney } = get();
+    const currentTier = getTierById(tierId);
+
+    if (currentTier.unlockPrice > money) {
+      throw new Error("not enough money");
+    }
+
+    setMoney(-currentTier.unlockPrice);
+
+    setTier({
+      id: tierId,
+      isUnlocked: true,
+    });
+  },
+
   invest: (tierId) => {
-    const { money, tiers, setTier, setMoney } = get();
-    const currentTier = tiers.find((tier) => tier.id === tierId);
+    const { money, setTier, setMoney, getTierById } = get();
+    const currentTier = getTierById(tierId);
 
     if (currentTier.investPrice > money) {
       throw new Error("not enough money");

@@ -1,72 +1,24 @@
-import MoneyButton from "./MoneyButton";
-import ProgressBar from "./ProgressBar";
-import useStore, { milestones } from "~/src/zustand/store";
-import { useState } from "react";
-import InvestButton from "./InvestButton";
-import Milestones from "./Milestones";
 import styled from "styled-components";
+import Tier from "./Tier";
+import TierLocked from "./TierLocked";
+import useStore from "~/src/zustand/store";
 
 export default function Product({ tierId }) {
-  const { setMoney, tiers, money, invest } = useStore();
-
-  const [isFilling, setIsFilling] = useState(false);
-
-  // replace tier1 with variable tierId
-  const currentTier = tiers.find((tier) => tier.id === tierId);
-
-  function handleTimerStart() {
-    setIsFilling(true);
-  }
-
-  function handleTimerEnd() {
-    setIsFilling(false);
-    setMoney(currentTier.income);
-  }
-
-  function handleInvest() {
-    try {
-      invest(currentTier.id);
-    } catch (error) {
-      // mby implement not enough money popup in a later US
-      console.error(error.message);
-    }
-  }
-
-  const { investCount, investPrice, milestoneIndex } = currentTier;
+  const { getTierById } = useStore();
+  const currentTier = getTierById(tierId);
 
   return (
-    <>
-      <StyledHeader>{currentTier.name}</StyledHeader>
-      <StyledContainer>
-        <MoneyButton
-          tier={currentTier}
-          isFilling={isFilling}
-          onTimerStart={handleTimerStart}
-          onTimerEnd={handleTimerEnd}
-        />
-        <ProgressBar isFilling={isFilling} tier={currentTier} />
-      </StyledContainer>
-      <StyledContainer>
-        <Milestones
-          investCount={investCount}
-          currentMilestone={milestones[milestoneIndex]}
-        />
-        <InvestButton
-          onInvest={handleInvest}
-          money={money}
-          investPrice={investPrice}
-        />
-      </StyledContainer>
-    </>
+    <StyledSection>
+      {currentTier.isUnlocked ? (
+        <Tier currentTier={currentTier} />
+      ) : (
+        <TierLocked currentTier={currentTier} />
+      )}
+    </StyledSection>
   );
 }
 
-const StyledHeader = styled.h2`
-  margin: 30px 0 0 0;
-`;
-
-const StyledContainer = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 5px 0;
+const StyledSection = styled.section`
+  height: 200px;
+  width: 500px;
 `;
