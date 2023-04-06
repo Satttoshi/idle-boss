@@ -3,9 +3,15 @@ import styled from "styled-components";
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
 
+  const displayIncome =
+    income.toLocaleString("de-DE", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }) + " €";
+
   return (
     <StyledWrapper>
-      <StyledIncome>{income + " €"}</StyledIncome>
+      <StyledIncome>{displayIncome}</StyledIncome>
       <StyledContainer data-testid="progress-bar">
         {isFilling ? <StyledBar delay={delay} /> : null}
       </StyledContainer>

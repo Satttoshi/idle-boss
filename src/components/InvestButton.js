@@ -22,7 +22,7 @@ export default function InvestButton({ onInvest, money, investPrice }) {
 
 const StyledButton = styled.button`
   height: 40px;
-  width: 170px;
+  width: 240px;
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 5px;

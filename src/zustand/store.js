@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [15, 30, 50, 75, 100, 200, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 15000,
+  money: 0,
   tiers: [
     {
       id: "tier1",
@@ -12,7 +12,8 @@ const useStore = createStore((set, get) => ({
       isActive: false,
       name: "Wordpress Website",
       income: 10,
-      delay: 2000,
+      incomeBase: 10,
+      delay: 600,
       investPrice: 50,
       investPriceCoefficient: 1.07,
       investCount: 0,
@@ -20,12 +21,13 @@ const useStore = createStore((set, get) => ({
     },
     {
       id: "tier2",
-      unlockPrice: 10000,
+      unlockPrice: 600,
       isUnlocked: false,
       isActive: false,
       name: "React Website",
       income: 600,
-      delay: 5000,
+      incomeBase: 600,
+      delay: 3000,
       investPrice: 200,
       investPriceCoefficient: 1.15,
       investCount: 0,
@@ -33,12 +35,13 @@ const useStore = createStore((set, get) => ({
     },
     {
       id: "tier3",
-      unlockPrice: 50000,
+      unlockPrice: 7200,
       isUnlocked: false,
       isActive: false,
       name: "Next-js Website",
       income: 5400,
-      delay: 10000,
+      incomeBase: 5400,
+      delay: 6000,
       investPrice: 500,
       investPriceCoefficient: 1.14,
       investCount: 0,
@@ -90,12 +93,12 @@ const useStore = createStore((set, get) => ({
 
     setTier({
       id: tierId,
-      income: currentTier.income + 5,
-      investPrice: (
-        currentTier.investPrice * currentTier.investPriceCoefficient
-      ).toFixed(2),
+      income: currentTier.income + currentTier.incomeBase,
+      investPrice: currentTier.investPrice * currentTier.investPriceCoefficient,
       investCount: currentTier.investCount + 1,
-      delay: didReachMilestone ? currentTier.delay - 800 : currentTier.delay,
+      delay: didReachMilestone
+        ? Math.round(currentTier.delay / 2)
+        : currentTier.delay,
       milestoneIndex: didReachMilestone
         ? currentTier.milestoneIndex + 1
         : currentTier.milestoneIndex,
