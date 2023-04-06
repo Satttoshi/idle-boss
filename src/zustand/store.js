@@ -14,7 +14,7 @@ const useStore = createStore((set, get) => ({
       income: 10,
       delay: 2000,
       investPrice: 50,
-      coefficient: 1.07,
+      investPriceCoefficient: 1.07,
       investCount: 0,
       milestoneIndex: 0,
     },
@@ -27,7 +27,7 @@ const useStore = createStore((set, get) => ({
       income: 600,
       delay: 5000,
       investPrice: 200,
-      coefficient: 1.15,
+      investPriceCoefficient: 1.15,
       investCount: 0,
       milestoneIndex: 0,
     },
@@ -40,7 +40,7 @@ const useStore = createStore((set, get) => ({
       income: 5400,
       delay: 10000,
       investPrice: 500,
-      coefficient: 1.14,
+      investPriceCoefficient: 1.14,
       investCount: 0,
       milestoneIndex: 0,
     },
@@ -91,9 +91,9 @@ const useStore = createStore((set, get) => ({
     setTier({
       id: tierId,
       income: currentTier.income + 5,
-      investPrice: (currentTier.investPrice * currentTier.coefficient)
-        .toFixed(2)
-        .toLocaleString("de-DE"),
+      investPrice: (
+        currentTier.investPrice * currentTier.investPriceCoefficient
+      ).toFixed(2),
       investCount: currentTier.investCount + 1,
       delay: didReachMilestone ? currentTier.delay - 800 : currentTier.delay,
       milestoneIndex: didReachMilestone
