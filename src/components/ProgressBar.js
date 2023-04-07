@@ -1,7 +1,14 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import { useState, useEffect } from "react";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
+  const [currentDelay, setCurrentDelay] = useState(delay);
+
+  useEffect(() => {
+    setCurrentDelay(delay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilling]);
 
   const displayIncome =
     income.toLocaleString("de-DE", {
@@ -13,7 +20,7 @@ export default function ProgressBar({ tier, isFilling }) {
     <StyledWrapper>
       <StyledIncome>{displayIncome}</StyledIncome>
       <StyledContainer data-testid="progress-bar">
-        {isFilling ? <StyledBar delay={delay} /> : null}
+        {isFilling ? <StyledBar delay={currentDelay} /> : null}
       </StyledContainer>
     </StyledWrapper>
   );
@@ -27,13 +34,12 @@ const StyledWrapper = styled.div`
 
 const StyledIncome = styled.span`
   position: absolute;
-  top: 0;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-right: 1rem;
   z-index: 10;
 `;
 
@@ -47,26 +53,27 @@ const StyledContainer = styled.div`
   border-radius: 5px;
 `;
 
+const fillingAnimation = keyframes`
+  
+    from {
+      width: 0;
+      background: hotpink;
+    }
+
+    to {
+      width: 100%;
+      background: hotpink;
+    }
+  `;
+
 const StyledBar = styled.div`
   position: absolute;
   left: 0;
   height: 30px;
   display: inline-block;
   overflow: hidden;
-  animation-name: load;
+  animation-name: ${fillingAnimation};
   animation-duration: ${({ delay }) => delay}ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-
-  @keyframes load {
-    0% {
-      width: 0;
-      background: hotpink;
-    }
-
-    100% {
-      width: 100%;
-      background: hotpink;
-    }
-  }
 `;

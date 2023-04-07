@@ -1,6 +1,6 @@
 import { create as createStore } from "zustand";
 
-export const milestones = [15, 30, 50, 75, 100, 200, "max"];
+export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
   money: 1,
@@ -9,7 +9,7 @@ const useStore = createStore((set, get) => ({
       id: "tier1",
       unlockPrice: 0,
       isUnlocked: true,
-      isActive: false,
+      isFilling: false,
       name: "Wordpress Website",
       income: 10,
       incomeBase: 10,
@@ -23,7 +23,7 @@ const useStore = createStore((set, get) => ({
       id: "tier2",
       unlockPrice: 600,
       isUnlocked: false,
-      isActive: false,
+      isFilling: false,
       name: "React App",
       income: 600,
       incomeBase: 600,
@@ -37,7 +37,7 @@ const useStore = createStore((set, get) => ({
       id: "tier3",
       unlockPrice: 7200,
       isUnlocked: false,
-      isActive: false,
+      isFilling: false,
       name: "Next-js App",
       income: 5400,
       incomeBase: 5400,
@@ -51,7 +51,7 @@ const useStore = createStore((set, get) => ({
       id: "tier4",
       unlockPrice: 86400,
       isUnlocked: false,
-      isActive: false,
+      isFilling: false,
       name: "Ruby on Rails App",
       income: 43200,
       incomeBase: 43200,
@@ -65,7 +65,7 @@ const useStore = createStore((set, get) => ({
       id: "tier5",
       unlockPrice: 1036800,
       isUnlocked: false,
-      isActive: false,
+      isFilling: false,
       name: "Quantum App",
       income: 518400,
       incomeBase: 518400,
@@ -104,6 +104,30 @@ const useStore = createStore((set, get) => ({
       id: tierId,
       isUnlocked: true,
     });
+  },
+
+  clickTimer: (tierId) => {
+    const { getTierById, onTimerStart, onTimerEnd } = get();
+    const currentTier = getTierById(tierId);
+    onTimerStart(currentTier.id);
+    setTimeout(() => {
+      onTimerEnd(currentTier.id);
+    }, currentTier.delay);
+  },
+
+  onTimerStart: (tierId) => {
+    const { setTier } = get();
+    setTier({
+      id: tierId,
+      isFilling: true,
+    });
+  },
+
+  onTimerEnd: (tierId) => {
+    const { setMoney, setTier, getTierById } = get();
+    const currentTier = getTierById(tierId);
+    setTier({ id: tierId, isFilling: false });
+    setMoney(currentTier.income);
   },
 
   invest: (tierId) => {

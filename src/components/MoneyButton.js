@@ -1,22 +1,12 @@
 import styled from "styled-components";
 
-export default function MoneyButton({
-  tier,
-  isFilling,
-  onTimerStart,
-  onTimerEnd,
-}) {
-  const { delay } = tier;
-
+export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
   return (
     <StyledButton
       type="button"
       disabled={isFilling}
       onClick={() => {
-        onTimerStart();
-        setTimeout(() => {
-          onTimerEnd();
-        }, delay);
+        onMoneyButtonClick();
       }}
     >
       Create & Sell
