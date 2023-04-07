@@ -2,17 +2,7 @@ import styled from "styled-components";
 import useStore from "~/src/zustand/store";
 
 export default function MoneyButton({ tier, isFilling }) {
-  const { delay } = tier;
-  const { setTier, onTimerStart, onTimerEnd } = useStore();
-
-  function onClick(delay) {
-    onTimerStart(tier.id);
-    const timeout = setTimeout(() => {
-      onTimerEnd(tier.id);
-    }, delay);
-    setTier({ id: tier.id, timeoutId: timeout });
-    console.log(timeout);
-  }
+  const { clickTimer } = useStore();
 
   function updateTimeout(newDelay, isFilling) {
     if (isFilling) {
@@ -26,7 +16,7 @@ export default function MoneyButton({ tier, isFilling }) {
       type="button"
       disabled={isFilling}
       onClick={() => {
-        onClick(delay);
+        clickTimer(tier.id);
       }}
     >
       Create & Sell

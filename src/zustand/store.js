@@ -112,8 +112,13 @@ const useStore = createStore((set, get) => ({
   },
 
   clickTimer: (tierId) => {
-    const { money, getTierById, setTier, setMoney } = get();
+    const { getTierById, setTier, onTimerStart, onTimerEnd } = get();
     const currentTier = getTierById(tierId);
+    onTimerStart(currentTier.id);
+    const timeoutId = setTimeout(() => {
+      onTimerEnd(currentTier.id);
+    }, currentTier.delay);
+    setTier({ id: tierId, timeoutId });
   },
 
   onTimerStart: (tierId) => {
