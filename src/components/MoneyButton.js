@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function MoneyButton({
   tier,
@@ -7,13 +8,23 @@ export default function MoneyButton({
   onTimerEnd,
 }) {
   const { delay } = tier;
+  const [timeoutId, setTimeoutId] = useState(null);
 
-  function onClick() {
+  function onClick(delay) {
     onTimerStart();
-    const timeout = setTimeout(() => {
-      onTimerEnd();
-    }, delay);
-    console.log(timeout);
+    setTimeoutId(
+      setTimeout(() => {
+        onTimerEnd();
+      }, delay)
+    );
+    console.log(timeoutId);
+  }
+
+  function updateTimeout(newDelay) {
+    if (isFilling) {
+      clearTimeout(timeoutId);
+      setTimeoutId(setTimeout(() => onTimerEnd(), newDelay));
+    }
   }
 
   return (
@@ -21,7 +32,7 @@ export default function MoneyButton({
       type="button"
       disabled={isFilling}
       onClick={() => {
-        onClick();
+        onClick(delay);
       }}
     >
       Create & Sell
