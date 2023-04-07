@@ -15,16 +15,33 @@ export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
 }
 
 const StyledButton = styled.button`
-  height: 75px;
-  width: 75px;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 5px;
-  color: #000;
+  height: 84px;
+  width: 84px;
+  z-index: 10;
+  transform: translateX(15%);
+  background-color: var(--5);
+  border: 3px solid var(--4);
+  border-radius: 50%;
+  color: var(--1);
   cursor: pointer;
   font-size: 1.2rem;
 
-  &:hover {
-    background-color: hotpink;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--1);
+      border-color: var(--5);
+      color: var(--5);
+      font-weight: bold;
+    }
+  }
+
+  @media (hover: none) {
+    &:active,
+    &:focus {
+      background-color: var(--1);
+      border-color: var(--5);
+      color: var(--5);
+      font-weight: bold;
+    }
   }
 `;

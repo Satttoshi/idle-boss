@@ -33,17 +33,16 @@ export default function Tier({ currentTier }) {
         />
         <ProgressBar isFilling={currentTier.isFilling} tier={currentTier} />
       </StyledContainer>
-      <StyledContainer>
-        <Milestones
-          investCount={investCount}
-          currentMilestone={milestones[milestoneIndex]}
-        />
-        <InvestButton
-          onInvest={handleInvest}
-          money={money}
-          investPrice={investPrice}
-        />
-      </StyledContainer>
+
+      <Milestones
+        investCount={investCount}
+        currentMilestone={milestones[milestoneIndex]}
+      />
+      <InvestButton
+        onInvest={handleInvest}
+        money={money}
+        investPrice={investPrice}
+      />
     </>
   );
 }
@@ -56,4 +55,5 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 5px 0;
+  border: 1px solid black;
 `;
