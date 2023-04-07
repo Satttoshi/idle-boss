@@ -26,13 +26,12 @@ const StyledWrapper = styled.div`
 
 const StyledIncome = styled.span`
   position: absolute;
-  top: 0;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin-right: 1rem;
   z-index: 10;
 `;
 
