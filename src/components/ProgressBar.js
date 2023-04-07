@@ -1,7 +1,15 @@
 import styled, { keyframes } from "styled-components";
+import { useState, useEffect } from "react";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
+
+  const [currentDelay, setCurrentDelay] = useState(delay);
+
+  useEffect(() => {
+    setCurrentDelay(delay);
+  }, [isFilling]);
+
   const displayIncome =
     income.toLocaleString("de-DE", {
       minimumFractionDigits: 2,
@@ -12,7 +20,7 @@ export default function ProgressBar({ tier, isFilling }) {
     <StyledWrapper>
       <StyledIncome>{displayIncome}</StyledIncome>
       <StyledContainer data-testid="progress-bar">
-        {isFilling ? <StyledBar delay={delay} /> : null}
+        {isFilling ? <StyledBar delay={currentDelay} /> : null}
       </StyledContainer>
     </StyledWrapper>
   );

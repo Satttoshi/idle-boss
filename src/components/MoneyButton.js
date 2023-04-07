@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import useStore from "~/src/zustand/store";
 
 export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
   return (
