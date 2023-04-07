@@ -1,6 +1,6 @@
 import { create as createStore } from "zustand";
 
-export const milestones = [15, 30, 50, 75, 100, 200, "max"];
+export const milestones = [3, 5, 7, 75, 100, 200, "max"];
 
 const useStore = createStore((set, get) => ({
   money: 1000000,
@@ -123,7 +123,10 @@ const useStore = createStore((set, get) => ({
 
   onTimerStart: (tierId) => {
     const { setTier } = get();
-    setTier({ id: tierId, isFilling: true });
+    setTier({
+      id: tierId,
+      isFilling: true,
+    });
   },
 
   onTimerEnd: (tierId) => {
@@ -131,6 +134,7 @@ const useStore = createStore((set, get) => ({
     const currentTier = getTierById(tierId);
     setTier({ id: tierId, isFilling: false });
     setMoney(currentTier.income);
+    console.log("old timer");
   },
 
   invest: (tierId) => {

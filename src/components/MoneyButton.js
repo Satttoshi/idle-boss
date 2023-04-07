@@ -1,22 +1,13 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
 
-export default function MoneyButton({ tier, isFilling }) {
-  const { clickTimer } = useStore();
-
-  function updateTimeout(newDelay, isFilling) {
-    if (isFilling) {
-      clearTimeout(timeoutId);
-      setTimeoutId(setTimeout(() => onTimerEnd(), newDelay));
-    }
-  }
-
+export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
   return (
     <StyledButton
       type="button"
       disabled={isFilling}
       onClick={() => {
-        clickTimer(tier.id);
+        onMoneyButtonClick();
       }}
     >
       Create & Sell

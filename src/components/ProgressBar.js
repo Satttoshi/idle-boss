@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
-
   const displayIncome =
     income.toLocaleString("de-DE", {
       minimumFractionDigits: 2,
@@ -47,26 +46,27 @@ const StyledContainer = styled.div`
   border-radius: 5px;
 `;
 
+const fillingAnimation = keyframes`
+  
+    from {
+      width: 0;
+      background: hotpink;
+    }
+
+    to {
+      width: 100%;
+      background: hotpink;
+    }
+  `;
+
 const StyledBar = styled.div`
   position: absolute;
   left: 0;
   height: 30px;
   display: inline-block;
   overflow: hidden;
-  animation-name: load;
+  animation-name: ${fillingAnimation};
   animation-duration: ${({ delay }) => delay}ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-
-  @keyframes load {
-    0% {
-      width: 0;
-      background: hotpink;
-    }
-
-    100% {
-      width: 100%;
-      background: hotpink;
-    }
-  }
 `;

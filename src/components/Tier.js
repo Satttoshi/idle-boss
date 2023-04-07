@@ -1,13 +1,16 @@
 import MoneyButton from "./MoneyButton";
 import ProgressBar from "./ProgressBar";
 import useStore, { milestones } from "~/src/zustand/store";
-import { useState } from "react";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
 import styled from "styled-components";
 
 export default function Tier({ currentTier }) {
-  const { money, invest } = useStore();
+  const { money, clickTimer, invest } = useStore();
+
+  function handleMoneyButtonClick() {
+    clickTimer(currentTier.id);
+  }
 
   function handleInvest() {
     try {
@@ -24,7 +27,10 @@ export default function Tier({ currentTier }) {
     <>
       <StyledHeader>{currentTier.name}</StyledHeader>
       <StyledContainer>
-        <MoneyButton tier={currentTier} isFilling={currentTier.isFilling} />
+        <MoneyButton
+          onMoneyButtonClick={handleMoneyButtonClick}
+          isFilling={currentTier.isFilling}
+        />
         <ProgressBar isFilling={currentTier.isFilling} tier={currentTier} />
       </StyledContainer>
       <StyledContainer>
