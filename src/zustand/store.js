@@ -1,9 +1,9 @@
 import { create as createStore } from "zustand";
 
-export const milestones = [3, 5, 7, 75, 100, 200, "max"];
+export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 100000000000,
+  money: 1,
   tiers: [
     {
       id: "tier1",

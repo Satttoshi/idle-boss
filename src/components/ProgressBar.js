@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
-
   const [currentDelay, setCurrentDelay] = useState(delay);
 
   useEffect(() => {
     setCurrentDelay(delay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilling]);
 
   const displayIncome =
