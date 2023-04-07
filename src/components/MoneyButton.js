@@ -1,26 +1,20 @@
 import styled from "styled-components";
-import { useState } from "react";
+import useStore from "~/src/zustand/store";
 
-export default function MoneyButton({
-  tier,
-  isFilling,
-  onTimerStart,
-  onTimerEnd,
-}) {
+export default function MoneyButton({ tier, isFilling }) {
   const { delay } = tier;
-  const [timeoutId, setTimeoutId] = useState(null);
+  const { setTier, onTimerStart, onTimerEnd } = useStore();
 
   function onClick(delay) {
-    onTimerStart();
-    setTimeoutId(
-      setTimeout(() => {
-        onTimerEnd();
-      }, delay)
-    );
-    console.log(timeoutId);
+    onTimerStart(tier.id);
+    const timeout = setTimeout(() => {
+      onTimerEnd(tier.id);
+    }, delay);
+    setTier({ id: tier.id, timeoutId: timeout });
+    console.log(timeout);
   }
 
-  function updateTimeout(newDelay) {
+  function updateTimeout(newDelay, isFilling) {
     if (isFilling) {
       clearTimeout(timeoutId);
       setTimeoutId(setTimeout(() => onTimerEnd(), newDelay));

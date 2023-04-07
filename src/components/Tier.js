@@ -7,16 +7,7 @@ import Milestones from "./Milestones";
 import styled from "styled-components";
 
 export default function Tier({ currentTier }) {
-  const { setMoney, setTier, money, invest } = useStore();
-
-  function handleTimerStart() {
-    setTier({ id: currentTier.id, isFilling: true });
-  }
-
-  function handleTimerEnd() {
-    setTier({ id: currentTier.id, isFilling: false });
-    setMoney(currentTier.income);
-  }
+  const { money, invest } = useStore();
 
   function handleInvest() {
     try {
@@ -33,12 +24,7 @@ export default function Tier({ currentTier }) {
     <>
       <StyledHeader>{currentTier.name}</StyledHeader>
       <StyledContainer>
-        <MoneyButton
-          tier={currentTier}
-          isFilling={currentTier.isFilling}
-          onTimerStart={handleTimerStart}
-          onTimerEnd={handleTimerEnd}
-        />
+        <MoneyButton tier={currentTier} isFilling={currentTier.isFilling} />
         <ProgressBar isFilling={currentTier.isFilling} tier={currentTier} />
       </StyledContainer>
       <StyledContainer>

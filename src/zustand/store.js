@@ -10,6 +10,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 0,
       isUnlocked: true,
       isFilling: false,
+      timeoutId: null,
       name: "Wordpress Website",
       income: 10,
       incomeBase: 10,
@@ -24,6 +25,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 600,
       isUnlocked: false,
       isFilling: false,
+      timeoutId: null,
       name: "React App",
       income: 600,
       incomeBase: 600,
@@ -38,6 +40,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 7200,
       isUnlocked: false,
       isFilling: false,
+      timeoutId: null,
       name: "Next-js App",
       income: 5400,
       incomeBase: 5400,
@@ -52,6 +55,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 86400,
       isUnlocked: false,
       isFilling: false,
+      timeoutId: null,
       name: "Ruby on Rails App",
       income: 43200,
       incomeBase: 43200,
@@ -66,6 +70,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 1036800,
       isUnlocked: false,
       isFilling: false,
+      timeoutId: null,
       name: "Quantum App",
       income: 518400,
       incomeBase: 518400,
@@ -104,6 +109,23 @@ const useStore = createStore((set, get) => ({
       id: tierId,
       isUnlocked: true,
     });
+  },
+
+  clickTimer: (tierId) => {
+    const { money, getTierById, setTier, setMoney } = get();
+    const currentTier = getTierById(tierId);
+  },
+
+  onTimerStart: (tierId) => {
+    const { setTier } = get();
+    setTier({ id: tierId, isFilling: true });
+  },
+
+  onTimerEnd: (tierId) => {
+    const { setMoney, setTier, getTierById } = get();
+    const currentTier = getTierById(tierId);
+    setTier({ id: tierId, isFilling: false });
+    setMoney(currentTier.income);
   },
 
   invest: (tierId) => {
