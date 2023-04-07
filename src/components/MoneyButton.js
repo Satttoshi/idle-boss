@@ -8,15 +8,20 @@ export default function MoneyButton({
 }) {
   const { delay } = tier;
 
+  function onClick() {
+    onTimerStart();
+    const timeout = setTimeout(() => {
+      onTimerEnd();
+    }, delay);
+    console.log(timeout);
+  }
+
   return (
     <StyledButton
       type="button"
       disabled={isFilling}
       onClick={() => {
-        onTimerStart();
-        setTimeout(() => {
-          onTimerEnd();
-        }, delay);
+        onClick();
       }}
     >
       Create & Sell
