@@ -1,4 +1,5 @@
 import useStore from "~/src/zustand/store";
+import styled from "styled-components";
 
 export default function MoneyDisplay() {
   const { money } = useStore();
@@ -11,7 +12,11 @@ export default function MoneyDisplay() {
 
   return (
     <div>
-      <h1>Money: {moneyString}</h1>
+      <StyledHeader>Money: {moneyString}</StyledHeader>
     </div>
   );
 }
+
+const StyledHeader = styled.h1`
+  font-family: var(--font1);
+`;

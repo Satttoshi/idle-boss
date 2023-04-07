@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
+import { Headland_One } from "@next/font/google";
+
+const headlandOne = Headland_One({ subsets: ["latin"], weight: ["400"] });
 
 export default createGlobalStyle`
+
   *,
   *::before,
   *::after {
@@ -14,10 +18,10 @@ export default createGlobalStyle`
     --3: #b8da66;
     --4: #329691;
     --5: 	#185362;
+    --font1: ${headlandOne.style.fontFamily}, serif;
   }
 
   body {
     margin: 0;
-    font-family: system-ui;
   }
 `;
