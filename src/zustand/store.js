@@ -10,7 +10,6 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 0,
       isUnlocked: true,
       isFilling: false,
-      timeoutId: null,
       name: "Wordpress Website",
       income: 10,
       incomeBase: 10,
@@ -25,7 +24,6 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 600,
       isUnlocked: false,
       isFilling: false,
-      timeoutId: null,
       name: "React App",
       income: 600,
       incomeBase: 600,
@@ -40,7 +38,6 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 7200,
       isUnlocked: false,
       isFilling: false,
-      timeoutId: null,
       name: "Next-js App",
       income: 5400,
       incomeBase: 5400,
@@ -55,7 +52,6 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 86400,
       isUnlocked: false,
       isFilling: false,
-      timeoutId: null,
       name: "Ruby on Rails App",
       income: 43200,
       incomeBase: 43200,
@@ -70,7 +66,6 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 1036800,
       isUnlocked: false,
       isFilling: false,
-      timeoutId: null,
       name: "Quantum App",
       income: 518400,
       incomeBase: 518400,
@@ -112,13 +107,12 @@ const useStore = createStore((set, get) => ({
   },
 
   clickTimer: (tierId) => {
-    const { getTierById, setTier, onTimerStart, onTimerEnd } = get();
+    const { getTierById, onTimerStart, onTimerEnd } = get();
     const currentTier = getTierById(tierId);
     onTimerStart(currentTier.id);
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       onTimerEnd(currentTier.id);
     }, currentTier.delay);
-    setTier({ id: tierId, timeoutId });
   },
 
   onTimerStart: (tierId) => {
