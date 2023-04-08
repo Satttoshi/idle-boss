@@ -17,63 +17,88 @@ export default function ProgressBar({ tier, isFilling }) {
     }) + " €";
 
   return (
-    <StyledWrapper>
-      <StyledIncome>{displayIncome}</StyledIncome>
-      <StyledContainer data-testid="progress-bar">
-        {isFilling ? <StyledBar delay={currentDelay} /> : null}
-      </StyledContainer>
-    </StyledWrapper>
+    <StyledProgressBar>
+      <StyledWrapper>
+        <StyledIncome>{displayIncome}</StyledIncome>
+        <StyledContainer data-testid="progress-bar">
+          {isFilling ? <StyledBar delay={currentDelay} /> : null}
+          <StyledUnfilledBar />
+        </StyledContainer>
+      </StyledWrapper>
+    </StyledProgressBar>
   );
 }
 
+const StyledProgressBar = styled.div`
+  position: absolute;
+  top: 9px;
+  right: 0;
+  background-color: var(--5);
+  border-radius: 0px 10px 10px 0px;
+`;
+
 const StyledWrapper = styled.div`
   position: relative;
-  width: 400px;
+  width: 248px;
   height: 50px;
 `;
 
 const StyledIncome = styled.span`
   position: absolute;
-  top: 15%;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 225px;
+  top: 11px;
+  left: 21px;
+  z-index: 10;
+
+  color: var(--5);
+  font-family: var(--font1);
   text-align: center;
   font-size: 1.5rem;
-  font-weight: bold;
-  z-index: 10;
+  font-weight: 600;
+  text-align: center;
 `;
 
 const StyledContainer = styled.div`
-  background-color: aqua;
-  width: 400px;
+  width: 248px;
   height: 50px;
   position: relative;
   display: flex;
   align-items: center;
-  border-radius: 5px;
 `;
 
 const fillingAnimation = keyframes`
   
     from {
       width: 0;
-      background: hotpink;
+      
     }
 
     to {
       width: 100%;
-      background: hotpink;
     }
   `;
 
 const StyledBar = styled.div`
+  background: var(--3);
   position: absolute;
   left: 0;
   height: 30px;
+  z-index: 5;
   display: inline-block;
   overflow: hidden;
   animation-name: ${fillingAnimation};
   animation-duration: ${({ delay }) => delay}ms;
   animation-iteration-count: 1;
   animation-timing-function: linear;
+`;
+
+const StyledUnfilledBar = styled.div`
+  background: var(--4);
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  right: 2px;
+  height: 30px;
+  display: inline-block;
+  overflow: hidden;
 `;

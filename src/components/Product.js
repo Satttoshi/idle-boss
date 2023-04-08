@@ -19,6 +19,8 @@ export default function Product({ tierId }) {
 }
 
 const StyledSection = styled.section`
-  height: 200px;
-  width: 500px;
+  height: 94px;
+  width: 307px;
+  margin: 15px;
+  position: relative;
 `;

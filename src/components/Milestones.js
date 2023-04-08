@@ -9,12 +9,21 @@ export default function Milestones({ investCount, currentMilestone }) {
 }
 
 const StyledBox = styled.div`
-  border: 1px solid black;
-  width: 100px;
-  height: 40px;
+  background-color: var(--5);
+  color: var(--1);
+  font-family: var(--font1);
+  font-size: 0.7rem;
+
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  border-radius: 15px;
+  z-index: 15;
+  width: 68px;
+  height: 24px;
+
   display: grid;
   place-items: center;
-  border-radius: 5px;
 
   h3 {
     margin: 0;
