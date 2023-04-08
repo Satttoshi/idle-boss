@@ -26,16 +26,18 @@ const StyledHeader = styled.header`
   height: 80px;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   div {
-    transform: translateX(100px);
+    transform: translateX(30px);
   }
 
   h1 {
     font-family: var(--font2);
     margin: 0;
+    width: 280px;
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   h2 {
