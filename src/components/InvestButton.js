@@ -36,6 +36,7 @@ const StyledButton = styled.button`
   align-items: center;
 
   background-color: var(--1);
+  transition: background-color 0.1s ease-in-out;
   color: var(--5);
   font-family: var(--font1);
   font-weight: 600;
@@ -46,7 +47,20 @@ const StyledButton = styled.button`
     width: 94px;
   }
 
-  &:hover {
-    background-color: hotpink;
+  :disabled {
+    cursor: default;
+    background-color: var(--4);
+  }
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
   }
 `;

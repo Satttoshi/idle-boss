@@ -32,18 +32,19 @@ const StyledButton = styled.button`
   display: grid;
   place-items: center;
 
+  :disabled {
+    cursor: default;
+    background-color: var(--3);
+  }
+
   @media (hover: hover) {
     &:hover {
-      background-color: var(--5);
-      color: var(--1);
     }
   }
 
   @media (hover: none) {
     &:active,
     &:focus {
-      background-color: var(--5);
-      color: var(--1);
     }
   }
 `;
