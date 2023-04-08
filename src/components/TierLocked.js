@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
+import { useState } from "react";
 
 export default function TierLocked({ currentTier }) {
-  const { unlock } = useStore();
+  const { unlock, money } = useStore();
 
   function handleUnlock(tierId) {
     try {
@@ -20,6 +21,7 @@ export default function TierLocked({ currentTier }) {
   return (
     <StyledButton
       type="button"
+      disabled={currentTier.unlockPrice > money}
       onClick={() => {
         handleUnlock(currentTier.id);
       }}
@@ -31,7 +33,16 @@ export default function TierLocked({ currentTier }) {
 }
 
 const StyledButton = styled.button`
+  appearance: none;
+  border: none;
   height: 94px;
   width: 307px;
   cursor: pointer;
+
+  color: var(--5);
+
+  :disabled {
+    cursor: default;
+    background-color: var(--4);
+  }
 `;
