@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import WordpressIcon from "~/src/assets/wordpress.svg";
 
 export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
   return (
@@ -9,39 +10,40 @@ export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
         onMoneyButtonClick();
       }}
     >
-      Create & Sell
+      <WordpressIcon width="48" height="48" fill="var(--5)" />
     </StyledButton>
   );
 }
 
 const StyledButton = styled.button`
-  height: 84px;
-  width: 84px;
-  z-index: 10;
-  transform: translateX(15%);
-  background-color: var(--5);
-  border: 3px solid var(--4);
+  appearance: none;
+  border: none;
+  position: absolute;
+  top: 4px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
-  color: var(--1);
+  z-index: 10;
+  background-color: var(--1);
+  color: var(--5);
   cursor: pointer;
   font-size: 1.2rem;
 
+  display: grid;
+  place-items: center;
+
   @media (hover: hover) {
     &:hover {
-      background-color: var(--1);
-      border-color: var(--5);
-      color: var(--5);
-      font-weight: bold;
+      background-color: var(--5);
+      color: var(--1);
     }
   }
 
   @media (hover: none) {
     &:active,
     &:focus {
-      background-color: var(--1);
-      border-color: var(--5);
-      color: var(--5);
-      font-weight: bold;
+      background-color: var(--5);
+      color: var(--1);
     }
   }
 `;

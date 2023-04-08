@@ -31,7 +31,7 @@ export default function TierLocked({ currentTier }) {
 }
 
 const StyledButton = styled.button`
-  height: 150px;
-  width: 500px;
+  height: 94px;
+  width: 307px;
   cursor: pointer;
 `;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import InvestIcon from "~/src/assets/invest.svg";
 
 export default function InvestButton({ onInvest, money, investPrice }) {
   const displayPrice =
@@ -15,20 +16,35 @@ export default function InvestButton({ onInvest, money, investPrice }) {
         onInvest();
       }}
     >
-      {"Invest! price: " + displayPrice}
+      <InvestIcon width="24" height="24" fill="var(--5)" />
+      <p>{displayPrice}</p>
     </StyledButton>
   );
 }
 
 const StyledButton = styled.button`
-  height: 40px;
-  width: 240px;
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 5px;
-  color: #000;
+  appearance: none;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  right: 32px;
+  height: 28px;
+  width: 125px;
+  border-radius: 17px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: var(--1);
+  color: var(--5);
+  font-family: var(--font1);
+  font-weight: 600;
   cursor: pointer;
-  font-size: 1.1rem;
+
+  p {
+    margin: 0;
+    width: 94px;
+  }
 
   &:hover {
     background-color: hotpink;
