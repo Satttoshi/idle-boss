@@ -40,6 +40,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   color: var(--5);
+  background-color: var(--1);
 
   :disabled {
     cursor: default;
