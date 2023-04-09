@@ -2,7 +2,10 @@ import { createGlobalStyle } from "styled-components";
 import { Fredoka } from "@next/font/google";
 import { Carter_One } from "@next/font/google";
 
-const fredoka = Fredoka({ subsets: ["latin"], weight: ["400", "600", "700"] });
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 const carterOne = Carter_One({ subsets: ["latin"], weight: ["400"] });
 
 const theme0 = {
