@@ -1,5 +1,6 @@
 import useStore from "~/src/zustand/store";
 import styled from "styled-components";
+import ThemeSwitch from "./ThemeSwitch";
 
 export default function MoneyDisplay() {
   const { money } = useStore();
@@ -16,6 +17,7 @@ export default function MoneyDisplay() {
         <h2>Username</h2>
         <h1>{moneyString}</h1>
       </div>
+      <ThemeSwitch />
     </StyledHeader>
   );
 }
@@ -34,6 +36,7 @@ const StyledHeader = styled.header`
 
   h1 {
     font-family: var(--font2);
+    color: var(--3);
     margin: 0;
     width: 280px;
     font-weight: 400;
