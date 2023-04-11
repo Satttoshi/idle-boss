@@ -12,6 +12,7 @@ const useStore = createStore((set, get) => ({
       isFilling: false,
       name: "Wordpress Website",
       income: 10,
+      incomePerSecond: null,
       incomeBase: 10,
       delay: 600,
       investPrice: 50,
@@ -26,6 +27,7 @@ const useStore = createStore((set, get) => ({
       isFilling: false,
       name: "React App",
       income: 600,
+      incomePerSecond: null,
       incomeBase: 600,
       delay: 3000,
       investPrice: 600,
@@ -40,6 +42,7 @@ const useStore = createStore((set, get) => ({
       isFilling: false,
       name: "Next-js App",
       income: 5400,
+      incomePerSecond: null,
       incomeBase: 5400,
       delay: 6000,
       investPrice: 7200,
@@ -54,6 +57,7 @@ const useStore = createStore((set, get) => ({
       isFilling: false,
       name: "Ruby on Rails App",
       income: 43200,
+      incomePerSecond: null,
       incomeBase: 43200,
       delay: 12000,
       investPrice: 86400,
@@ -68,6 +72,7 @@ const useStore = createStore((set, get) => ({
       isFilling: false,
       name: "Quantum App",
       income: 518400,
+      incomePerSecond: null,
       incomeBase: 518400,
       delay: 24000,
       investPrice: 1036800,
@@ -89,6 +94,15 @@ const useStore = createStore((set, get) => ({
         tier.id === updatedTier.id ? { ...tier, ...updatedTier } : tier
       ),
     })),
+
+  setIncomePerSecond: (tierId) => {
+    const { setTier, getTierById } = get();
+    const currentTier = getTierById(tierId);
+    setTier({
+      id: tierId,
+      incomePerSecond: currentTier.income / (currentTier.delay / 1000),
+    });
+  },
 
   unlock: (tierId) => {
     const { money, getTierById, setTier, setMoney } = get();
@@ -131,7 +145,7 @@ const useStore = createStore((set, get) => ({
   },
 
   invest: (tierId) => {
-    const { money, setTier, setMoney, getTierById } = get();
+    const { money, setTier, setMoney, getTierById, setIncomePerSecond } = get();
     const currentTier = getTierById(tierId);
 
     if (currentTier.investPrice > money) {
@@ -155,6 +169,8 @@ const useStore = createStore((set, get) => ({
         ? currentTier.milestoneIndex + 1
         : currentTier.milestoneIndex,
     });
+
+    setIncomePerSecond(tierId);
   },
 }));
 
