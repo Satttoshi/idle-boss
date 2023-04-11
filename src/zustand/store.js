@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 0,
+  money: 1000000,
   tiers: [
     {
       id: "tier1",
@@ -123,10 +123,11 @@ const useStore = createStore((set, get) => ({
   clickTimer: (tierId) => {
     const { getTierById, onTimerStart, onTimerEnd } = get();
     const currentTier = getTierById(tierId);
+    const delay = Math.max(currentTier.delay, 250);
     onTimerStart(currentTier.id);
     setTimeout(() => {
       onTimerEnd(currentTier.id);
-    }, currentTier.delay);
+    }, delay);
   },
 
   onTimerStart: (tierId) => {
