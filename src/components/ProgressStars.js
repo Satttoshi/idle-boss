@@ -1,6 +1,5 @@
 import Star from "~/src/assets/star.svg";
 import styled from "styled-components";
-import useStore from "../zustand/store";
 
 export default function ProgressStars({ tier }) {
   const { milestoneIndex } = tier;
