@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import WordpressIcon from "~/src/assets/wordpress.svg";
 
-export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
+export default function MoneyButton({ tier, onMoneyButtonClick }) {
   return (
     <StyledButton
       type="button"
-      disabled={isFilling}
+      disabled={tier.isFilling || tier.hasManager}
       onClick={() => {
         onMoneyButtonClick();
       }}

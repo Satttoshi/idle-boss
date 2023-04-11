@@ -36,4 +36,8 @@ const StyledButton = styled.button`
   width: 65px;
   height: 38px;
   font-size: 10px;
+
+  :disabled {
+    cursor: default;
+  }
 `;

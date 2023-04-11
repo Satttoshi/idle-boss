@@ -27,7 +27,7 @@ export default function Tier({ currentTier }) {
     <>
       <MoneyButton
         onMoneyButtonClick={handleMoneyButtonClick}
-        isFilling={currentTier.isFilling}
+        tier={currentTier}
       />
       <ProgressBar isFilling={currentTier.isFilling} tier={currentTier} />
 
