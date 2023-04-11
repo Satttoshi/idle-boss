@@ -1,6 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { Fredoka } from "@next/font/google";
-import { Carter_One } from "@next/font/google";
+import { Fredoka, Carter_One } from "@next/font/google";
 
 const fredoka = Fredoka({
   subsets: ["latin"],
