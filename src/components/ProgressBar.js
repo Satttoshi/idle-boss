@@ -23,7 +23,7 @@ export default function ProgressBar({ tier, isFilling }) {
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <StyledContainer data-testid="progress-bar">
-          {isFilling ? <StyledBar delay={currentDelay} /> : null}
+          {isFilling ? <StyledBar delay={currentDelay} tier={tier} /> : null}
           <StyledUnfilledBar />
         </StyledContainer>
       </StyledWrapper>
@@ -93,7 +93,8 @@ const StyledBar = styled.div`
   overflow: hidden;
   animation-name: ${fillingAnimation};
   animation-duration: ${({ delay }) => delay}ms;
-  animation-iteration-count: 1;
+  animation-iteration-count: ${({ tier }) =>
+    tier.hasManager ? "infinite" : 1};
   animation-timing-function: linear;
 `;
 
