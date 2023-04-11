@@ -1,12 +1,18 @@
 import { createGlobalStyle } from "styled-components";
-import { Fredoka } from "@next/font/google";
-import { Carter_One } from "@next/font/google";
+// import { Fredoka, Carter_One } from "@next/font/google";
 
-const fredoka = Fredoka({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+// const fredoka = Fredoka({
+//   subsets: ["latin"],
+//   weight: ["400", "600", "700"],
+// });
+// const carterOne = Carter_One({ subsets: ["latin"], weight: ["400"] });
+
+import localfont from "@next/font/local";
+
+const fredoka = localfont({ src: "/public/fonts/fredoka.ttf" });
+const carterOne = localfont({
+  src: [{ path: "/public/fonts/carter_one.ttf", weight: "400" }],
 });
-const carterOne = Carter_One({ subsets: ["latin"], weight: ["400"] });
 
 const theme0 = {
   "--1": "#f2ffda",

@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { useState, useEffect } from "react";
+import ProgressStars from "./ProgressStars";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
@@ -18,6 +19,7 @@ export default function ProgressBar({ tier, isFilling }) {
 
   return (
     <StyledProgressBar>
+      <ProgressStars tier={tier} />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <StyledContainer data-testid="progress-bar">
@@ -49,13 +51,16 @@ const StyledIncome = styled.span`
   top: 11px;
   left: 21px;
   z-index: 10;
-
   color: var(--5);
   font-family: var(--font1);
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const StyledContainer = styled.div`

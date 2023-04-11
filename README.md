@@ -21,4 +21,4 @@ to manage your company and grow PROFITS even when you're not actively playing
 
 project still under development
 
-current version 0.0.0 unreleased
+current version 0.0.1 unreleased

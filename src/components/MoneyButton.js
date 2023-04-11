@@ -18,6 +18,7 @@ export default function MoneyButton({ isFilling, onMoneyButtonClick }) {
 const StyledButton = styled.button`
   appearance: none;
   border: none;
+  padding: 0;
   position: absolute;
   top: 4px;
   height: 80px;
@@ -27,7 +28,6 @@ const StyledButton = styled.button`
   background-color: var(--1);
   color: var(--5);
   cursor: pointer;
-  font-size: 1.2rem;
 
   display: grid;
   place-items: center;
