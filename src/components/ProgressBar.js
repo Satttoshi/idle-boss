@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { useState, useEffect } from "react";
-import Star from "~/src/assets/star.svg";
+import ProgressStars from "./ProgressStars";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income } = tier;
@@ -19,15 +19,7 @@ export default function ProgressBar({ tier, isFilling }) {
 
   return (
     <StyledProgressBar>
-      <StyledStarContainer>
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-      </StyledStarContainer>
+      <ProgressStars />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <StyledContainer data-testid="progress-bar">
@@ -38,23 +30,6 @@ export default function ProgressBar({ tier, isFilling }) {
     </StyledProgressBar>
   );
 }
-
-const StyledStarContainer = styled.div`
-  height: 20px;
-  width: 200px;
-  z-index: 20;
-  position: absolute;
-  left: 28px;
-  transform: translateY(-10px);
-  display: flex;
-  gap: 2px;
-
-  svg {
-    width: 20px;
-    height: 20px;
-    fill: #ffd02c;
-  }
-`;
 
 const StyledProgressBar = styled.div`
   position: absolute;
@@ -83,6 +58,10 @@ const StyledIncome = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const StyledContainer = styled.div`
