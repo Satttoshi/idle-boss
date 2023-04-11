@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import ProgressStars from "./ProgressStars";
 
 export default function ProgressBar({ tier, isFilling }) {
-  const { delay, income } = tier;
+  const { delay, income, trigger } = tier;
   const [currentDelay, setCurrentDelay] = useState(delay);
 
   useEffect(() => {
     setCurrentDelay(Math.max(delay, 250));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFilling]);
+  }, [trigger]);
 
   const displayIncome =
     income.toLocaleString("de-DE", {
@@ -93,8 +93,7 @@ const StyledBar = styled.div`
   overflow: hidden;
   animation-name: ${fillingAnimation};
   animation-duration: ${({ delay }) => delay}ms;
-  animation-iteration-count: ${({ tier }) =>
-    tier.hasManager ? "infinite" : 1};
+  animation-iteration-count: infinite;
   animation-timing-function: linear;
 `;
 

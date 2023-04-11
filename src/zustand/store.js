@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 1000000,
+  money: 10000000,
   tiers: [
     {
       id: "tier1",
@@ -16,6 +16,7 @@ const useStore = createStore((set, get) => ({
       incomePerSecond: null,
       incomeBase: 10,
       delay: 600,
+      trigger: true,
       investPrice: 50,
       investPriceCoefficient: 1.07,
       investCount: 0,
@@ -26,7 +27,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 600,
       isUnlocked: false,
       isFilling: false,
-      hasManager: false,
+      hasManager: true,
       name: "React App",
       income: 600,
       incomePerSecond: null,
@@ -86,6 +87,7 @@ const useStore = createStore((set, get) => ({
       milestoneIndex: 0,
     },
   ],
+
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
 
   getTierById: (tierId) => {
@@ -129,6 +131,7 @@ const useStore = createStore((set, get) => ({
     const { getTierById, onTimerStart, onTimerEnd } = get();
     const currentTier = getTierById(tierId);
     const delay = Math.max(currentTier.delay, 250);
+
     onTimerStart(currentTier.id);
     setTimeout(() => {
       onTimerEnd(currentTier.id);
@@ -146,7 +149,7 @@ const useStore = createStore((set, get) => ({
   onTimerEnd: (tierId) => {
     const { setMoney, setTier, getTierById, clickTimer } = get();
     const currentTier = getTierById(tierId);
-    setTier({ id: tierId, isFilling: false });
+    setTier({ id: tierId, isFilling: false, trigger: !currentTier.trigger });
     setMoney(currentTier.income);
     if (currentTier.hasManager) {
       clickTimer(tierId);
