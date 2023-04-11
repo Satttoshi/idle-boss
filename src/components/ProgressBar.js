@@ -19,7 +19,7 @@ export default function ProgressBar({ tier, isFilling }) {
 
   return (
     <StyledProgressBar>
-      <ProgressStars />
+      <ProgressStars tier={tier} />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <StyledContainer data-testid="progress-bar">

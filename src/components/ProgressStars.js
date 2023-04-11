@@ -1,18 +1,19 @@
 import Star from "~/src/assets/star.svg";
 import styled from "styled-components";
+import useStore from "../zustand/store";
 
-export default function ProgressStars() {
-  return (
-    <StyledStarContainer>
-      <Star />
-      <Star />
-      <Star />
-      <Star />
-      <Star />
-      <Star />
-      <Star />
-    </StyledStarContainer>
-  );
+export default function ProgressStars({ tier }) {
+  const { milestoneIndex } = tier;
+
+  function renderStars() {
+    const stars = [];
+    for (let i = 0; i < milestoneIndex; i++) {
+      stars.push(<Star />);
+    }
+    return stars;
+  }
+
+  return <StyledStarContainer>{renderStars()}</StyledStarContainer>;
 }
 
 const StyledStarContainer = styled.div`
