@@ -7,7 +7,7 @@ const useStore = createStore((set, get) => ({
   tiers: [
     {
       id: "tier1",
-      unlockPrice: 0,
+      unlockPrice: 10,
       isUnlocked: true,
       isFilling: false,
       hasManager: false,
@@ -124,6 +124,25 @@ const useStore = createStore((set, get) => ({
       id: tierId,
       isUnlocked: true,
     });
+  },
+
+  buyManager: (tierId) => {
+    const { money, getTierById, setTier, setMoney, clickTimer } = get();
+    const currentTier = getTierById(tierId);
+    const price = currentTier.unlockPrice * 100;
+
+    if (price > money) {
+      throw new Error("not enough money");
+    }
+
+    setMoney(-price);
+
+    setTier({
+      id: tierId,
+      hasManager: true,
+    });
+
+    clickTimer(tierId);
   },
 
   clickTimer: (tierId) => {

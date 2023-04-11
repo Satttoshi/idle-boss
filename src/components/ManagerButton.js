@@ -2,34 +2,38 @@ import useStore from "~/src/zustand/store";
 import styled from "styled-components";
 
 export default function ManagerButton({ tier }) {
-  const { setTier, clickTimer } = useStore();
+  const { buyManager, money } = useStore();
 
-  function handleHireManager() {
-    setTier({
-      id: tier.id,
-      hasManager: true,
-    });
-    clickTimer(tier.id);
+  const price = tier.unlockPrice * 100;
+
+  function handleBuyManager() {
+    try {
+      buyManager(tier.id);
+    } catch (error) {
+      // mby implement not enough money popup in a later US
+      console.error(error.message);
+    }
   }
 
   return (
     <StyledButton
-      disabled={tier.hasManager}
+      disabled={tier.hasManager || money < price}
       type="button"
-      onClick={handleHireManager}
+      onClick={handleBuyManager}
     >
-      Hire Manager
+      Hire Manager {price} €
     </StyledButton>
   );
 }
 
 const StyledButton = styled.button`
   position: absolute;
-  bottom: 0;
-  left: 90px;
+  bottom: -10px;
+  left: 80px;
+  cursor: pointer;
 
   z-index: 100;
-  width: 50px;
-  height: 30px;
+  width: 65px;
+  height: 38px;
   font-size: 10px;
 `;
