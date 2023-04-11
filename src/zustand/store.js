@@ -10,6 +10,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 0,
       isUnlocked: true,
       isFilling: false,
+      hasManager: true,
       name: "Wordpress Website",
       income: 10,
       incomePerSecond: null,
@@ -25,6 +26,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 600,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "React App",
       income: 600,
       incomePerSecond: null,
@@ -40,6 +42,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 7200,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "Next-js App",
       income: 5400,
       incomePerSecond: null,
@@ -55,6 +58,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 86400,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "Ruby on Rails App",
       income: 43200,
       incomePerSecond: null,
@@ -70,6 +74,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 1036800,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "Quantum App",
       income: 518400,
       incomePerSecond: null,
@@ -139,10 +144,13 @@ const useStore = createStore((set, get) => ({
   },
 
   onTimerEnd: (tierId) => {
-    const { setMoney, setTier, getTierById } = get();
+    const { setMoney, setTier, getTierById, clickTimer } = get();
     const currentTier = getTierById(tierId);
     setTier({ id: tierId, isFilling: false });
     setMoney(currentTier.income);
+    if (currentTier.hasManager) {
+      clickTimer(tierId);
+    }
   },
 
   invest: (tierId) => {
