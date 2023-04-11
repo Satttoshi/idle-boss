@@ -7,7 +7,7 @@ export default function ProgressBar({ tier, isFilling }) {
   const [currentDelay, setCurrentDelay] = useState(delay);
 
   useEffect(() => {
-    setCurrentDelay(delay);
+    setCurrentDelay(Math.max(delay, 250));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFilling]);
 
