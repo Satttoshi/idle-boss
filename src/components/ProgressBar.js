@@ -51,7 +51,6 @@ const StyledIncome = styled.span`
   top: 11px;
   left: 21px;
   z-index: 10;
-
   color: var(--5);
   font-family: var(--font1);
   text-align: center;

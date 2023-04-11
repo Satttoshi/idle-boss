@@ -7,7 +7,7 @@ export default function ProgressStars({ tier }) {
   function renderStars() {
     const stars = [];
     for (let i = 0; i < milestoneIndex; i++) {
-      stars.push(<Star />);
+      stars.push(<Star key={tier.id + "Star" + i} />);
     }
     return stars;
   }
