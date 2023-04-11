@@ -12,6 +12,7 @@ const useStore = createStore((set, get) => ({
       isFilling: false,
       name: "Wordpress Website",
       income: 10,
+      incomePerSecond: 16.66666,
       incomeBase: 10,
       delay: 600,
       investPrice: 50,
@@ -90,6 +91,18 @@ const useStore = createStore((set, get) => ({
       ),
     })),
 
+  setIncomePerSecond: (tierId) => {
+    const { setTier, getTierById } = get();
+    const currentTier = getTierById(tierId);
+    setTier({
+      id: tierId,
+      incomePerSecond: currentTier.income / (currentTier.delay / 1000),
+    });
+
+    const testTier = getTierById(tierId);
+    console.log(testTier.incomePerSecond);
+  },
+
   unlock: (tierId) => {
     const { money, getTierById, setTier, setMoney } = get();
     const currentTier = getTierById(tierId);
@@ -131,7 +144,7 @@ const useStore = createStore((set, get) => ({
   },
 
   invest: (tierId) => {
-    const { money, setTier, setMoney, getTierById } = get();
+    const { money, setTier, setMoney, getTierById, setIncomePerSecond } = get();
     const currentTier = getTierById(tierId);
 
     if (currentTier.investPrice > money) {
@@ -155,6 +168,8 @@ const useStore = createStore((set, get) => ({
         ? currentTier.milestoneIndex + 1
         : currentTier.milestoneIndex,
     });
+
+    setIncomePerSecond(tierId);
   },
 }));
 
