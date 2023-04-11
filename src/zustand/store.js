@@ -98,9 +98,6 @@ const useStore = createStore((set, get) => ({
       id: tierId,
       incomePerSecond: currentTier.income / (currentTier.delay / 1000),
     });
-
-    const testTier = getTierById(tierId);
-    console.log(testTier.incomePerSecond);
   },
 
   unlock: (tierId) => {
