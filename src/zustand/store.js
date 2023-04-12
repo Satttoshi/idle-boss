@@ -156,27 +156,26 @@ const useStore = createStore((set, get) => ({
       return;
     }
 
-    onTimerStart(currentTier.id);
+    onTimerStart(currentTier);
     setTimeout(() => {
-      onTimerEnd(currentTier.id);
+      onTimerEnd(currentTier);
     }, delay);
   },
 
-  onTimerStart: (tierId) => {
+  onTimerStart: (tier) => {
     const { setTier } = get();
     setTier({
-      id: tierId,
+      id: tier.id,
       isFilling: true,
     });
   },
 
-  onTimerEnd: (tierId) => {
-    const { setMoney, setTier, getTierById, clickTimer } = get();
-    const currentTier = getTierById(tierId);
-    setTier({ id: tierId, isFilling: false, trigger: !currentTier.trigger });
-    setMoney(currentTier.income);
-    if (currentTier.hasManager) {
-      clickTimer(tierId);
+  onTimerEnd: (tier) => {
+    const { setMoney, setTier, clickTimer } = get();
+    setTier({ id: tier.id, isFilling: false, trigger: !tier.trigger });
+    setMoney(tier.income);
+    if (tier.hasManager) {
+      clickTimer(tier.id);
     }
   },
 
