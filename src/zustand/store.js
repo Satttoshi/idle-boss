@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 1,
+  money: 100000000000,
   tiers: [
     {
       id: "tier1",
@@ -21,6 +21,7 @@ const useStore = createStore((set, get) => ({
       investPriceCoefficient: 1.07,
       investCount: 0,
       milestoneIndex: 0,
+      timer: null,
     },
     {
       id: "tier2",
@@ -38,6 +39,7 @@ const useStore = createStore((set, get) => ({
       investPriceCoefficient: 1.15,
       investCount: 0,
       milestoneIndex: 0,
+      timer: null,
     },
     {
       id: "tier3",
@@ -55,6 +57,7 @@ const useStore = createStore((set, get) => ({
       investPriceCoefficient: 1.14,
       investCount: 0,
       milestoneIndex: 0,
+      timer: null,
     },
     {
       id: "tier4",
@@ -72,6 +75,7 @@ const useStore = createStore((set, get) => ({
       investPriceCoefficient: 1.13,
       investCount: 0,
       milestoneIndex: 0,
+      timer: null,
     },
     {
       id: "tier5",
@@ -89,6 +93,7 @@ const useStore = createStore((set, get) => ({
       investPriceCoefficient: 1.12,
       investCount: 0,
       milestoneIndex: 0,
+      timer: null,
     },
   ],
 
@@ -148,7 +153,9 @@ const useStore = createStore((set, get) => ({
       isPerSecond: currentTier.delay < 250 ? true : false,
     });
 
-    clickTimer(tierId);
+    if (!currentTier.isFilling) {
+      clickTimer(tierId);
+    }
   },
 
   clickTimer: (tierId) => {
@@ -157,8 +164,9 @@ const useStore = createStore((set, get) => ({
     const delay = Math.max(currentTier.delay, 250);
 
     onTimerStart(currentTier);
+
     setTimeout(() => {
-      onTimerEnd(currentTier);
+      onTimerEnd(currentTier.id);
     }, delay);
   },
 
@@ -170,8 +178,9 @@ const useStore = createStore((set, get) => ({
     });
   },
 
-  onTimerEnd: (tier) => {
-    const { setMoney, setTier, clickTimer } = get();
+  onTimerEnd: (tierId) => {
+    const { setMoney, setTier, clickTimer, getTierById } = get();
+    const tier = getTierById(tierId);
     setTier({ id: tier.id, isFilling: false, trigger: !tier.trigger });
 
     if (tier.isPerSecond) {
