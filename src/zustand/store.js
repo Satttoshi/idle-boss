@@ -151,7 +151,7 @@ const useStore = createStore((set, get) => ({
     const currentTier = getTierById(tierId);
     const delay = Math.max(currentTier.delay, 250);
 
-    if (currentTier.isPerSecond) {
+    if (currentTier.isPerSecond && currentTier.hasManager) {
       return;
     }
 
