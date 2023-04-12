@@ -230,12 +230,6 @@ const useStore = createStore((set, get) => ({
     });
 
     setIncomePerSecond(tierId);
-
-    console.log(
-      currentTier.income,
-      currentTier.incomePerSecond,
-      currentTier.investCount
-    );
   },
 }));
 
