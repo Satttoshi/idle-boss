@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import WordpressIcon from "~/src/assets/wordpress.svg";
+import TierLogo from "./TierLogo";
 
 export default function MoneyButton({ tier, onMoneyButtonClick }) {
   return (
@@ -10,7 +10,7 @@ export default function MoneyButton({ tier, onMoneyButtonClick }) {
         onMoneyButtonClick();
       }}
     >
-      <WordpressIcon width="48" height="48" fill="var(--5)" />
+      <TierLogo tierId={tier.id} />
     </StyledButton>
   );
 }
