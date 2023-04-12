@@ -152,10 +152,6 @@ const useStore = createStore((set, get) => ({
     const currentTier = getTierById(tierId);
     const delay = Math.max(currentTier.delay, 250);
 
-    if (currentTier.isPerSecond && currentTier.hasManager) {
-      return;
-    }
-
     onTimerStart(currentTier);
     setTimeout(() => {
       onTimerEnd(currentTier);
@@ -166,14 +162,20 @@ const useStore = createStore((set, get) => ({
     const { setTier } = get();
     setTier({
       id: tier.id,
-      isFilling: true,
+      isFilling: tier.isPerSecond ? false : true,
     });
   },
 
   onTimerEnd: (tier) => {
     const { setMoney, setTier, clickTimer } = get();
     setTier({ id: tier.id, isFilling: false, trigger: !tier.trigger });
-    setMoney(tier.income);
+
+    if (tier.isPerSecond) {
+      setMoney(tier.incomePerSecond / 4);
+    } else {
+      setMoney(tier.income);
+    }
+
     if (tier.hasManager) {
       clickTimer(tier.id);
     }
