@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import ProgressStars from "./ProgressStars";
 
 export default function ProgressBar({ tier, isFilling }) {
-  const { delay, income, trigger } = tier;
+  const { delay, income, isPerSecond, incomePerSecond, trigger } = tier;
   const [currentDelay, setCurrentDelay] = useState(delay);
 
   useEffect(() => {
@@ -12,10 +12,10 @@ export default function ProgressBar({ tier, isFilling }) {
   }, [trigger]);
 
   const displayIncome =
-    income.toLocaleString("de-DE", {
+    (isPerSecond ? incomePerSecond : income).toLocaleString("de-DE", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }) + " €";
+    }) + (isPerSecond ? " /sec" : " €");
 
   return (
     <StyledProgressBar>
@@ -23,7 +23,11 @@ export default function ProgressBar({ tier, isFilling }) {
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <StyledContainer data-testid="progress-bar">
-          {isFilling ? <StyledBar delay={currentDelay} tier={tier} /> : null}
+          {isPerSecond ? (
+            <StyledFlowBar />
+          ) : isFilling ? (
+            <StyledBar delay={currentDelay} tier={tier} />
+          ) : null}
           <StyledUnfilledBar />
         </StyledContainer>
       </StyledWrapper>
@@ -104,6 +108,17 @@ const StyledUnfilledBar = styled.div`
   z-index: 2;
   right: 2px;
   height: 30px;
+  display: inline-block;
+  overflow: hidden;
+`;
+
+const StyledFlowBar = styled.div`
+  background: var(--3);
+  width: 100%;
+  position: absolute;
+  left: -2px;
+  height: 30px;
+  z-index: 5;
   display: inline-block;
   overflow: hidden;
 `;

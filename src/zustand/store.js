@@ -217,19 +217,6 @@ const useStore = createStore((set, get) => ({
     });
 
     setIncomePerSecond(tierId);
-
-    const test = getTierById(tierId);
-    console.log(
-      test.investCount +
-        " " +
-        test.isPerSecond +
-        " " +
-        test.delay +
-        " " +
-        test.incomePerSecond +
-        " " +
-        test.income
-    );
   },
 }));
 
