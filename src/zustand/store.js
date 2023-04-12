@@ -3,7 +3,7 @@ import { create as createStore } from "zustand";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 0,
+  money: 10000000,
   tiers: [
     {
       id: "tier1",
@@ -11,6 +11,7 @@ const useStore = createStore((set, get) => ({
       isUnlocked: true,
       isFilling: false,
       hasManager: false,
+      isPerSecond: false,
       name: "Wordpress Website",
       income: 10,
       incomePerSecond: null,
@@ -198,9 +199,25 @@ const useStore = createStore((set, get) => ({
       milestoneIndex: didReachMilestone
         ? currentTier.milestoneIndex + 1
         : currentTier.milestoneIndex,
+      isPerSecond:
+        (didReachMilestone || currentTier.isPerSecond) &&
+        currentTier.delay / 2 < 250
+          ? true
+          : false,
     });
 
     setIncomePerSecond(tierId);
+
+    const test = getTierById(tierId);
+    console.log(
+      test.isPerSecond +
+        " " +
+        test.delay +
+        " " +
+        test.incomePerSecond +
+        " " +
+        test.income
+    );
   },
 }));
 
