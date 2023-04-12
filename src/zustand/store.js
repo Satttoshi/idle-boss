@@ -3,13 +3,14 @@ import { create as createStore } from "zustand";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 1000000,
+  money: 0,
   tiers: [
     {
       id: "tier1",
-      unlockPrice: 0,
+      unlockPrice: 10,
       isUnlocked: true,
       isFilling: false,
+      hasManager: false,
       name: "Wordpress Website",
       income: 10,
       incomePerSecond: null,
@@ -25,6 +26,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 600,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "React App",
       income: 600,
       incomePerSecond: null,
@@ -40,6 +42,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 7200,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "Next-js App",
       income: 5400,
       incomePerSecond: null,
@@ -55,6 +58,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 86400,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "Ruby on Rails App",
       income: 43200,
       incomePerSecond: null,
@@ -70,6 +74,7 @@ const useStore = createStore((set, get) => ({
       unlockPrice: 1036800,
       isUnlocked: false,
       isFilling: false,
+      hasManager: false,
       name: "Quantum App",
       income: 518400,
       incomePerSecond: null,
@@ -81,6 +86,7 @@ const useStore = createStore((set, get) => ({
       milestoneIndex: 0,
     },
   ],
+
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
 
   getTierById: (tierId) => {
@@ -120,10 +126,30 @@ const useStore = createStore((set, get) => ({
     });
   },
 
+  buyManager: (tierId) => {
+    const { money, getTierById, setTier, setMoney, clickTimer } = get();
+    const currentTier = getTierById(tierId);
+    const price = currentTier.unlockPrice * 100;
+
+    if (price > money) {
+      throw new Error("not enough money");
+    }
+
+    setMoney(-price);
+
+    setTier({
+      id: tierId,
+      hasManager: true,
+    });
+
+    clickTimer(tierId);
+  },
+
   clickTimer: (tierId) => {
     const { getTierById, onTimerStart, onTimerEnd } = get();
     const currentTier = getTierById(tierId);
     const delay = Math.max(currentTier.delay, 250);
+
     onTimerStart(currentTier.id);
     setTimeout(() => {
       onTimerEnd(currentTier.id);
@@ -139,10 +165,13 @@ const useStore = createStore((set, get) => ({
   },
 
   onTimerEnd: (tierId) => {
-    const { setMoney, setTier, getTierById } = get();
+    const { setMoney, setTier, getTierById, clickTimer } = get();
     const currentTier = getTierById(tierId);
-    setTier({ id: tierId, isFilling: false });
+    setTier({ id: tierId, isFilling: false, trigger: !currentTier.trigger });
     setMoney(currentTier.income);
+    if (currentTier.hasManager) {
+      clickTimer(tierId);
+    }
   },
 
   invest: (tierId) => {

@@ -3,6 +3,7 @@ import ProgressBar from "./ProgressBar";
 import useStore, { milestones } from "~/src/zustand/store";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
+import ManagerButton from "./ManagerButton";
 
 export default function Tier({ currentTier }) {
   const { money, clickTimer, invest } = useStore();
@@ -26,7 +27,7 @@ export default function Tier({ currentTier }) {
     <>
       <MoneyButton
         onMoneyButtonClick={handleMoneyButtonClick}
-        isFilling={currentTier.isFilling}
+        tier={currentTier}
       />
       <ProgressBar isFilling={currentTier.isFilling} tier={currentTier} />
 
@@ -39,6 +40,7 @@ export default function Tier({ currentTier }) {
         money={money}
         investPrice={investPrice}
       />
+      <ManagerButton tier={currentTier} />
     </>
   );
 }

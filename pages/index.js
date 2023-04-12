@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export default function HomePage() {
   return (
-    <div>
+    <>
       <MoneyDisplay />
       <StyledMain>
         <Product tierId="tier1" />
@@ -13,7 +13,7 @@ export default function HomePage() {
         <Product tierId="tier4" />
         <Product tierId="tier5" />
       </StyledMain>
-    </div>
+    </>
   );
 }
 
