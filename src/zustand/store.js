@@ -193,6 +193,14 @@ const useStore = createStore((set, get) => ({
     const didReachMilestone =
       currentTier.investCount + 1 >= milestones[currentTier.milestoneIndex];
 
+    const isPerSecond = didReachMilestone
+      ? currentTier.hasManager && currentTier.delay / 2 < 250
+        ? true
+        : false
+      : currentTier.hasManager && currentTier.delay < 250
+      ? true
+      : false;
+
     setTier({
       id: tierId,
       income: currentTier.income + currentTier.incomeBase,
@@ -204,13 +212,7 @@ const useStore = createStore((set, get) => ({
       milestoneIndex: didReachMilestone
         ? currentTier.milestoneIndex + 1
         : currentTier.milestoneIndex,
-      isPerSecond: didReachMilestone
-        ? currentTier.hasManager && currentTier.delay / 2 < 250
-          ? true
-          : false
-        : currentTier.hasManager && currentTier.delay < 250
-        ? true
-        : false,
+      isPerSecond: isPerSecond,
     });
 
     setIncomePerSecond(tierId);
