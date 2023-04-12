@@ -1,7 +1,24 @@
 import GlobalStyle from "../styles";
 import { ThemeProvider } from "next-themes";
+import { useEffect } from "react";
+import useStore from "~/src/zustand/store";
 
 export default function App({ Component, pageProps }) {
+  const { setMoney } = useStore();
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === " ") {
+        setMoney(10000000);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setMoney]);
+
   return (
     <ThemeProvider
       defaultTheme="theme0"
