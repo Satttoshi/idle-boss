@@ -141,6 +141,7 @@ const useStore = createStore((set, get) => ({
     setTier({
       id: tierId,
       hasManager: true,
+      isPerSecond: currentTier.delay < 250 ? true : false,
     });
 
     clickTimer(tierId);
