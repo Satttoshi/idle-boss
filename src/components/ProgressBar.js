@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { useState, useEffect } from "react";
 import ProgressStars from "./ProgressStars";
+import PopupText from "./PopupText";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income, isPerSecond, incomePerSecond, trigger } = tier;
@@ -22,7 +23,7 @@ export default function ProgressBar({ tier, isFilling }) {
       <ProgressStars tier={tier} />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
-        <StyledPopup>+ 4.000,00 €</StyledPopup>
+        <PopupText tier={tier} />
         <StyledContainer data-testid="progress-bar">
           {isPerSecond ? (
             <StyledFlowBar />
