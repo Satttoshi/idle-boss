@@ -1,23 +1,19 @@
 import styled, { keyframes } from "styled-components";
 
 export default function PopupText({ tier }) {
-  const { delay, incomePerSecond, isPerSecond } = tier;
-  const addedIncome = (incomePerSecond * delay) / 1000;
+  const { id, incomePerSecond, isPerSecond, income } = tier;
 
-  if (addedIncome === 0) {
+  if (!incomePerSecond) {
     return null;
   }
 
   const displayIncome =
-    (isPerSecond
-      ? incomePerSecond
-      : (incomePerSecond * delay) / 1000
-    ).toLocaleString("de-DE", {
+    (isPerSecond ? incomePerSecond : income).toLocaleString("de-DE", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }) + (isPerSecond ? " /sec" : " €");
 
-  return <StyledPopup key={addedIncome}>{displayIncome}</StyledPopup>;
+  return <StyledPopup key={id + income}>{displayIncome}</StyledPopup>;
 }
 
 const PopupAnimation = keyframes`
@@ -27,7 +23,7 @@ const PopupAnimation = keyframes`
     }
   100% {
     opacity: 0;
-    transform: translateY(-15px);
+    transform: translateY(-10px);
     }`;
 
 const StyledPopup = styled.span`
