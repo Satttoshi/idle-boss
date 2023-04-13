@@ -1,6 +1,8 @@
 import styled, { keyframes } from "styled-components";
+import { useState } from "react";
 
 export default function PopupText({ tier }) {
+  const [showPopup, setShowPopup] = useState(false);
   const addedIncome = (tier.incomePerSecond * tier.delay) / 1000;
 
   const addedIncomeDisplay =
@@ -37,8 +39,9 @@ const StyledPopup = styled.span`
 
   animation-name: ${PopupAnimation};
   animation-duration: 800ms;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
 
   -webkit-user-select: none;
   -ms-user-select: none;
