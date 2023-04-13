@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
-import { useState } from "react";
 
 export default function TierLocked({ currentTier }) {
   const { unlock, money } = useStore();
