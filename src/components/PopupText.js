@@ -43,6 +43,9 @@ const StyledPopup = styled.span`
   font-weight: 600;
   text-align: center;
 
+  text-shadow: -1px -1px 0 var(--5), 1px -1px 0 var(--5), -1px 1px 0 var(--5),
+    1px 1px 0 var(--5);
+
   animation-name: ${PopupAnimation};
   animation-duration: 800ms;
   animation-iteration-count: 1;
