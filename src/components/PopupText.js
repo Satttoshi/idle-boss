@@ -1,17 +1,23 @@
 import styled, { keyframes } from "styled-components";
-import { useState } from "react";
 
 export default function PopupText({ tier }) {
-  const [showPopup, setShowPopup] = useState(false);
-  const addedIncome = (tier.incomePerSecond * tier.delay) / 1000;
+  const { delay, incomePerSecond, isPerSecond } = tier;
+  const addedIncome = (incomePerSecond * delay) / 1000;
 
-  const addedIncomeDisplay =
-    addedIncome.toLocaleString("de-DE", {
+  if (addedIncome === 0) {
+    return null;
+  }
+
+  const displayIncome =
+    (isPerSecond
+      ? incomePerSecond
+      : (incomePerSecond * delay) / 1000
+    ).toLocaleString("de-DE", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }) + " €";
+    }) + (isPerSecond ? " /sec" : " €");
 
-  return <StyledPopup>{addedIncomeDisplay}</StyledPopup>;
+  return <StyledPopup key={addedIncome}>{displayIncome}</StyledPopup>;
 }
 
 const PopupAnimation = keyframes`
