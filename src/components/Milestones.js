@@ -27,5 +27,8 @@ const StyledBox = styled.div`
 
   h3 {
     margin: 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
