@@ -7,7 +7,14 @@ export default function ProgressStars({ tier }) {
   function renderStars() {
     const stars = [];
     for (let i = 0; i < milestoneIndex; i++) {
-      stars.push(<StyledStar key={tier.id + "Star" + i} />);
+      stars.push(
+        <StyledStar
+          key={tier.id + "Star" + i}
+          style={{
+            "--star-offset": -((i + 1) * 20 + 40) + "px",
+          }}
+        />
+      );
     }
     return stars;
   }
@@ -24,7 +31,8 @@ const StyledStar = styled(Star)`
   @keyframes StarAnimation {
     0% {
       opacity: 0.6;
-      transform: translateX(-60px) translateY(75px) rotate(0deg) scale(3);
+      transform: translateX(var(--star-offset)) translateY(75px) rotate(0deg)
+        scale(3);
     }
     100% {
       opacity: 1;
