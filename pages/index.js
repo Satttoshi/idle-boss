@@ -1,8 +1,11 @@
 import MoneyDisplay from "~/src/components/MoneyDisplay";
 import Product from "~/src/components/Product";
 import styled from "styled-components";
+import useStore from "~/src/zustand/store";
 
 export default function HomePage() {
+  const { setMoney } = useStore();
+
   return (
     <>
       <MoneyDisplay />
@@ -13,6 +16,7 @@ export default function HomePage() {
         <Product tierId="tier4" />
         <Product tierId="tier5" />
       </StyledMain>
+      <button onClick={() => setMoney(1000000000)}>Cheat Money</button>
     </>
   );
 }
