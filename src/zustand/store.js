@@ -144,17 +144,3 @@ const useStore = createStore((set, get) => ({
 }));
 
 export default useStore;
-
-function test(FormData) {
-  const defaultData = {
-    workoutTitle: null,
-    titleInput: "new Exercise",
-    setInput: 0,
-    repInput: 0,
-    weightInput: 0,
-    timeInput: 0,
-    notesInput: "",
-  };
-
-  return { ...defaultData, ...FormData };
-}

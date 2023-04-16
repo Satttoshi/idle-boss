@@ -1,18 +1,25 @@
 import styled from "styled-components";
+import useStore, { milestones } from "~/src/zustand/store";
 
-export default function Milestones({ investCount, currentMilestone }) {
+export default function Milestones({ investCount, currentMilestone, tier }) {
+  console.log(tier.milestoneIndex);
+  function getBarClipPath(investCount, tier, milestones) {
+    const previousMilestone =
+      tier.milestoneIndex === 0 ? 0 : milestones[tier.milestoneIndex - 1];
+    const currentMilestoneDifference =
+      milestones[tier.milestoneIndex] - previousMilestone;
+    const progress =
+      (investCount - previousMilestone) / currentMilestoneDifference;
+    const clipPath = `inset(0px ${100 - progress * 100}% 0px 0px)`;
+    return clipPath;
+  }
+
   return (
     <StyledBox>
       <h3>{investCount + " / " + currentMilestone}</h3>
-      <StyledBar path={getBarClipPath(investCount, currentMilestone)} />
+      <StyledBar path={getBarClipPath(investCount, tier, milestones)} />
     </StyledBox>
   );
-}
-
-function getBarClipPath(investCount, currentMilestone) {
-  const progress = investCount / currentMilestone;
-  const clipPath = `inset(0px ${62 - progress * 62}% 0px 0px)`;
-  return clipPath;
 }
 
 const StyledBar = styled.div`
@@ -21,6 +28,7 @@ const StyledBar = styled.div`
   width: 62px;
   height: 18px;
   border-radius: 15px;
+  transition: clip-path 0.07s ease-in-out;
   clip-path: ${({ path }) => path};
 `;
 
