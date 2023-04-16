@@ -34,6 +34,7 @@ export default function Tier({ currentTier }) {
       <Milestones
         investCount={investCount}
         currentMilestone={milestones[milestoneIndex]}
+        tier={currentTier}
       />
       <InvestButton
         onInvest={handleInvest}
