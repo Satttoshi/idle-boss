@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import useStore, { milestones } from "~/src/zustand/store";
+import { milestones } from "~/src/zustand/store";
 
 export default function Milestones({ investCount, currentMilestone, tier }) {
-  console.log(tier.milestoneIndex);
   function getBarClipPath(investCount, tier, milestones) {
     const previousMilestone =
       tier.milestoneIndex === 0 ? 0 : milestones[tier.milestoneIndex - 1];
