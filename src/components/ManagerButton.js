@@ -2,7 +2,8 @@ import useStore from "~/src/zustand/store";
 import styled from "styled-components";
 
 export default function ManagerButton({ tier }) {
-  const { buyManager, money } = useStore();
+  const buyManager = useStore((state) => state.buyManager);
+  const money = useStore((state) => state.money);
 
   const price = tier.unlockPrice * 100;
 

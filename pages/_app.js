@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import useStore from "~/src/zustand/store";
 
 export default function App({ Component, pageProps }) {
-  const { setMoney } = useStore();
+  const setMoney = useStore((state) => state.setMoney);
 
   useEffect(() => {
     function handleKeyDown(event) {

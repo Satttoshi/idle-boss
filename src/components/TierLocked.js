@@ -2,7 +2,8 @@ import styled from "styled-components";
 import useStore from "~/src/zustand/store";
 
 export default function TierLocked({ currentTier }) {
-  const { unlock, money } = useStore();
+  const unlock = useStore((state) => state.unlock);
+  const money = useStore((state) => state.money);
 
   function handleUnlock(tierId) {
     try {

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
 
 export default function MoneyDisplay() {
-  const { money, username } = useStore();
+  const money = useStore((state) => state.money);
+  const username = useStore((state) => state.username);
 
   const moneyString =
     money.toLocaleString("de-DE", {
