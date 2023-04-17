@@ -1,9 +1,14 @@
 import MoneyDisplay from "~/src/components/MoneyDisplay";
+import useStore from "../../src/zustand/store";
 
 export default function BossFloor() {
+  const setUsername = useStore((state) => state.setUsername);
   function handleChange(event) {
     if (event.target.value.includes(" ")) {
       event.target.value = event.target.value.replace(" ", "");
+    }
+    if (event.target.value.length > 25) {
+      event.target.value = event.target.value.slice(0, 25);
     }
   }
 
@@ -11,7 +16,7 @@ export default function BossFloor() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
+    setUsername(data.username);
   }
 
   return (
@@ -19,15 +24,19 @@ export default function BossFloor() {
       <MoneyDisplay />
       <div>hhi</div>
       <form onSubmit={handleSubmit} aria-label="change username">
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          onChange={handleChange}
-          minlength="3"
-          required
-        />
-        <button type="submit">Submit</button>
+        <fieldset>
+          <legend>Change username</legend>
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="text"
+            name="username"
+            onChange={handleChange}
+            minLength="3"
+            required
+          />
+          <button type="submit">change</button>
+        </fieldset>
       </form>
     </>
   );
