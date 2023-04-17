@@ -32,7 +32,6 @@ const StyledButton = styled.button`
   left: 80px;
   cursor: pointer;
 
-  z-index: 100;
   width: 65px;
   height: 38px;
   font-size: 10px;

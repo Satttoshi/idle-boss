@@ -24,6 +24,6 @@ const StyledMain = styled.main`
   flex-direction: column;
   z-index: 100;
   align-items: center;
-  margin-top: 80px;
-  overflow-y: scroll;
+  padding: 80px 0 80px 0;
+  overflow-y: auto;
 `;

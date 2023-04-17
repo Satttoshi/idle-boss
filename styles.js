@@ -73,8 +73,6 @@ export default createGlobalStyle`
     --6: ${() => theme2["--6"]};
   }
 
-
-
   body {
     margin: 0;
     background-color: var(--6);
