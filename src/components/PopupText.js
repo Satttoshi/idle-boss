@@ -17,11 +17,11 @@ export default function PopupText({ tier }) {
 }
 
 const PopupAnimation = keyframes`
-  0% {
+  from {
     opacity: 1;
     transform: translateY(0px);
     }
-  100% {
+  to {
     opacity: 0;
     transform: translateY(-10px);
     }`;
