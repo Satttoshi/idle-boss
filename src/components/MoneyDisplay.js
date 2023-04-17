@@ -23,6 +23,9 @@ export default function MoneyDisplay() {
 }
 
 const StyledHeader = styled.header`
+  position: fixed;
+  top: 0;
+  z-index: 100;
   background-color: var(--5);
   width: 100%;
   height: 80px;
