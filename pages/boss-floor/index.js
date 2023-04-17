@@ -20,7 +20,13 @@ export default function BossFloor() {
       <div>hhi</div>
       <form onSubmit={handleSubmit} aria-label="change username">
         <label htmlFor="name">Name</label>
-        <input id="name" type="text" onChange={handleChange} min="3" required />
+        <input
+          id="name"
+          type="text"
+          onChange={handleChange}
+          minlength="3"
+          required
+        />
         <button type="submit">Submit</button>
       </form>
     </>
