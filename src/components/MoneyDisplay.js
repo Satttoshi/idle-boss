@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
 
 export default function MoneyDisplay() {
-  const { money } = useStore();
+  const { money, username } = useStore();
 
   const moneyString =
     money.toLocaleString("de-DE", {
@@ -14,7 +14,7 @@ export default function MoneyDisplay() {
   return (
     <StyledHeader>
       <div>
-        <h2>Username</h2>
+        <h2>{username}</h2>
         <h1>{moneyString}</h1>
       </div>
       <ThemeSwitch />

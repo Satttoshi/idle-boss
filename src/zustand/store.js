@@ -5,7 +5,7 @@ export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
   money: 0,
-  username: "username",
+  username: "Username",
   tiers: tierData,
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
