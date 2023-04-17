@@ -15,7 +15,7 @@ export default function Navigation() {
 
   function handleUpstairs() {
     if (index === "3") {
-      return;
+      router.push("/boss-floor");
     } else {
       router.push(`/floor/${parseInt(index, 10) + 1}`);
     }
