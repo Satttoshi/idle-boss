@@ -13,11 +13,11 @@ export default function HomePage() {
       <>
         <MoneyDisplay />
         <StyledMain>
-          <Product tierId="tier1" />
-          <Product tierId="tier2" />
-          <Product tierId="tier3" />
-          <Product tierId="tier4" />
-          <Product tierId="tier5" />
+          <Product key="tier1" tierId="tier1" />
+          <Product key="tier2" tierId="tier2" />
+          <Product key="tier3" tierId="tier3" />
+          <Product key="tier4" tierId="tier4" />
+          <Product key="tier5" tierId="tier5" />
         </StyledMain>
         <Navigation />
       </>
@@ -27,11 +27,10 @@ export default function HomePage() {
       <>
         <MoneyDisplay />
         <StyledMain>
-          <Product tierId="tier6" />
-          <Product tierId="tier7" />
-          <Product tierId="tier8" />
-          <Product tierId="tier9" />
-          <Product tierId="tier10" />
+          <Product key="tier6" tierId="tier6" />
+          <Product key="tier7" tierId="tier7" />
+          <Product key="tier8" tierId="tier8" />
+          <Product key="tier9" tierId="tier9" />
         </StyledMain>
         <Navigation />
       </>
