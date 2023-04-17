@@ -1,11 +1,19 @@
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
+  const router = useRouter();
+  const { floor } = router.query;
+
   return (
     <StyledNavigation>
-      <button type="button">downstairs</button>
+      <button type="button" onClick={() => router.push("/")}>
+        downstairs
+      </button>
       <h3>1st floor</h3>
-      <button type="button">upstairs</button>
+      <button type="button" onClick={() => console.log(floor)}>
+        upstairs
+      </button>
     </StyledNavigation>
   );
 }
