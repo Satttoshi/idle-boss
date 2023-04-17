@@ -3,15 +3,46 @@ import { useRouter } from "next/router";
 
 export default function Navigation() {
   const router = useRouter();
-  const { floor } = router.query;
+  const { index } = router.query;
+
+  function handleDownstairs() {
+    if (index === "1") {
+      return;
+    } else {
+      router.push(`/floor/${parseInt(index, 10) - 1}`);
+    }
+  }
+
+  function handleUpstairs() {
+    if (index === "3") {
+      return;
+    } else {
+      router.push(`/floor/${parseInt(index, 10) + 1}`);
+    }
+  }
+
+  function ordinalSuffix(i) {
+    const j = i % 10;
+    const k = i % 100;
+    if (j === 1 && k !== 11) {
+      return i + "st";
+    }
+    if (j === 2 && k !== 12) {
+      return i + "nd";
+    }
+    if (j === 3 && k !== 13) {
+      return i + "rd";
+    }
+    return i + "th";
+  }
 
   return (
     <StyledNavigation>
-      <button type="button" onClick={() => router.push("/")}>
+      <button type="button" onClick={handleDownstairs}>
         downstairs
       </button>
-      <h3>1st floor</h3>
-      <button type="button" onClick={() => console.log(floor)}>
+      <h3>{ordinalSuffix(index) + " floor"}</h3>
+      <button type="button" onClick={handleUpstairs}>
         upstairs
       </button>
     </StyledNavigation>
