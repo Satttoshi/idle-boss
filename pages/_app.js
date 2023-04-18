@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     function handleKeyDown(event) {
       if (event.key === " ") {
-        setMoney(10000000);
+        setMoney(1000000000);
       }
     }
 
