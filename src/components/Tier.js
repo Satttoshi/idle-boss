@@ -6,7 +6,9 @@ import Milestones from "./Milestones";
 import ManagerButton from "./ManagerButton";
 
 export default function Tier({ currentTier }) {
-  const { money, clickTimer, invest } = useStore();
+  const money = useStore((state) => state.money);
+  const invest = useStore((state) => state.invest);
+  const clickTimer = useStore((state) => state.clickTimer);
 
   function handleMoneyButtonClick() {
     clickTimer(currentTier.id);

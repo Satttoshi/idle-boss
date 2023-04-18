@@ -13,7 +13,7 @@ const theme0 = {
   "--3": "#b8da66",
   "--4": "#329691",
   "--5": "#185362",
-  "--6": "#082026",
+  "--6": "#071012",
 };
 
 const theme1 = {
@@ -72,8 +72,6 @@ export default createGlobalStyle`
     --5: ${() => theme2["--5"]};
     --6: ${() => theme2["--6"]};
   }
-
-
 
   body {
     margin: 0;

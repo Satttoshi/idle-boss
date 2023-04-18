@@ -2,7 +2,8 @@ import useStore from "~/src/zustand/store";
 import styled from "styled-components";
 
 export default function ManagerButton({ tier }) {
-  const { buyManager, money } = useStore();
+  const buyManager = useStore((state) => state.buyManager);
+  const money = useStore((state) => state.money);
 
   const price = tier.unlockPrice * 100;
 
@@ -32,7 +33,6 @@ const StyledButton = styled.button`
   left: 80px;
   cursor: pointer;
 
-  z-index: 100;
   width: 65px;
   height: 38px;
   font-size: 10px;

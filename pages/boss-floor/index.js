@@ -1,5 +1,7 @@
 import MoneyDisplay from "~/src/components/MoneyDisplay";
+import Navigation from "~/src/components/Navigation";
 import useStore from "../../src/zustand/store";
+import styled from "styled-components";
 
 export default function BossFloor() {
   const setUsername = useStore((state) => state.setUsername);
@@ -22,22 +24,28 @@ export default function BossFloor() {
   return (
     <>
       <MoneyDisplay />
-      <div>hhi</div>
-      <form onSubmit={handleSubmit} aria-label="change username">
-        <fieldset>
-          <legend>Change username</legend>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            name="username"
-            onChange={handleChange}
-            minLength="3"
-            required
-          />
-          <button type="submit">change</button>
-        </fieldset>
-      </form>
+      <StyledSection>
+        <form onSubmit={handleSubmit} aria-label="change username">
+          <fieldset>
+            <legend>Change username</legend>
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="username"
+              onChange={handleChange}
+              minLength="3"
+              required
+            />
+            <button type="submit">change</button>
+          </fieldset>
+        </form>
+      </StyledSection>
+      <Navigation />
     </>
   );
 }
+
+const StyledSection = styled.section`
+  margin-top: 100px;
+`;
