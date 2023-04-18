@@ -4,9 +4,12 @@ import { useRouter } from "next/router";
 export default function Navigation() {
   const router = useRouter();
   const { index } = router.query;
+  const currentPath = router.pathname;
 
   function handleDownstairs() {
-    if (index === "1") {
+    if (currentPath === "/boss-floor") {
+      router.push("/floor/2");
+    } else if (index === "1") {
       return;
     } else {
       router.push(`/floor/${parseInt(index, 10) - 1}`);
@@ -14,7 +17,9 @@ export default function Navigation() {
   }
 
   function handleUpstairs() {
-    if (index === "2") {
+    if (currentPath === "/boss-floor") {
+      return;
+    } else if (index === "2") {
       router.push("/boss-floor");
     } else {
       router.push(`/floor/${parseInt(index, 10) + 1}`);
@@ -38,11 +43,19 @@ export default function Navigation() {
 
   return (
     <StyledNavigation>
-      <button type="button" onClick={handleDownstairs}>
+      <button type="button" disabled={index === "1"} onClick={handleDownstairs}>
         downstairs
       </button>
-      <h3>{ordinalSuffix(index) + " floor"}</h3>
-      <button type="button" onClick={handleUpstairs}>
+      <h3>
+        {currentPath === "/boss-floor"
+          ? "boss floor"
+          : ordinalSuffix(index) + " floor"}
+      </h3>
+      <button
+        type="button"
+        disabled={currentPath === "/boss-floor"}
+        onClick={handleUpstairs}
+      >
         upstairs
       </button>
     </StyledNavigation>
@@ -72,6 +85,11 @@ const StyledNavigation = styled.nav`
     font-weight: 600;
     cursor: pointer;
     padding: 0;
+
+    &:disabled {
+      background-color: var(--4);
+      cursor: default;
+    }
   }
 
   h3 {

@@ -42,6 +42,10 @@ const StyledButton = styled.button`
   font-weight: 600;
   cursor: pointer;
 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   p {
     margin: 0;
     width: 94px;
