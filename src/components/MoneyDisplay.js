@@ -6,17 +6,50 @@ export default function MoneyDisplay() {
   const money = useStore((state) => state.money);
   const username = useStore((state) => state.username);
 
+  const moneyToString = Math.floor(money).toString();
+
+  function largeNumberNamingScaling(moneyString) {
+    if (moneyString.length > 32) {
+      return moneyString.slice(0, moneyString.length - 30) + " Decillion";
+    } else if (moneyString.length > 29) {
+      return moneyString.slice(0, moneyString.length - 27) + " Nonillion";
+    } else if (moneyString.length > 26) {
+      return moneyString.slice(0, moneyString.length - 24) + " Septillion";
+    } else if (moneyString.length > 23) {
+      return moneyString.slice(0, moneyString.length - 21) + " Sextillion";
+    } else if (moneyString.length > 20) {
+      return moneyString.slice(0, moneyString.length - 18) + " Quintillion";
+    } else if (moneyString.length > 17) {
+      return moneyString.slice(0, moneyString.length - 15) + " Quadrillion";
+    } else if (moneyString.length > 14) {
+      return moneyString.slice(0, moneyString.length - 12) + " Trillion";
+    } else if (moneyString.length > 11) {
+      return moneyString.slice(0, moneyString.length - 9) + " Billion";
+    } else if (moneyString.length > 8) {
+      return moneyString.slice(0, moneyString.length - 6) + " Million";
+    } else {
+      return (
+        moneyString.toLocaleString("de-DE", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }) + " €"
+      );
+    }
+  }
+
   const moneyString =
     money.toLocaleString("de-DE", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }) + " €";
 
+  const convertedMoney = largeNumberNamingScaling(moneyToString);
+
   return (
     <StyledHeader>
       <div>
         <h2>{username}</h2>
-        <h1>{moneyString}</h1>
+        <h1>{convertedMoney}</h1>
       </div>
       <ThemeSwitch />
     </StyledHeader>
