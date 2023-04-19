@@ -10,6 +10,9 @@ import { mainnet, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { SessionProvider } from "next-auth/react";
+
 const { chains, provider } = configureChains(
   [mainnet, goerli],
   [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
@@ -45,15 +48,19 @@ export default function App({ Component, pageProps }) {
 
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <ThemeProvider
-          defaultTheme="theme0"
-          themes={["theme0", "theme1", "theme2"]}
-        >
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </ThemeProvider>{" "}
-      </RainbowKitProvider>
+      <SessionProvider refetchInterval={0} session={pageProps.session}>
+        <RainbowKitSiweNextAuthProvider>
+          <RainbowKitProvider chains={chains}>
+            <ThemeProvider
+              defaultTheme="theme0"
+              themes={["theme0", "theme1", "theme2"]}
+            >
+              <GlobalStyle />
+              <Component {...pageProps} />
+            </ThemeProvider>{" "}
+          </RainbowKitProvider>
+        </RainbowKitSiweNextAuthProvider>
+      </SessionProvider>
     </WagmiConfig>
   );
 }
