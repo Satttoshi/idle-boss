@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 import { useState, useEffect } from "react";
 import ProgressStars from "./ProgressStars";
 import PopupText from "./PopupText";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income, isPerSecond, incomePerSecond, trigger } = tier;
@@ -13,10 +14,8 @@ export default function ProgressBar({ tier, isFilling }) {
   }, [trigger]);
 
   const displayIncome =
-    (isPerSecond ? incomePerSecond : income).toLocaleString("de-DE", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }) + (isPerSecond ? " /sec" : " €");
+    (isPerSecond ? formatNumbers(incomePerSecond) : formatNumbers(income)) +
+    (isPerSecond ? " /sec" : " €");
 
   return (
     <StyledProgressBar>
