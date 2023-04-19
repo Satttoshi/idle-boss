@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function PopupText({ tier }) {
   const { id, incomePerSecond, isPerSecond, income } = tier;
@@ -8,10 +9,8 @@ export default function PopupText({ tier }) {
   }
 
   const displayIncome =
-    (isPerSecond ? incomePerSecond : income).toLocaleString("de-DE", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }) + (isPerSecond ? " /sec" : " €");
+    (isPerSecond ? formatNumbers(incomePerSecond) : formatNumbers(income)) +
+    (isPerSecond ? " /sec" : " €");
 
   return <StyledPopup key={id + income}>{displayIncome}</StyledPopup>;
 }

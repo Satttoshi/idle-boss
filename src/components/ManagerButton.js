@@ -1,11 +1,13 @@
 import useStore from "~/src/zustand/store";
 import styled from "styled-components";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function ManagerButton({ tier }) {
   const buyManager = useStore((state) => state.buyManager);
   const money = useStore((state) => state.money);
 
   const price = tier.unlockPrice * 100;
+  const displayPrice = formatNumbers(price);
 
   function handleBuyManager() {
     try {
@@ -22,7 +24,7 @@ export default function ManagerButton({ tier }) {
       type="button"
       onClick={handleBuyManager}
     >
-      Hire Manager {price} €
+      Hire Manager {displayPrice} €
     </StyledButton>
   );
 }
@@ -35,7 +37,7 @@ const StyledButton = styled.button`
 
   width: 65px;
   height: 38px;
-  font-size: 10px;
+  font-size: 8px;
 
   :disabled {
     cursor: default;
