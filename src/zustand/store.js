@@ -4,7 +4,7 @@ import tierData from "./tierData";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 0,
+  money: 1234567,
   username: "Username",
   tiers: tierData,
 
