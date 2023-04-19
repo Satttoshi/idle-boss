@@ -6,9 +6,18 @@ export default function MoneyDisplay() {
   const money = useStore((state) => state.money);
   const username = useStore((state) => state.username);
 
-  const moneyToString = Math.floor(money).toString();
+  function largeNumberNamingScaling(money) {
+    if (money < 100000000) {
+      return (
+        money.toLocaleString("de-DE", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }) + " €"
+      );
+    }
 
-  function largeNumberNamingScaling(moneyString) {
+    const moneyString = Math.floor(money).toString();
+
     if (moneyString.length > 32) {
       return moneyString.slice(0, moneyString.length - 30) + " Decillion";
     } else if (moneyString.length > 29) {
@@ -28,22 +37,11 @@ export default function MoneyDisplay() {
     } else if (moneyString.length > 8) {
       return moneyString.slice(0, moneyString.length - 6) + " Million";
     } else {
-      return (
-        moneyString.toLocaleString("de-DE", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }) + " €"
-      );
+      return moneyString;
     }
   }
 
-  const moneyString =
-    money.toLocaleString("de-DE", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }) + " €";
-
-  const convertedMoney = largeNumberNamingScaling(moneyToString);
+  const convertedMoney = largeNumberNamingScaling(money);
 
   return (
     <StyledHeader>
