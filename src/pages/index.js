@@ -30,6 +30,7 @@ const StyledSection = styled.section`
     appearance: none;
     border: none;
     position: absolute;
+    cursor: pointer;
     width: 220px;
     height: 90px;
     border-radius: 20px;
