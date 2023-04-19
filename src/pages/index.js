@@ -1,9 +1,20 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/router";
-
+import { useState } from "react";
 import WalletConnect from "~/src/components/WalletConnect";
 
 export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleButtonClick() {
+    setIsModalOpen(true);
+  }
+
+  function handleModalSubmit() {
+    setIsModalOpen(false);
+    router.push("/floor/1");
+  }
+
   const router = useRouter();
   return (
     <>
@@ -11,21 +22,102 @@ export default function HomePage() {
         <h1>IDLE BOSS</h1>
       </StyledMain>
       <StyledSection>
-        <StyledButton type="button" onClick={() => router.push("/floor/1")}>
+        <StyledButton type="button" onClick={handleButtonClick}>
           ENTER
         </StyledButton>
+        {isModalOpen && (
+          <StyledDimmer>
+            <StyledModal>
+              <p>
+                Your wallet is currently not connected, Game Progress won
+                {"'"}t be saved!
+              </p>
+              <button type="button" onClick={handleModalSubmit}>
+                I do understand. Let me in.
+              </button>
+            </StyledModal>
+          </StyledDimmer>
+        )}
         <WalletConnect />
-        <span>idle boss - version 0.0.27</span>
+        <span>idle boss - version 0.2.27</span>
       </StyledSection>
     </>
   );
 }
 
+const ModalPopupAnimation = keyframes`
+  from {
+    bottom: -200px;
+  }
+  
+  to {
+    bottom: 260px;
+  }`;
+
+const StyledDimmer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+`;
+
+const StyledModal = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 260px;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 180px;
+  background-color: var(--5);
+  border-radius: 50px;
+  z-index: 1;
+  animation-name: ${ModalPopupAnimation};
+  animation-duration: 0.35s;
+  animation-timing-function: ease-out;
+
+  p {
+    position: absolute;
+    margin: 0;
+    top: 30px;
+    left: 50%;
+    width: 200px;
+    transform: translateX(-50%);
+    font-family: var(--font1);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  button {
+    position: absolute;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    border-radius: 20px;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family: var(--font1);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--5);
+
+    :hover {
+      background-color: var(--3);
+    }
+  }
+`;
+
 const StyledSection = styled.section`
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 284px;
+  height: 280px;
   border-radius: 50px 50px 0 0;
   background-color: var(--5);
 

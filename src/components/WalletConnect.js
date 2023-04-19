@@ -107,7 +107,7 @@ const StyledNetworkButton = styled.button`
   transform: translate(-50%, -50%);
   font-family: var(--font1);
   font-weight: 500;
-  font-size: 0.6rem;
+  font-size: 0.67rem;
 
   display: flex;
   align-items: center;
@@ -119,7 +119,7 @@ const StyledAddressButton = styled.button`
   background-color: var(--6);
   color: var(--1);
   appearance: none;
-  border: 3px solid var(--1);
+  border: 2px solid var(--1);
   position: absolute;
   cursor: pointer;
   width: 220px;
