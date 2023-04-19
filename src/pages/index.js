@@ -2,17 +2,27 @@ import styled, { keyframes } from "styled-components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import WalletConnect from "~/src/components/WalletConnect";
+import { useAccount } from "wagmi";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isConnected } = useAccount();
 
   function handleButtonClick() {
-    setIsModalOpen(true);
+    if (!isConnected) {
+      setIsModalOpen(true);
+    } else {
+      router.push("/floor/1");
+    }
   }
 
   function handleModalSubmit() {
     setIsModalOpen(false);
     router.push("/floor/1");
+  }
+
+  function handleModalClose() {
+    setIsModalOpen(false);
   }
 
   const router = useRouter();
@@ -26,7 +36,7 @@ export default function HomePage() {
           ENTER
         </StyledButton>
         {isModalOpen && (
-          <StyledDimmer>
+          <StyledDimmer onClick={handleModalClose}>
             <StyledModal>
               <p>
                 Your wallet is currently not connected, Game Progress won
