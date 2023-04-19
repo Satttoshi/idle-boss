@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
+import WalletConnect from "~/src/components/WalletConnect";
+
 export default function HomePage() {
   const router = useRouter();
   return (
@@ -9,9 +11,10 @@ export default function HomePage() {
         <h1>IDLE BOSS</h1>
       </StyledMain>
       <StyledSection>
-        <button type="button" onClick={() => router.push("/floor/1")}>
+        <StyledButton type="button" onClick={() => router.push("/floor/1")}>
           ENTER
-        </button>
+        </StyledButton>
+        <WalletConnect />
         <span>idle boss - version 0.0.27</span>
       </StyledSection>
     </>
@@ -26,24 +29,6 @@ const StyledSection = styled.section`
   border-radius: 50px 50px 0 0;
   background-color: var(--5);
 
-  button {
-    appearance: none;
-    border: none;
-    position: absolute;
-    cursor: pointer;
-    width: 220px;
-    height: 90px;
-    border-radius: 20px;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    font-family: var(--font1);
-    font-weight: 700;
-    font-size: 40px;
-    color: var(--5);
-  }
-
   span {
     position: absolute;
     bottom: 10px;
@@ -54,6 +39,24 @@ const StyledSection = styled.section`
     font-size: 0.6rem;
     color: var(--1);
   }
+`;
+
+const StyledButton = styled.button`
+  appearance: none;
+  border: none;
+  position: absolute;
+  cursor: pointer;
+  width: 220px;
+  height: 90px;
+  border-radius: 20px;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: var(--font1);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--5);
 `;
 
 const StyledMain = styled.main`
