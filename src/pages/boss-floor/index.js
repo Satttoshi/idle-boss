@@ -1,6 +1,6 @@
 import MoneyDisplay from "~/src/components/MoneyDisplay";
 import Navigation from "~/src/components/Navigation";
-import useStore from "../../src/zustand/store";
+import useStore from "~/src/zustand/store";
 import styled from "styled-components";
 
 export default function BossFloor() {
