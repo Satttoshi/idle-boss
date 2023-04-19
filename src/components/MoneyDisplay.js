@@ -6,7 +6,7 @@ export default function MoneyDisplay() {
   const money = useStore((state) => state.money);
   const username = useStore((state) => state.username);
 
-  function largeNumberNamingScaling(money) {
+  function formatNumbers(money) {
     if (money < 100000000) {
       return (
         money.toLocaleString("de-DE", {
@@ -66,7 +66,7 @@ export default function MoneyDisplay() {
     }
   }
 
-  const convertedMoney = largeNumberNamingScaling(money);
+  const convertedMoney = formatNumbers(money);
 
   return (
     <StyledHeader>
