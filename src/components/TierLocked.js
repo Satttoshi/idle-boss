@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function TierLocked({ currentTier }) {
   const unlock = useStore((state) => state.unlock);
@@ -14,9 +15,7 @@ export default function TierLocked({ currentTier }) {
     }
   }
 
-  const formattedPrice =
-    currentTier.unlockPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") +
-    ",00 €";
+  const formattedPrice = formatNumbers(currentTier.unlockPrice) + " €";
 
   return (
     <StyledButton
@@ -38,9 +37,12 @@ const StyledButton = styled.button`
   height: 94px;
   width: 307px;
   cursor: pointer;
-
   color: var(--5);
   background-color: var(--1);
+
+  h2 {
+    font-size: 18px;
+  }
 
   :disabled {
     cursor: default;

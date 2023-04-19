@@ -1,22 +1,19 @@
 import useStore from "~/src/zustand/store";
 import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function MoneyDisplay() {
   const money = useStore((state) => state.money);
   const username = useStore((state) => state.username);
 
-  const moneyString =
-    money.toLocaleString("de-DE", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }) + " €";
+  const formattedMoney = formatNumbers(money);
 
   return (
     <StyledHeader>
       <div>
         <h2>{username}</h2>
-        <h1>{moneyString}</h1>
+        <h1>{formattedMoney + " €"}</h1>
       </div>
       <ThemeSwitch />
     </StyledHeader>

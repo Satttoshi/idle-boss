@@ -1,4 +1,4 @@
-import GlobalStyle from "../styles";
+import GlobalStyle from "~/styles";
 import { ThemeProvider } from "next-themes";
 import { useEffect } from "react";
 import useStore from "~/src/zustand/store";

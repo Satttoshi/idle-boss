@@ -1,12 +1,9 @@
 import styled from "styled-components";
 import InvestIcon from "~/src/assets/invest.svg";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function InvestButton({ onInvest, money, investPrice }) {
-  const displayPrice =
-    investPrice.toLocaleString("de-DE", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }) + " €";
+  const displayPrice = formatNumbers(investPrice) + " €";
 
   return (
     <StyledButton
@@ -27,9 +24,9 @@ const StyledButton = styled.button`
   border: none;
   position: absolute;
   bottom: 0;
-  right: 32px;
+  right: 15px;
   height: 28px;
-  width: 125px;
+  width: 140px;
   border-radius: 17px;
 
   display: flex;
@@ -48,7 +45,7 @@ const StyledButton = styled.button`
 
   p {
     margin: 0;
-    width: 94px;
+    width: 105px;
   }
 
   :disabled {
