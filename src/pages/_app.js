@@ -17,7 +17,7 @@ const { chains, provider } = configureChains(
 
 const { connectors } = getDefaultWallets({
   appName: "IDLE BOSS",
-  projectId: "IDLE_BOSS",
+  projectId: process.env.PROJECT_ID,
   chains,
 });
 
