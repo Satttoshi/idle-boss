@@ -2,24 +2,12 @@ import GlobalStyle from "~/styles";
 import { ThemeProvider } from "next-themes";
 import { useEffect } from "react";
 import useStore from "~/src/zustand/store";
-
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, goerli } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
-import { publicProvider } from "wagmi/providers/public";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { createClient, WagmiConfig } from "wagmi";
+import ConfigureChains, { connectors } from "./api/wagmi/ConfigureChains";
 
-const { chains, provider } = configureChains(
-  [mainnet, goerli],
-  [alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
-);
-
-const { connectors } = getDefaultWallets({
-  appName: "IDLE BOSS",
-  projectId: process.env.PROJECT_ID,
-  chains,
-});
+const { chains, provider } = ConfigureChains;
 
 const wagmiClient = createClient({
   autoConnect: true,
