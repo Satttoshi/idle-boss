@@ -1,28 +1,25 @@
 import styled from "styled-components";
-import { useRouter } from "next/router";
+import useStore from "~/src/zustand/store";
 
 export default function Navigation() {
-  const router = useRouter();
-  const { index } = router.query;
-  const currentPath = router.pathname;
+  const currentFloor = useStore((state) => state.currentFloor);
+  const availableFloors = useStore((state) => state.availableFloors);
+  const setCurrentFloor = useStore((state) => state.setCurrentFloor);
+  const currentBossFloor = availableFloors.length;
 
   function handleDownstairs() {
-    if (currentPath === "/boss-floor") {
-      router.push("/floor/2");
-    } else if (index === "1") {
+    if (currentFloor === 1) {
       return;
     } else {
-      router.push(`/floor/${parseInt(index, 10) - 1}`);
+      setCurrentFloor(-1);
     }
   }
 
   function handleUpstairs() {
-    if (currentPath === "/boss-floor") {
+    if (currentFloor === currentBossFloor) {
       return;
-    } else if (index === "2") {
-      router.push("/boss-floor");
     } else {
-      router.push(`/floor/${parseInt(index, 10) + 1}`);
+      setCurrentFloor(1);
     }
   }
 
@@ -43,17 +40,21 @@ export default function Navigation() {
 
   return (
     <StyledNavigation>
-      <button type="button" disabled={index === "1"} onClick={handleDownstairs}>
+      <button
+        type="button"
+        disabled={currentFloor === 1}
+        onClick={handleDownstairs}
+      >
         downstairs
       </button>
       <h3>
-        {currentPath === "/boss-floor"
+        {currentFloor === currentBossFloor
           ? "boss floor"
-          : ordinalSuffix(index) + " floor"}
+          : ordinalSuffix(currentFloor) + " floor"}
       </h3>
       <button
         type="button"
-        disabled={currentPath === "/boss-floor"}
+        disabled={currentFloor === currentBossFloor}
         onClick={handleUpstairs}
       >
         upstairs

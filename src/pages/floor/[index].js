@@ -4,12 +4,12 @@ import styled from "styled-components";
 import Navigation from "~/src/components/Navigation";
 import Layout from "~/src/components/Layout";
 import { useRouter } from "next/router";
+import useStore from "~/src/zustand/store";
 
 export default function HomePage() {
   const router = useRouter();
   const { index } = router.query;
-
-  const currentFloor = 2;
+  const currentFloor = useStore((state) => state.currentFloor);
 
   function getPosition() {
     switch (currentFloor) {
