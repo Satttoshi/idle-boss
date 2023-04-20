@@ -11,13 +11,21 @@
   },
   "dependencies": {
     "@next/font": "13.0.6",
+    "@rainbow-me/rainbowkit": "^0.12.8",
+    "@rainbow-me/rainbowkit-siwe-next-auth": "^0.1.9",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.37",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "ethers": "^5.7.2",
     "next": "13.0.6",
+    "next-auth": "^4.22.1",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "siwe": "^1.1.6",
     "styled-components": "^5.3.6",
+    "wagmi": "^0.12.11",
     "zustand": "^4.3.7"
   },
   "devDependencies": {
