@@ -77,6 +77,7 @@ export default createGlobalStyle`
     margin: 0;
     background-color: var(--6);
     color: var(--1);
+    overflow-x: hidden;
   }
 
   input,
@@ -86,4 +87,5 @@ export default createGlobalStyle`
   a {
     -webkit-tap-highlight-color: transparent;
   }
+
 `;
