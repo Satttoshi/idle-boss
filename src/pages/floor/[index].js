@@ -6,8 +6,14 @@ import BossFloor from "../../components/BossFloor";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
+  const availableFloors = useStore((state) => state.availableFloors);
+  const currentBossFloor = availableFloors.length;
 
   function getPosition() {
+    if (currentFloor === currentBossFloor) {
+      return { floor1: "1080px", floor2: "1080px", bossFloor: "80px" };
+    }
+
     switch (currentFloor) {
       case 1:
         return { floor1: "80px", floor2: "-920px", bossFloor: "-920px" };
@@ -27,12 +33,14 @@ export default function HomePage() {
           <StyledSection floor={bossFloor}>
             <BossFloor />
           </StyledSection>
-          <StyledSection floor={floor2}>
-            <Product key="tier6" tierId="tier6" />
-            <Product key="tier7" tierId="tier7" />
-            <Product key="tier8" tierId="tier8" />
-            <Product key="tier9" tierId="tier9" />
-          </StyledSection>
+          {availableFloors.length > 2 ? (
+            <StyledSection floor={floor2}>
+              <Product key="tier6" tierId="tier6" />
+              <Product key="tier7" tierId="tier7" />
+              <Product key="tier8" tierId="tier8" />
+              <Product key="tier9" tierId="tier9" />
+            </StyledSection>
+          ) : null}
           <StyledSection floor={floor1}>
             <Product key="tier1" tierId="tier1" />
             <Product key="tier2" tierId="tier2" />
