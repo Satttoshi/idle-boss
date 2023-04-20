@@ -22,5 +22,7 @@ const StyledSection = styled.section`
   height: 94px;
   width: 307px;
   margin: 15px;
+  min-width: 307px;
+  flex-shrink: 0;
   position: relative;
 `;

@@ -39,6 +39,7 @@ export default function HomePage() {
             <Product key="tier3" tierId="tier3" />
             <Product key="tier4" tierId="tier4" />
             <Product key="tier5" tierId="tier5" />
+            <StyledScrollEnd />
           </StyledSection>
         </StyledMain>
       </Layout>
@@ -46,17 +47,37 @@ export default function HomePage() {
   );
 }
 
+const StyledScrollEnd = styled.div`
+  height: 100px;
+  flex-shrink: 0;
+
+  @media (min-height: 770px) {
+    flex-shrink: 1;
+  }
+`;
+
 const StyledSection = styled.section`
   position: absolute;
   top: ${({ floor }) => floor};
   left: 50%;
   transform: translateX(-50%);
+  height: 527px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0;
   border: 2px solid red;
   transition: top 0.5s ease-in-out;
+  overflow: scroll;
+
+  @media (min-height: 740px) {
+    height: 600px;
+  }
+
+  @media (min-height: 770px) {
+    height: 630px;
+  }
 `;
 
 const StyledMain = styled.main`
