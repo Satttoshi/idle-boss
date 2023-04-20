@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useStore from "~/src/zustand/store";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -7,10 +8,13 @@ export default function Navigation() {
   const setCurrentFloor = useStore((state) => state.setCurrentFloor);
   const currentBossFloor = availableFloors.length;
 
+  const router = useRouter();
+
   function handleDownstairs() {
     if (currentFloor === 1) {
       return;
     } else {
+      router.push(`/floor/${currentFloor - 1}`);
       setCurrentFloor(-1);
     }
   }
@@ -19,6 +23,11 @@ export default function Navigation() {
     if (currentFloor === currentBossFloor) {
       return;
     } else {
+      if (currentFloor + 1 === currentBossFloor) {
+        router.push(`/floor/executive`);
+      } else {
+        router.push(`/floor/${currentFloor + 1}`);
+      }
       setCurrentFloor(1);
     }
   }
