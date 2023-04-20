@@ -9,18 +9,31 @@ export default function HomePage() {
   const router = useRouter();
   const { index } = router.query;
 
+  const currentFloor = 2;
+
+  function getPosition() {
+    switch (currentFloor) {
+      case 1:
+        return { floor1: "80px", floor2: "-920px" };
+      case 2:
+        return { floor1: "1080px", floor2: "80px" };
+    }
+  }
+
+  const { floor1, floor2 } = getPosition();
+
   if (index === "1") {
     return (
       <>
         <Layout>
           <StyledMain>
-            <StyledSection floor={-1080}>
+            <StyledSection floor={floor2}>
               <Product key="tier6" tierId="tier6" />
               <Product key="tier7" tierId="tier7" />
               <Product key="tier8" tierId="tier8" />
               <Product key="tier9" tierId="tier9" />
             </StyledSection>
-            <StyledSection floor={80}>
+            <StyledSection floor={floor1}>
               <Product key="tier1" tierId="tier1" />
               <Product key="tier2" tierId="tier2" />
               <Product key="tier3" tierId="tier3" />
@@ -49,16 +62,18 @@ export default function HomePage() {
 
 const StyledSection = styled.section`
   position: absolute;
-  top: ${({ floor }) => floor + "px"};
+  top: ${({ floor }) => floor};
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 0 80px 0;
+  padding: 0;
   border: 2px solid red;
+  transition: top 0.5s ease-in-out;
 `;
 
 const StyledMain = styled.main`
   padding: 80px 0 0 0;
+  overflow: hidden;
 `;
