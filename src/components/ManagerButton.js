@@ -7,7 +7,6 @@ export default function ManagerButton({ tier }) {
   const money = useStore((state) => state.money);
 
   const price = tier.unlockPrice * 100;
-  const displayPrice = formatNumbers(price);
 
   function handleBuyManager() {
     try {
@@ -24,20 +23,29 @@ export default function ManagerButton({ tier }) {
       type="button"
       onClick={handleBuyManager}
     >
-      Hire Manager {displayPrice} €
+      Hire!
     </StyledButton>
   );
 }
 
 const StyledButton = styled.button`
+  appearance: none;
+  border: none;
   position: absolute;
-  bottom: -10px;
-  left: 80px;
+  bottom: 33px;
+  left: 50%;
+  transform: translateX(-50%);
   cursor: pointer;
 
-  width: 65px;
-  height: 38px;
-  font-size: 8px;
+  border-radius: 15px;
+
+  width: 123px;
+  height: 44px;
+
+  font-size: 1rem;
+  font-family: var(--font1);
+  font-weight: 600;
+  color: var(--5);
 
   :disabled {
     cursor: default;

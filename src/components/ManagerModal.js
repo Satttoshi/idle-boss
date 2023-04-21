@@ -1,13 +1,23 @@
 import styled from "styled-components";
 import Manager from "~/src/assets/manager.svg";
 import Logo from "./TierLogo";
+import formatNumbers from "~/src/utils/format-numbers";
+import ManagerButton from "./ManagerButton";
+import { useState } from "react";
 
-export default function ManagerModal({ userName }) {
+import useStore from "~/src/zustand/store";
+
+export default function ManagerModal({ userName, oManagerModalClose }) {
+  const { getTierById } = useStore();
+  const currentTier = getTierById("tier1");
+  const price = currentTier.unlockPrice * 100;
+  const displayPrice = formatNumbers(price);
+
   return (
-    <StyledDimmer>
+    <StyledDimmer onClick={oManagerModalClose}>
       <StyledModal>
         <StyledLogoContainer>
-          <Logo tierId={"tier2"} forModal={true} />
+          <Logo tierId={currentTier.id} forModal={true} />
         </StyledLogoContainer>
         <StyledManagerName>Herbert Penguin</StyledManagerName>
         <StyledManager width="64" height="64" fill="var(--3)" />
@@ -23,10 +33,24 @@ export default function ManagerModal({ userName }) {
             <span>Sincerely, Herbert</span>
           </StyledArticle>
         </StyledApplication>
+        <StyledPrice>Price: {displayPrice + " €"}</StyledPrice>
+        <ManagerButton tier={currentTier} />
       </StyledModal>
     </StyledDimmer>
   );
 }
+
+const StyledPrice = styled.h5`
+  width: 100%;
+  position: absolute;
+  bottom: 99px;
+  text-align: center;
+  margin: 0;
+
+  font-family: var(--font1);
+  font-weight: 600;
+  font-size: 1.1rem;
+`;
 
 const StyledManagerName = styled.h3`
   position: absolute;
@@ -85,7 +109,7 @@ const StyledApplication = styled.div`
 
 const StyledModal = styled.div`
   position: relative;
-  top: 25px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -97,10 +121,8 @@ const StyledModal = styled.div`
 
 const StyledDimmer = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  z-index: 5;
 `;

@@ -3,17 +3,25 @@ import styled from "styled-components";
 import Layout from "~/src/components/Layout";
 import useStore from "~/src/zustand/store";
 import BossFloor from "../../components/BossFloor";
+import ManagerModal from "../../components/ManagerModal";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
   const availableFloors = useStore((state) => state.availableFloors);
   const currentBossFloor = availableFloors.length;
 
+  const isManagerModalOpen = useStore((state) => state.isManagerModalOpen);
+  const userName = useStore((state) => state.username);
+  const setManagerModal = useStore((state) => state.setManagerModal);
+
+  function handleManagerModalClose() {
+    setManagerModal(false);
+  }
+
   function getPosition() {
     if (currentFloor === currentBossFloor) {
       return { floor1: "1080px", floor2: "1080px", bossFloor: "80px" };
     }
-
     switch (currentFloor) {
       case 1:
         return { floor1: "80px", floor2: "-920px", bossFloor: "-920px" };
@@ -28,6 +36,12 @@ export default function HomePage() {
 
   return (
     <>
+      {isManagerModalOpen && (
+        <ManagerModal
+          userName={userName}
+          oManagerModalClose={handleManagerModalClose}
+        />
+      )}
       <Layout>
         <StyledMain>
           <StyledSection floor={bossFloor}>

@@ -9,11 +9,14 @@ const useStore = createStore((set, get) => ({
   availableFloors: [1, 2, 3],
   username: "Username",
   tiers: tierData,
+  isManagerModalOpen: false,
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),
   setCurrentFloor: (amount) =>
     set((state) => ({ currentFloor: state.currentFloor + amount })),
+
+  setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
 
   getTierById: (tierId) => {
     const { tiers } = get();
