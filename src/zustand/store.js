@@ -60,7 +60,11 @@ const useStore = createStore((set, get) => ({
   buyManager: (tierId) => {
     const { money, getTierById, setTier, setMoney, clickTimer } = get();
     const currentTier = getTierById(tierId);
-    const price = currentTier.unlockPrice * 100;
+    const price = currentTier.unlockPrice * 300;
+
+    if (!currentTier.isUnlocked) {
+      throw new Error("tier is not unlocked");
+    }
 
     if (price > money) {
       throw new Error("not enough money");

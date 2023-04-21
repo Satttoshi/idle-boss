@@ -11,26 +11,39 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
   const { getTierById } = useStore();
   const selectedManager = useStore((state) => state.selectedManager);
   const setSelectedManager = useStore((state) => state.setSelectedManager);
+  const tiers = useStore((state) => state.tiers);
 
   const currentTier = getTierById(`tier${selectedManager}`);
   const price = currentTier.unlockPrice * 300;
   const displayPrice = formatNumbers(price);
 
+  const unlockedTiers = tiers.filter((tier) => tier.isUnlocked);
+
+  console.log(unlockedTiers);
+
   function handleNextManager(event) {
     event.stopPropagation();
-    if (selectedManager === 9) {
+    if (selectedManager === unlockedTiers[unlockedTiers.length - 1].index) {
       setSelectedManager(1);
     } else {
-      setSelectedManager(selectedManager + 1);
+      setSelectedManager(
+        unlockedTiers[
+          unlockedTiers.findIndex((tier) => tier.index === selectedManager) + 1
+        ].index
+      );
     }
   }
 
   function handlePrevManager(event) {
     event.stopPropagation();
     if (selectedManager === 1) {
-      setSelectedManager(9);
+      setSelectedManager(unlockedTiers[unlockedTiers.length - 1].index);
     } else {
-      setSelectedManager(selectedManager - 1);
+      setSelectedManager(
+        unlockedTiers[
+          unlockedTiers.findIndex((tier) => tier.index === selectedManager) - 1
+        ].index
+      );
     }
   }
 
@@ -70,6 +83,7 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
 const StyledNextButton = styled.button`
   appearance: none;
   border: none;
+  cursor: pointer;
   width: 40px;
   height: 40px;
   padding: 0;
@@ -83,6 +97,7 @@ const StyledNextButton = styled.button`
 const StyledPrevButton = styled.button`
   appearance: none;
   border: none;
+  cursor: pointer;
   width: 40px;
   height: 40px;
   padding: 0;

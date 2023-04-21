@@ -1,6 +1,7 @@
 const tierData = [
   {
     id: "tier1",
+    index: 1,
     unlockPrice: 10,
     isUnlocked: true,
     isFilling: false,
@@ -19,6 +20,7 @@ const tierData = [
   },
   {
     id: "tier2",
+    index: 2,
     unlockPrice: 600,
     isUnlocked: false,
     isFilling: false,
@@ -37,6 +39,7 @@ const tierData = [
   },
   {
     id: "tier3",
+    index: 3,
     unlockPrice: 7200,
     isUnlocked: false,
     isFilling: false,
@@ -55,6 +58,7 @@ const tierData = [
   },
   {
     id: "tier4",
+    index: 4,
     unlockPrice: 86400,
     isUnlocked: false,
     isFilling: false,
@@ -73,6 +77,7 @@ const tierData = [
   },
   {
     id: "tier5",
+    index: 5,
     unlockPrice: 1036800,
     isUnlocked: false,
     isFilling: false,
@@ -91,6 +96,7 @@ const tierData = [
   },
   {
     id: "tier6",
+    index: 6,
     unlockPrice: 12441600,
     isUnlocked: false,
     isFilling: false,
@@ -109,6 +115,7 @@ const tierData = [
   },
   {
     id: "tier7",
+    index: 7,
     unlockPrice: 149299200,
     isUnlocked: false,
     isFilling: false,
@@ -127,6 +134,7 @@ const tierData = [
   },
   {
     id: "tier8",
+    index: 8,
     unlockPrice: 1791590400,
     isUnlocked: false,
     isFilling: false,
@@ -145,6 +153,7 @@ const tierData = [
   },
   {
     id: "tier9",
+    index: 9,
     unlockPrice: 21499084800,
     isUnlocked: false,
     isFilling: false,
