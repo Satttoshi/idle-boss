@@ -1,9 +1,8 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Manager from "~/src/assets/manager.svg";
 import Logo from "./TierLogo";
 import formatNumbers from "~/src/utils/format-numbers";
 import ManagerButton from "./ManagerButton";
-import { useState } from "react";
 
 import useStore from "~/src/zustand/store";
 
@@ -39,6 +38,15 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
     </StyledDimmer>
   );
 }
+
+const ModalPopupAnimation = keyframes`
+  from {
+    top: 2000px;
+  }
+  
+  to {
+    top: 100px;
+  }`;
 
 const StyledPrice = styled.h5`
   width: 100%;
@@ -117,6 +125,10 @@ const StyledModal = styled.div`
   height: 480px;
   background-color: var(--5);
   border-radius: 25px;
+
+  animation-name: ${ModalPopupAnimation};
+  animation-duration: 0.35s;
+  animation-timing-function: ease-out;
 `;
 
 const StyledDimmer = styled.div`
@@ -124,5 +136,5 @@ const StyledDimmer = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5;
+  z-index: 200;
 `;
