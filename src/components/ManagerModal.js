@@ -105,11 +105,21 @@ export default function ManagerModal({ userName }) {
   );
 }
 
+const StampAnimation = keyframes`
+from {
+  scale: 5;
+  transform: translatex(-20%)
+}
+to {
+  scale: 1;
+  transform: translatex(-50%)
+}`;
+
 const StyledApprovalBox = styled.div`
   position: absolute;
   width: 280px;
   height: 150px;
-  top: 180px;
+  top: 165px;
   left: 50%;
   transform: translateX(-50%);
   display: grid;
@@ -122,6 +132,11 @@ const StyledApprovalBox = styled.div`
   border: 10px solid var(--3);
   border-radius: 15px;
   rotate: 12deg;
+
+  animation-name: ${StampAnimation};
+  animation-duration: 200ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
 
   span {
     text-shadow: -3px -3px 0 var(--6), 3px -3px 0 var(--6), -3px 3px 0 var(--6),
