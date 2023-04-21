@@ -75,7 +75,6 @@ const StyledSection = styled.section`
   flex-direction: column;
   align-items: center;
   padding: 0;
-  border: 2px solid red;
   transition: top 0.5s ease-in-out;
   overflow: scroll;
 
@@ -94,5 +93,4 @@ const StyledSection = styled.section`
 
 const StyledMain = styled.main`
   padding: 80px 0 0 0;
-  overflow: hidden;
 `;

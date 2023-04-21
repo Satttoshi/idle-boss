@@ -15,7 +15,6 @@ export default function MoneyDisplay() {
         <h2>{username}</h2>
         <h1>{formattedMoney + " €"}</h1>
       </div>
-      <ThemeSwitch />
     </StyledHeader>
   );
 }
@@ -47,7 +46,7 @@ const StyledHeader = styled.header`
   h2 {
     font-family: var(--font1);
     margin: 0;
-    font-weight: 400;
-    font-size: 0.8rem;
+    font-weight: 500;
+    font-size: 0.9rem;
   }
 `;

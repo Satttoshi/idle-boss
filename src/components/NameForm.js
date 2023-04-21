@@ -22,7 +22,7 @@ export default function NameForm() {
   return (
     <StyledForm onSubmit={handleSubmit} aria-label="change username">
       <fieldset>
-        <label htmlFor="name">Name</label>
+        <StyledLabel htmlFor="name">Name:</StyledLabel>
         <StyledInput
           id="name"
           type="text"
@@ -31,7 +31,7 @@ export default function NameForm() {
           minLength="3"
           required
         />
-        <StyledButton type="submit">change</StyledButton>
+        <StyledButton type="submit">change!</StyledButton>
       </fieldset>
     </StyledForm>
   );
@@ -41,10 +41,25 @@ const StyledForm = styled.form`
   position: relative;
   width: 375px;
   height: 60px;
+  margin-top: 20px;
 
   fieldset {
     border: none;
   }
+`;
+
+const StyledLabel = styled.label`
+  position: absolute;
+  top: 19px;
+  left: 0px;
+
+  font-family: var(--font1);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--1);
+  text-align: right;
+
+  width: 87px;
 `;
 
 const StyledInput = styled.input`
@@ -56,16 +71,35 @@ const StyledInput = styled.input`
   width: 158px;
   height: 28px;
   border-bottom: 3px solid var(--5);
-  border-radius: 3px;
+  border-radius: 4px;
 
   background-color: var(--1);
+
+  text-align: center;
+  font-family: var(--font1);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--5);
 `;
 
 const StyledButton = styled.button`
+  appearance: none;
+  border: none;
+  cursor: pointer;
+
   position: absolute;
   top: 18px;
   right: 34px;
 
   width: 69px;
   height: 24px;
+
+  background-color: var(--1);
+  border-radius: 3px;
+
+  font-family: var(--font1);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--5);
 `;
