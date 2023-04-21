@@ -77,6 +77,25 @@ export default function Application({ userName, selectedManager }) {
           </StyledApplication>
         </>
       );
+    case 5:
+      return (
+        <>
+          <StyledManagerName>Joshua Stolle</StyledManagerName>
+          <StyledApplication>
+            <StyledArticle>
+              <h4>Hi {userName}!</h4>
+              <p>
+                I{"'"}m a Scientist. And I believe that science is art and
+                knowledge combined. Those who understand science, understand
+                real value. But be aware, evolution is a process of change, a
+                plant grows and dies and leaves a seed. It may grow into an
+                improved version of itself. But it will never be the same.
+              </p>
+              <span>Thanks for Feedback, Joshua</span>
+            </StyledArticle>
+          </StyledApplication>
+        </>
+      );
     default:
       return null;
   }
