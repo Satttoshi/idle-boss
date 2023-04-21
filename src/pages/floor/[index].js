@@ -20,15 +20,15 @@ export default function HomePage() {
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
-      return { floor1: "1080px", floor2: "1080px", bossFloor: "80px" };
+      return { floor1: "1440px", floor2: "1440px", bossFloor: "80px" };
     }
     switch (currentFloor) {
       case 1:
         return { floor1: "80px", floor2: "-920px", bossFloor: "-920px" };
       case 2:
-        return { floor1: "1080px", floor2: "80px", bossFloor: "-920px" };
+        return { floor1: "1440px", floor2: "80px", bossFloor: "-920px" };
       default:
-        return { floor1: "1080px", floor2: "1080px", bossFloor: "80px" };
+        return { floor1: "1440px", floor2: "1440px", bossFloor: "80px" };
     }
   }
 
@@ -63,11 +63,23 @@ export default function HomePage() {
             <Product key="tier5" tierId="tier5" />
             <StyledScrollEnd />
           </StyledSection>
+          <StyledContentHider />
         </StyledMain>
       </Layout>
     </>
   );
 }
+
+const StyledContentHider = styled.div`
+  background: var(--6);
+  position: absolute;
+  top: 1440px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 800px;
+  z-index: 95;
+`;
 
 const StyledScrollEnd = styled.div`
   height: 100px;
