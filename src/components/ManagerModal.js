@@ -8,11 +8,12 @@ import ChevronLeft from "~/src/assets/chevron-left.svg";
 import ChevronRight from "~/src/assets/chevron-right.svg";
 import Application from "./Application";
 
-export default function ManagerModal({ userName, oManagerModalClose }) {
+export default function ManagerModal({ userName }) {
   const getTierById = useStore((state) => state.getTierById);
   const selectedManager = useStore((state) => state.selectedManager);
   const setSelectedManager = useStore((state) => state.setSelectedManager);
   const tiers = useStore((state) => state.tiers);
+  const setManagerModal = useStore((state) => state.setManagerModal);
 
   const currentTier = getTierById(`tier${selectedManager}`);
   const price = currentTier.unlockPrice * 300;
@@ -21,7 +22,6 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
   const unlockedTiers = tiers.filter((tier) => tier.isUnlocked);
 
   function handleNextManager(event) {
-    event.stopPropagation();
     if (selectedManager === unlockedTiers[unlockedTiers.length - 1].index) {
       setSelectedManager(1);
     } else {
@@ -34,7 +34,6 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
   }
 
   function handlePrevManager(event) {
-    event.stopPropagation();
     if (selectedManager === 1) {
       setSelectedManager(unlockedTiers[unlockedTiers.length - 1].index);
     } else {
@@ -61,9 +60,17 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
     return false;
   }
 
+  function handleManagerModalClose() {
+    setManagerModal(false);
+  }
+
+  function preventClosing(event) {
+    event.stopPropagation();
+  }
+
   return (
-    <StyledDimmer onClick={oManagerModalClose}>
-      <StyledModal>
+    <StyledDimmer onClick={handleManagerModalClose}>
+      <StyledModal onClick={preventClosing}>
         <StyledLogoContainer>
           <Logo tierId={currentTier.id} forModal={false} />
         </StyledLogoContainer>
@@ -85,10 +92,32 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
         >
           <ChevronRight width="40" heigth="40" fill="var(--1)" />
         </StyledNextButton>
+        <StyledCloseButton type="button" onClick={handleManagerModalClose}>
+          close
+        </StyledCloseButton>
       </StyledModal>
     </StyledDimmer>
   );
 }
+
+const StyledCloseButton = styled.button`
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  appearance: none;
+  border: 2px solid var(--1);
+  border-radius: 10px;
+  cursor: pointer;
+  width: 200px;
+  height: 28px;
+
+  font-family: var(--font1);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--1);
+`;
 
 const StyledNextButton = styled.button`
   appearance: none;

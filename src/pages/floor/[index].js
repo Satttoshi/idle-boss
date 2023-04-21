@@ -12,11 +12,6 @@ export default function HomePage() {
 
   const isManagerModalOpen = useStore((state) => state.isManagerModalOpen);
   const userName = useStore((state) => state.username);
-  const setManagerModal = useStore((state) => state.setManagerModal);
-
-  function handleManagerModalClose() {
-    setManagerModal(false);
-  }
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
@@ -36,12 +31,7 @@ export default function HomePage() {
 
   return (
     <>
-      {isManagerModalOpen && (
-        <ManagerModal
-          userName={userName}
-          oManagerModalClose={handleManagerModalClose}
-        />
-      )}
+      {isManagerModalOpen && <ManagerModal userName={userName} />}
       <Layout>
         <StyledMain>
           <StyledSection floor={bossFloor}>
