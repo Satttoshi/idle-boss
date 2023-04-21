@@ -83,7 +83,7 @@ export default function Application({ userName, selectedManager }) {
           <StyledManagerName>Joshua Stolle</StyledManagerName>
           <StyledApplication>
             <StyledArticle>
-              <h4>Hi {userName}!</h4>
+              <h4>Hi {userName}</h4>
               <p>
                 I{"'"}m a Scientist. And I believe that science is art and
                 knowledge combined. Those who understand science, understand
@@ -92,6 +92,82 @@ export default function Application({ userName, selectedManager }) {
                 improved version of itself. But it will never be the same.
               </p>
               <span>Thanks for Feedback, Joshua</span>
+            </StyledArticle>
+          </StyledApplication>
+        </>
+      );
+    case 6:
+      return (
+        <>
+          <StyledManagerName>Aljosha Petrovic</StyledManagerName>
+          <StyledApplication>
+            <StyledArticle>
+              <h4>Hello {userName}</h4>
+              <p>
+                I{"'"}m a Unity developer with an unquenchable thirst for
+                creating games that are as addictive as a barrel of monkeys. I
+                {"'"}m up-to-date with the latest technologies and have a strong
+                track record of delivering projects on time and within budget
+                (even if it means living on coffee and pizza for a few days).
+              </p>
+              <span>Greetings, Aljosha</span>
+            </StyledArticle>
+          </StyledApplication>
+        </>
+      );
+    case 7:
+      return (
+        <>
+          <StyledManagerName>Lesly Jade</StyledManagerName>
+          <StyledApplication>
+            <StyledArticle>
+              <h4>Hey {userName}!</h4>
+              <p>
+                I{"'"}m an experienced Unreal Engine developer with a talent for
+                creating games that are as immersive as a lucid dream. My
+                expertise includes designing game mechanics, optimizing
+                performance and service integration. With my skills and
+                experience, I{"'"}m ready to join your team and take game
+                development to the next level.
+              </p>
+              <span>Greetings, Lesly</span>
+            </StyledArticle>
+          </StyledApplication>
+        </>
+      );
+    case 8:
+      return (
+        <>
+          <StyledManagerName>Anton Torers</StyledManagerName>
+          <StyledApplication>
+            <StyledArticle>
+              <h4>Hi there {userName}!</h4>
+              <p>
+                Looking for a CryEngine developer who can help take your company
+                to the next level? Look no further! As a seasoned developer with
+                a creative eye, I have a proven track record of turning visions
+                into successful games. With me, I{"'"}m confident your company
+                will thrive and succeed in this competitive industry.
+              </p>
+              <span>With best regards, Anton</span>
+            </StyledArticle>
+          </StyledApplication>
+        </>
+      );
+    case 9:
+      return (
+        <>
+          <StyledManagerName>Warkus Mielandt</StyledManagerName>
+          <StyledApplication>
+            <StyledArticle>
+              <h4>Hello {userName}!</h4>
+              <p>
+                I don{"'"}t need to work for your demand, but I can make my
+                slaves work for you. I am a master of the dark arts and I can
+                make your dreams come true. I can make your enemies disappear
+                and let you forget about your problems.
+              </p>
+              <span>You got no choice {userName}!</span>
             </StyledArticle>
           </StyledApplication>
         </>
