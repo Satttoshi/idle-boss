@@ -1,4 +1,5 @@
 import useStore from "~/src/zustand/store";
+import styled from "styled-components";
 
 export default function NameForm() {
   const setUsername = useStore((state) => state.setUsername);
@@ -19,11 +20,10 @@ export default function NameForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} aria-label="change username">
+    <StyledForm onSubmit={handleSubmit} aria-label="change username">
       <fieldset>
-        <legend>Change username</legend>
         <label htmlFor="name">Name</label>
-        <input
+        <StyledInput
           id="name"
           type="text"
           name="username"
@@ -31,8 +31,41 @@ export default function NameForm() {
           minLength="3"
           required
         />
-        <button type="submit">change</button>
+        <StyledButton type="submit">change</StyledButton>
       </fieldset>
-    </form>
+    </StyledForm>
   );
 }
+
+const StyledForm = styled.form`
+  position: relative;
+  width: 375px;
+  height: 60px;
+
+  fieldset {
+    border: none;
+  }
+`;
+
+const StyledInput = styled.input`
+  border: none;
+  position: absolute;
+  top: 16px;
+  left: 101px;
+
+  width: 158px;
+  height: 28px;
+  border-bottom: 3px solid var(--5);
+  border-radius: 3px;
+
+  background-color: var(--1);
+`;
+
+const StyledButton = styled.button`
+  position: absolute;
+  top: 18px;
+  right: 34px;
+
+  width: 69px;
+  height: 24px;
+`;

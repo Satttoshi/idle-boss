@@ -70,7 +70,7 @@ const StyledSection = styled.section`
   left: 50%;
   transform: translateX(-50%);
   height: 527px;
-  width: 357px;
+  width: 375px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +78,6 @@ const StyledSection = styled.section`
   border: 2px solid red;
   transition: top 0.5s ease-in-out;
   overflow: scroll;
-  scrollbar-width: none;
 
   @media (min-height: 740px) {
     height: 600px;
