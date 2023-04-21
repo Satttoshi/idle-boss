@@ -95,10 +95,39 @@ export default function ManagerModal({ userName }) {
         <StyledCloseButton type="button" onClick={handleManagerModalClose}>
           close
         </StyledCloseButton>
+        {currentTier.hasManager && (
+          <StyledApprovalBox>
+            <span>HIRED !</span>
+          </StyledApprovalBox>
+        )}
       </StyledModal>
     </StyledDimmer>
   );
 }
+
+const StyledApprovalBox = styled.div`
+  position: absolute;
+  width: 280px;
+  height: 150px;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  color: var(--3);
+  font-family: var(--font2);
+  font-weight: 600;
+  font-size: 4rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 10px solid var(--3);
+  border-radius: 15px;
+  rotate: 12deg;
+
+  span {
+    text-shadow: -3px -3px 0 var(--6), 3px -3px 0 var(--6), -3px 3px 0 var(--6),
+      3px 3px 0 var(--6);
+  }
+`;
 
 const StyledCloseButton = styled.button`
   position: absolute;
