@@ -1,0 +1,106 @@
+import styled from "styled-components";
+import Manager from "~/src/assets/manager.svg";
+import Logo from "./TierLogo";
+
+export default function ManagerModal({ userName }) {
+  return (
+    <StyledDimmer>
+      <StyledModal>
+        <StyledLogoContainer>
+          <Logo tierId={"tier2"} forModal={true} />
+        </StyledLogoContainer>
+        <StyledManagerName>Herbert Penguin</StyledManagerName>
+        <StyledManager width="64" height="64" fill="var(--3)" />
+        <StyledApplication>
+          <StyledArticle>
+            <h4>Dear {userName}</h4>
+            <p>
+              I am a skilled Wordpress Creator Manager with experience in
+              website development, optimization, and customer service. I believe
+              my expertise and passion for Wordpress make me a great fit for
+              your team. Thank you for considering my application.
+            </p>
+            <span>Sincerely, Herbert</span>
+          </StyledArticle>
+        </StyledApplication>
+      </StyledModal>
+    </StyledDimmer>
+  );
+}
+
+const StyledManagerName = styled.h3`
+  position: absolute;
+  top: 48px;
+  right: 14px;
+
+  width: 200px;
+  font-size: 1.2rem;
+  font-family: var(--font1);
+  font-weight: 600;
+  margin: 0;
+  color: var(--1);
+  text-align: center;
+`;
+
+const StyledArticle = styled.article`
+  padding: 22px;
+  font-weight: 400;
+  font-size: 0.8rem;
+
+  h4 {
+    margin: 0;
+    font-weight: 400;
+  }
+`;
+
+const StyledLogoContainer = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 30px;
+`;
+
+const StyledManager = styled(Manager)`
+  position: absolute;
+  top: 96px;
+  right: 34px;
+  z-index: 2;
+`;
+
+const StyledApplication = styled.div`
+  position: absolute;
+  top: 122px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 290px;
+  height: 216px;
+  background-color: var(--4);
+  border-radius: 15px;
+
+  font-family: var(--font1);
+
+  display: grid;
+  place-items: center;
+`;
+
+const StyledModal = styled.div`
+  position: relative;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 317px;
+  height: 480px;
+  background-color: var(--5);
+  border-radius: 25px;
+`;
+
+const StyledDimmer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+`;
