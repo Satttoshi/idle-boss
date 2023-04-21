@@ -43,7 +43,6 @@ export default function Tier({ currentTier }) {
         money={money}
         investPrice={investPrice}
       />
-      <ManagerButton tier={currentTier} />
     </>
   );
 }

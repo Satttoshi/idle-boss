@@ -8,7 +8,7 @@ import ChevronLeft from "~/src/assets/chevron-left.svg";
 import ChevronRight from "~/src/assets/chevron-right.svg";
 
 export default function ManagerModal({ userName, oManagerModalClose }) {
-  const { getTierById } = useStore();
+  const getTierById = useStore((state) => state.getTierById);
   const selectedManager = useStore((state) => state.selectedManager);
   const setSelectedManager = useStore((state) => state.setSelectedManager);
   const tiers = useStore((state) => state.tiers);
@@ -18,8 +18,6 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
   const displayPrice = formatNumbers(price);
 
   const unlockedTiers = tiers.filter((tier) => tier.isUnlocked);
-
-  console.log(unlockedTiers);
 
   function handleNextManager(event) {
     event.stopPropagation();
