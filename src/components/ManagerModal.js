@@ -3,14 +3,36 @@ import Manager from "~/src/assets/manager.svg";
 import Logo from "./TierLogo";
 import formatNumbers from "~/src/utils/format-numbers";
 import ManagerButton from "./ManagerButton";
-
 import useStore from "~/src/zustand/store";
+import ChevronLeft from "~/src/assets/chevron-left.svg";
+import ChevronRight from "~/src/assets/chevron-right.svg";
 
 export default function ManagerModal({ userName, oManagerModalClose }) {
   const { getTierById } = useStore();
-  const currentTier = getTierById("tier1");
-  const price = currentTier.unlockPrice * 100;
+  const selectedManager = useStore((state) => state.selectedManager);
+  const setSelectedManager = useStore((state) => state.setSelectedManager);
+
+  const currentTier = getTierById(`tier${selectedManager}`);
+  const price = currentTier.unlockPrice * 300;
   const displayPrice = formatNumbers(price);
+
+  function handleNextManager(event) {
+    event.stopPropagation();
+    if (selectedManager === 9) {
+      setSelectedManager(1);
+    } else {
+      setSelectedManager(selectedManager + 1);
+    }
+  }
+
+  function handlePrevManager(event) {
+    event.stopPropagation();
+    if (selectedManager === 1) {
+      setSelectedManager(9);
+    } else {
+      setSelectedManager(selectedManager - 1);
+    }
+  }
 
   return (
     <StyledDimmer onClick={oManagerModalClose}>
@@ -34,10 +56,42 @@ export default function ManagerModal({ userName, oManagerModalClose }) {
         </StyledApplication>
         <StyledPrice>Price: {displayPrice + " €"}</StyledPrice>
         <ManagerButton tier={currentTier} />
+        <StyledPrevButton type="button" onClick={handlePrevManager}>
+          <ChevronLeft width="40" heigth="40" fill="var(--1)" />
+        </StyledPrevButton>
+        <StyledNextButton type="button" onClick={handleNextManager}>
+          <ChevronRight width="40" heigth="40" fill="var(--1)" />
+        </StyledNextButton>
       </StyledModal>
     </StyledDimmer>
   );
 }
+
+const StyledNextButton = styled.button`
+  appearance: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  position: absolute;
+  bottom: 31px;
+  right: 31px;
+  z-index: 300;
+`;
+
+const StyledPrevButton = styled.button`
+  appearance: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  position: absolute;
+  bottom: 31px;
+  left: 31px;
+  z-index: 300;
+`;
 
 const ModalPopupAnimation = keyframes`
   from {

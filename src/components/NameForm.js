@@ -4,8 +4,8 @@ import styled from "styled-components";
 export default function NameForm() {
   const setUsername = useStore((state) => state.setUsername);
   function handleChange(event) {
-    if (event.target.value.includes(" ")) {
-      event.target.value = event.target.value.replace(" ", "");
+    if (event.target.value.includes("  ")) {
+      event.target.value = event.target.value.replace("  ", " ");
     }
     if (event.target.value.length > 25) {
       event.target.value = event.target.value.slice(0, 25);

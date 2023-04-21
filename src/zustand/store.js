@@ -7,16 +7,18 @@ const useStore = createStore((set, get) => ({
   money: 0,
   currentFloor: 1,
   availableFloors: [1, 2, 3],
-  username: "Username",
+  username: "The Boss",
   tiers: tierData,
   isManagerModalOpen: false,
+  selectedManager: 1,
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),
   setCurrentFloor: (amount) =>
     set((state) => ({ currentFloor: state.currentFloor + amount })),
-
   setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
+  setSelectedManager: (managerId) =>
+    set(() => ({ selectedManager: managerId })),
 
   getTierById: (tierId) => {
     const { tiers } = get();
