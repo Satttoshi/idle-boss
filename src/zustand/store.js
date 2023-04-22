@@ -1,5 +1,6 @@
 import { create as createStore } from "zustand";
 import tierData from "./tierData";
+import setSpeed from "./speedSheet";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
@@ -140,7 +141,12 @@ const useStore = createStore((set, get) => ({
       currentTier.investCount + 1 >= milestones[currentTier.milestoneIndex];
 
     const isPerSecond = didReachMilestone
-      ? currentTier.hasManager && currentTier.delay / 2 < 250
+      ? currentTier.hasManager &&
+        setSpeed(
+          currentTier.milestoneIndex,
+          currentTier.index,
+          currentTier.delay
+        ) < 250
         ? true
         : false
       : currentTier.hasManager && currentTier.delay < 250
@@ -153,7 +159,11 @@ const useStore = createStore((set, get) => ({
       investPrice: currentTier.investPrice * currentTier.investPriceCoefficient,
       investCount: currentTier.investCount + 1,
       delay: didReachMilestone
-        ? Math.round(currentTier.delay / 2)
+        ? setSpeed(
+            currentTier.milestoneIndex,
+            currentTier.index,
+            currentTier.delay
+          )
         : currentTier.delay,
       milestoneIndex: didReachMilestone
         ? currentTier.milestoneIndex + 1
