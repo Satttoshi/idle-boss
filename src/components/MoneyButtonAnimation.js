@@ -58,13 +58,13 @@ const StyledForm1 = styled(Form1)`
 
 const StyledForm2 = styled(Form2)`
   position: absolute;
-  top: 11px;
-  left: 11px;
+  top: 10px;
+  left: 10px;
   fill: var(--5);
 
   animation: ${rotate2} 1s linear infinite;
   opacity: 0.5;
-  scale: 1.02;
+  scale: 1.25;
 `;
 
 const StyledForm3 = styled(Form3)`
