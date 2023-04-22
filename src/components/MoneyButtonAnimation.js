@@ -13,11 +13,22 @@ export default function MoneyButtonAnimation({ forModal }) {
   );
 }
 
+const opacity = keyframes`
+    0% {
+        opacity: 0;
+        }
+    100% {
+        opacity: 1;
+        }
+`;
+
 const StyledContainer = styled.div`
   z-index: 15;
   position: absolute;
   top: ${({ forModal }) => (forModal ? -5 : 0)}px;
   left: ${({ forModal }) => (forModal ? -5 : 0)}px;
+
+  animation: ${opacity} 0.5s ease-out;
 `;
 
 const rotate1 = keyframes`
