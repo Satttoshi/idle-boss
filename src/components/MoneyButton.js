@@ -1,17 +1,21 @@
 import styled from "styled-components";
 import TierLogo from "./TierLogo";
+import MoneyButtonAnimation from "./MoneyButtonAnimation";
 
 export default function MoneyButton({ tier, onMoneyButtonClick }) {
   return (
-    <StyledButton
-      type="button"
-      disabled={tier.isFilling || tier.hasManager}
-      onClick={() => {
-        onMoneyButtonClick();
-      }}
-    >
-      <TierLogo tierId={tier.id} forModal={false} />
-    </StyledButton>
+    <>
+      <MoneyButtonAnimation />
+      <StyledButton
+        type="button"
+        disabled={tier.isFilling || tier.hasManager}
+        onClick={() => {
+          onMoneyButtonClick();
+        }}
+      >
+        <TierLogo tierId={tier.id} forModal={false} />
+      </StyledButton>
+    </>
   );
 }
 
@@ -25,7 +29,7 @@ const StyledButton = styled.button`
   width: 80px;
   border-radius: 50%;
   z-index: 10;
-  background-color: var(--1);
+  background-color: var(--3);
   color: var(--5);
   cursor: pointer;
 
