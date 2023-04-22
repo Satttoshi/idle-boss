@@ -108,11 +108,13 @@ export default function ManagerModal({ userName }) {
 const StampAnimation = keyframes`
 from {
   scale: 5;
-  transform: translatex(-20%)
+  transform: translatex(0%);
+  opacity: 0;
 }
 to {
   scale: 1;
-  transform: translatex(-50%)
+  transform: translatex(-50%);
+  opacity: 1;
 }`;
 
 const StyledApprovalBox = styled.div`
