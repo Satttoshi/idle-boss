@@ -8,83 +8,43 @@ import UnrealIcon from "~/src/assets/tier-logos/unreal.svg";
 import CryEngineIcon from "~/src/assets/tier-logos/cryengine.svg";
 import CustomEngineIcon from "~/src/assets/tier-logos/customengine.svg";
 
-export default function TierLogo({ tierId, forModal }) {
-  function logoColor() {
-    if (forModal) {
-      return "var(--1)";
-    } else {
-      return "var(--5)";
-    }
-  }
+import styled from "styled-components";
 
-  function logoSize() {
-    if (forModal) {
-      return "64";
-    } else {
-      return "48";
-    }
-  }
-
+export default function TierLogo({ tierId }) {
   switch (tierId) {
     case "tier1":
-      return (
-        <WordpressIcon
-          width={logoSize()}
-          height={logoSize()}
-          fill={logoColor()}
-        />
-      );
+      return <WordpressIcon width={48} height={48} fill={"var(--5)"} />;
     case "tier2":
       return (
-        <VueIcon width={logoSize()} height={logoSize()} fill={logoColor()} />
+        <StyledContainer>
+          <VueIcon width={48} height={48} fill={"var(--5)"} />
+        </StyledContainer>
       );
     case "tier3":
       return (
-        <NextIcon width={logoSize()} height={logoSize()} fill={logoColor()} />
+        <StyledContainer>
+          <NextIcon width={48} height={48} fill={"var(--5)"} />
+        </StyledContainer>
       );
     case "tier4":
-      return (
-        <RubyIcon width={logoSize()} height={logoSize()} fill={logoColor()} />
-      );
+      return <RubyIcon width={48} height={48} fill={"var(--5)"} />;
     case "tier5":
-      return (
-        <QuantumIcon
-          width={logoSize()}
-          height={logoSize()}
-          fill={logoColor()}
-        />
-      );
+      return <QuantumIcon width={48} height={48} fill={"var(--5)"} />;
     case "tier6":
-      return (
-        <UnityIcon width={logoSize()} height={logoSize()} fill={logoColor()} />
-      );
+      return <UnityIcon width={48} height={48} fill={"var(--5)"} />;
     case "tier7":
-      return (
-        <UnrealIcon width={logoSize()} height={logoSize()} fill={logoColor()} />
-      );
+      return <UnrealIcon width={48} height={48} fill={"var(--5)"} />;
     case "tier8":
-      return (
-        <CryEngineIcon
-          width={logoSize()}
-          height={logoSize()}
-          fill={logoColor()}
-        />
-      );
+      return <CryEngineIcon width={48} height={48} fill={"var(--5)"} />;
     case "tier9":
-      return (
-        <CustomEngineIcon
-          width={logoSize()}
-          height={logoSize()}
-          fill={logoColor()}
-        />
-      );
+      return <CustomEngineIcon width={48} height={48} fill={"var(--5)"} />;
     default:
-      return (
-        <WordpressIcon
-          width={logoSize()}
-          height={logoSize()}
-          fill={logoColor()}
-        />
-      );
+      return <WordpressIcon width={48} height={48} fill={"var(--5)"} />;
   }
 }
+
+const StyledContainer = styled.div`
+  display: grid;
+  place-items: center;
+  z-index: 20;
+`;

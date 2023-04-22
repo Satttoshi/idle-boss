@@ -7,6 +7,7 @@ import useStore from "~/src/zustand/store";
 import ChevronLeft from "~/src/assets/chevron-left.svg";
 import ChevronRight from "~/src/assets/chevron-right.svg";
 import Application from "./Application";
+import MoneyButtonAnimation from "./MoneyButtonAnimation";
 
 export default function ManagerModal({ userName }) {
   const getTierById = useStore((state) => state.getTierById);
@@ -72,7 +73,8 @@ export default function ManagerModal({ userName }) {
     <StyledDimmer onClick={handleManagerModalClose}>
       <StyledModal onClick={preventClosing}>
         <StyledLogoContainer>
-          <Logo tierId={currentTier.id} forModal={false} />
+          <Logo tierId={currentTier.id} />
+          {currentTier.hasManager && <MoneyButtonAnimation forModal={true} />}
         </StyledLogoContainer>
         <StyledManager width="64" height="64" fill="var(--3)" />
         <Application userName={userName} selectedManager={selectedManager} />
