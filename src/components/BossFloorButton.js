@@ -23,4 +23,16 @@ const StyledButton = styled.button`
   font-family: var(--font1);
   font-size: 1rem;
   font-weight: 600;
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
+  }
 `;

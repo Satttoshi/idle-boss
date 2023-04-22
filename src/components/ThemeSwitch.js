@@ -14,18 +14,13 @@ export default function ThemeSwitch() {
   return (
     <StyledField>
       <StyledSpan>Theme:</StyledSpan>
-      <StyledPalette>
+      <StyledPalette onClick={toggleTheme}>
         <StyledColor color="5" />
         <StyledColor color="4" />
         <StyledColor color="3" />
         <StyledColor color="6" />
       </StyledPalette>
-      <StyledButton
-        type="button"
-        onClick={() => {
-          toggleTheme();
-        }}
-      >
+      <StyledButton type="button" onClick={toggleTheme}>
         change!
       </StyledButton>
     </StyledField>
@@ -89,4 +84,16 @@ const StyledButton = styled.button`
   font-weight: 600;
   line-height: 16px;
   color: var(--5);
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
+  }
 `;

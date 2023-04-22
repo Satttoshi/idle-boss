@@ -161,6 +161,21 @@ const StyledCloseButton = styled.button`
   font-weight: 600;
   font-size: 1rem;
   color: var(--1);
+  line-height: 1px;
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      border-color: var(--3);
+      color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      border-color: var(--3);
+      color: var(--3);
+    }
+  }
 `;
 
 const StyledNextButton = styled.button`
@@ -178,6 +193,22 @@ const StyledNextButton = styled.button`
   &:disabled {
     opacity: 0.3;
     cursor: default;
+  }
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      svg {
+        fill: var(--3);
+      }
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      svg {
+        fill: var(--3);
+      }
+    }
   }
 `;
 
@@ -197,6 +228,22 @@ const StyledPrevButton = styled.button`
   &:disabled {
     opacity: 0.4;
     cursor: default;
+  }
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      svg {
+        fill: var(--3);
+      }
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      svg {
+        fill: var(--3);
+      }
+    }
   }
 `;
 

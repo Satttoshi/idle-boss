@@ -49,4 +49,16 @@ const StyledButton = styled.button`
   :disabled {
     cursor: default;
   }
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
+  }
 `;

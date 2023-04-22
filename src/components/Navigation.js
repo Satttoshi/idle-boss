@@ -97,8 +97,20 @@ const StyledNavigation = styled.nav`
     padding: 0;
 
     &:disabled {
-      background-color: var(--4);
+      background-color: rgba(255, 255, 255, 0.3);
       cursor: default;
+    }
+
+    @media (hover: hover) {
+      &:hover:enabled {
+        background-color: var(--3);
+      }
+    }
+
+    @media (hover: none) {
+      &:active:enabled {
+        background-color: var(--3);
+      }
     }
   }
 
