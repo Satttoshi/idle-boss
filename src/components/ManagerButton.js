@@ -7,7 +7,7 @@ export default function ManagerButton({ tier }) {
 
   const price = tier.unlockPrice * 300;
 
-  function handleBuyManager(event) {
+  function handleBuyManager() {
     try {
       buyManager(tier.id);
     } catch (error) {

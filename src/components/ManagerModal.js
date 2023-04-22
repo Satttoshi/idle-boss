@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import Manager from "~/src/assets/manager.svg";
 import Logo from "./TierLogo";
 import formatNumbers from "~/src/utils/format-numbers";
@@ -21,7 +21,7 @@ export default function ManagerModal({ userName }) {
 
   const unlockedTiers = tiers.filter((tier) => tier.isUnlocked);
 
-  function handleNextManager(event) {
+  function handleNextManager() {
     if (selectedManager === unlockedTiers[unlockedTiers.length - 1].index) {
       setSelectedManager(1);
     } else {
@@ -33,7 +33,7 @@ export default function ManagerModal({ userName }) {
     }
   }
 
-  function handlePrevManager(event) {
+  function handlePrevManager() {
     if (selectedManager === 1) {
       setSelectedManager(unlockedTiers[unlockedTiers.length - 1].index);
     } else {
@@ -96,7 +96,7 @@ export default function ManagerModal({ userName }) {
           close
         </StyledCloseButton>
         {currentTier.hasManager && (
-          <StyledApprovalBox>
+          <StyledApprovalBox isStamped={currentTier.isStamped}>
             <span>HIRED !</span>
           </StyledApprovalBox>
         )}
@@ -135,7 +135,12 @@ const StyledApprovalBox = styled.div`
   border-radius: 15px;
   rotate: 12deg;
 
-  animation-name: ${StampAnimation};
+  animation-name: ${({ isStamped }) =>
+    isStamped
+      ? "none"
+      : css`
+          ${StampAnimation}
+        `};
   animation-duration: 200ms;
   animation-iteration-count: 1;
   animation-timing-function: ease-out;

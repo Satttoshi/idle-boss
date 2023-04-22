@@ -78,6 +78,13 @@ const useStore = createStore((set, get) => ({
       isPerSecond: currentTier.delay < 250 ? true : false,
     });
 
+    setTimeout(() => {
+      setTier({
+        id: tierId,
+        isStamped: true,
+      });
+    }, 1000);
+
     if (!currentTier.isFilling) {
       clickTimer(tierId);
     }
