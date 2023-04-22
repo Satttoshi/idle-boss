@@ -1,15 +1,25 @@
 import { create as createStore } from "zustand";
 import tierData from "./tierData";
+import setSpeed from "./speedSheet";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
   money: 0,
-  username: "Username",
+  currentFloor: 1,
+  availableFloors: [1, 2, 3],
+  username: "The Boss",
   tiers: tierData,
+  isManagerModalOpen: false,
+  selectedManager: 1,
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),
+  setCurrentFloor: (amount) =>
+    set((state) => ({ currentFloor: state.currentFloor + amount })),
+  setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
+  setSelectedManager: (managerId) =>
+    set(() => ({ selectedManager: managerId })),
 
   getTierById: (tierId) => {
     const { tiers } = get();
@@ -51,7 +61,11 @@ const useStore = createStore((set, get) => ({
   buyManager: (tierId) => {
     const { money, getTierById, setTier, setMoney, clickTimer } = get();
     const currentTier = getTierById(tierId);
-    const price = currentTier.unlockPrice * 100;
+    const price = currentTier.unlockPrice * 300;
+
+    if (!currentTier.isUnlocked) {
+      throw new Error("tier is not unlocked");
+    }
 
     if (price > money) {
       throw new Error("not enough money");
@@ -64,6 +78,13 @@ const useStore = createStore((set, get) => ({
       hasManager: true,
       isPerSecond: currentTier.delay < 250 ? true : false,
     });
+
+    setTimeout(() => {
+      setTier({
+        id: tierId,
+        isStamped: true,
+      });
+    }, 1000);
 
     if (!currentTier.isFilling) {
       clickTimer(tierId);
@@ -120,7 +141,12 @@ const useStore = createStore((set, get) => ({
       currentTier.investCount + 1 >= milestones[currentTier.milestoneIndex];
 
     const isPerSecond = didReachMilestone
-      ? currentTier.hasManager && currentTier.delay / 2 < 250
+      ? currentTier.hasManager &&
+        setSpeed(
+          currentTier.milestoneIndex,
+          currentTier.index,
+          currentTier.delay
+        ) < 250
         ? true
         : false
       : currentTier.hasManager && currentTier.delay < 250
@@ -133,7 +159,11 @@ const useStore = createStore((set, get) => ({
       investPrice: currentTier.investPrice * currentTier.investPriceCoefficient,
       investCount: currentTier.investCount + 1,
       delay: didReachMilestone
-        ? Math.round(currentTier.delay / 2)
+        ? setSpeed(
+            currentTier.milestoneIndex,
+            currentTier.index,
+            currentTier.delay
+          )
         : currentTier.delay,
       milestoneIndex: didReachMilestone
         ? currentTier.milestoneIndex + 1

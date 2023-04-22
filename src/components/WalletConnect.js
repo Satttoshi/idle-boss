@@ -149,4 +149,16 @@ const StyledButton = styled.button`
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--5);
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
+  }
 `;

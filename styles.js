@@ -13,7 +13,7 @@ const theme0 = {
   "--3": "#b8da66",
   "--4": "#329691",
   "--5": "#185362",
-  "--6": "#071012",
+  "--6": "#092726",
 };
 
 const theme1 = {
@@ -77,6 +77,8 @@ export default createGlobalStyle`
     margin: 0;
     background-color: var(--6);
     color: var(--1);
+    overflow: hidden;
+    
   }
 
   input,
@@ -86,4 +88,5 @@ export default createGlobalStyle`
   a {
     -webkit-tap-highlight-color: transparent;
   }
+
 `;

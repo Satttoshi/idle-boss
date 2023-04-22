@@ -1,13 +1,11 @@
 import useStore from "~/src/zustand/store";
 import styled from "styled-components";
-import formatNumbers from "~/src/utils/format-numbers";
 
 export default function ManagerButton({ tier }) {
   const buyManager = useStore((state) => state.buyManager);
   const money = useStore((state) => state.money);
 
-  const price = tier.unlockPrice * 100;
-  const displayPrice = formatNumbers(price);
+  const price = tier.unlockPrice * 300;
 
   function handleBuyManager() {
     try {
@@ -24,22 +22,43 @@ export default function ManagerButton({ tier }) {
       type="button"
       onClick={handleBuyManager}
     >
-      Hire Manager {displayPrice} €
+      Hire!
     </StyledButton>
   );
 }
 
 const StyledButton = styled.button`
+  appearance: none;
+  border: none;
   position: absolute;
-  bottom: -10px;
-  left: 80px;
+  bottom: 63px;
+  left: 50%;
+  transform: translateX(-50%);
   cursor: pointer;
 
-  width: 65px;
-  height: 38px;
-  font-size: 8px;
+  border-radius: 15px;
+
+  width: 123px;
+  height: 44px;
+
+  font-size: 1rem;
+  font-family: var(--font1);
+  font-weight: 600;
+  color: var(--5);
 
   :disabled {
     cursor: default;
+  }
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
   }
 `;

@@ -10,7 +10,7 @@ export default function MoneyButton({ tier, onMoneyButtonClick }) {
         onMoneyButtonClick();
       }}
     >
-      <TierLogo tierId={tier.id} />
+      <TierLogo tierId={tier.id} forModal={false} />
     </StyledButton>
   );
 }

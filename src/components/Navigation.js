@@ -1,28 +1,34 @@
 import styled from "styled-components";
+import useStore from "~/src/zustand/store";
 import { useRouter } from "next/router";
 
 export default function Navigation() {
+  const currentFloor = useStore((state) => state.currentFloor);
+  const availableFloors = useStore((state) => state.availableFloors);
+  const setCurrentFloor = useStore((state) => state.setCurrentFloor);
+  const currentBossFloor = availableFloors.length;
+
   const router = useRouter();
-  const { index } = router.query;
-  const currentPath = router.pathname;
 
   function handleDownstairs() {
-    if (currentPath === "/boss-floor") {
-      router.push("/floor/2");
-    } else if (index === "1") {
+    if (currentFloor === 1) {
       return;
     } else {
-      router.push(`/floor/${parseInt(index, 10) - 1}`);
+      router.push(`/floor/${currentFloor - 1}`);
+      setCurrentFloor(-1);
     }
   }
 
   function handleUpstairs() {
-    if (currentPath === "/boss-floor") {
+    if (currentFloor === currentBossFloor) {
       return;
-    } else if (index === "2") {
-      router.push("/boss-floor");
     } else {
-      router.push(`/floor/${parseInt(index, 10) + 1}`);
+      if (currentFloor + 1 === currentBossFloor) {
+        router.push(`/floor/executive`);
+      } else {
+        router.push(`/floor/${currentFloor + 1}`);
+      }
+      setCurrentFloor(1);
     }
   }
 
@@ -43,17 +49,21 @@ export default function Navigation() {
 
   return (
     <StyledNavigation>
-      <button type="button" disabled={index === "1"} onClick={handleDownstairs}>
+      <button
+        type="button"
+        disabled={currentFloor === 1}
+        onClick={handleDownstairs}
+      >
         downstairs
       </button>
       <h3>
-        {currentPath === "/boss-floor"
+        {currentFloor === currentBossFloor
           ? "boss floor"
-          : ordinalSuffix(index) + " floor"}
+          : ordinalSuffix(currentFloor) + " floor"}
       </h3>
       <button
         type="button"
-        disabled={currentPath === "/boss-floor"}
+        disabled={currentFloor === currentBossFloor}
         onClick={handleUpstairs}
       >
         upstairs
@@ -87,8 +97,20 @@ const StyledNavigation = styled.nav`
     padding: 0;
 
     &:disabled {
-      background-color: var(--4);
+      background-color: rgba(255, 255, 255, 0.3);
       cursor: default;
+    }
+
+    @media (hover: hover) {
+      &:hover:enabled {
+        background-color: var(--3);
+      }
+    }
+
+    @media (hover: none) {
+      &:active:enabled {
+        background-color: var(--3);
+      }
     }
   }
 
