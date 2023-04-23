@@ -13,6 +13,9 @@ export default function TutorialModal() {
   }
   return (
     <StyledDimmer>
+      <StyledArticleBox>
+        <p>To begin earning money, tap on the Wordpress button.</p>
+      </StyledArticleBox>
       <StyledButtonContainer>
         <MoneyButton
           onMoneyButtonClick={handleMoneyButtonClick}
@@ -37,6 +40,29 @@ function PulseAnimation() {
     </>
   );
 }
+
+const StyledArticleBox = styled.article`
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+
+  display: grid;
+  place-items: center;
+
+  p {
+    margin: 0;
+    padding: 25px;
+    font-family: var(--font1);
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+  }
+`;
 
 const pulse1 = keyframes`
   0% {
