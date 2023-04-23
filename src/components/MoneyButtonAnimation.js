@@ -38,23 +38,25 @@ const rotate1 = keyframes`
     100% {
         transform: rotate(-360deg);
         }
-            `;
+`;
 
 const rotate2 = keyframes`
-0% {
-    transform: rotate(0deg);
-    }
+    0% {
+        transform: rotate(0deg);
+        }
     100% {
         transform: rotate(360deg);
-        }`;
+        }
+`;
 
 const rotate3 = keyframes`
-0% {
-    transform: rotate(0deg);
-    }
+    0% {
+        transform: rotate(0deg);
+        }
     100% {
         transform: rotate(360deg);
-        }`;
+        }
+`;
 
 const StyledForm1 = styled(Form1)`
   position: absolute;

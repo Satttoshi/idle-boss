@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProgressStars from "./ProgressStars";
 import PopupText from "./PopupText";
 import formatNumbers from "~/src/utils/format-numbers";
+import ProgressBarAnimation from "./ProgressBarAnimation";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income, isPerSecond, incomePerSecond, trigger } = tier;
@@ -25,7 +26,9 @@ export default function ProgressBar({ tier, isFilling }) {
         <PopupText tier={tier} />
         <StyledContainer data-testid="progress-bar">
           {isPerSecond ? (
-            <StyledFlowBar />
+            <StyledFlowBar>
+              <ProgressBarAnimation />
+            </StyledFlowBar>
           ) : isFilling ? (
             <StyledBar delay={currentDelay} tier={tier} />
           ) : null}

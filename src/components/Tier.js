@@ -3,7 +3,6 @@ import ProgressBar from "./ProgressBar";
 import useStore, { milestones } from "~/src/zustand/store";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
-import ManagerButton from "./ManagerButton";
 
 export default function Tier({ currentTier }) {
   const money = useStore((state) => state.money);
