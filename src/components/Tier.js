@@ -7,7 +7,7 @@ import Milestones from "./Milestones";
 import Lottie from "lottie-react";
 import animationData from "~/src/assets/animation/unlock.json";
 import styled from "styled-components";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 export default function Tier({ currentTier }) {
   const money = useStore((state) => state.money);
@@ -16,6 +16,8 @@ export default function Tier({ currentTier }) {
   const { investCount, investPrice, milestoneIndex } = currentTier;
 
   const lottieRef = useRef();
+
+  const [isLottieVisible, setIsLottieVisible] = useState(true);
 
   function handleMoneyButtonClick() {
     clickTimer(currentTier.id);
@@ -35,12 +37,13 @@ export default function Tier({ currentTier }) {
     lottie?.setSpeed(2);
     setTimeout(() => {
       lottie?.destroy();
+      setIsLottieVisible(false);
     }, 1000);
   }, []);
 
   return (
     <>
-      {currentTier.index !== 1 && (
+      {currentTier.index !== 1 && isLottieVisible && (
         <StyledLottie
           lottieRef={lottieRef}
           animationData={animationData}

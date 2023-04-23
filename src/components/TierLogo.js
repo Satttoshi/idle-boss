@@ -46,5 +46,4 @@ export default function TierLogo({ tierId }) {
 const StyledContainer = styled.div`
   display: grid;
   place-items: center;
-  z-index: 20;
 `;
