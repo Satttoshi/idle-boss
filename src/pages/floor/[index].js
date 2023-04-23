@@ -5,6 +5,7 @@ import useStore from "~/src/zustand/store";
 import BossFloor from "../../components/BossFloor";
 import ManagerModal from "../../components/ManagerModal";
 import StyledPageSection from "../../components/StyledPageSection";
+import TutorialModal from "~/src/components/TutorialModal";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -30,9 +31,13 @@ export default function HomePage() {
 
   const { floor1, floor2, bossFloor } = getPosition();
 
+  const isTutorialActive = true;
+
   return (
     <>
       {isManagerModalOpen && <ManagerModal userName={userName} />}
+      {isTutorialActive && <TutorialModal />}
+
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>

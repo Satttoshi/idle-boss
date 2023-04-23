@@ -38,7 +38,7 @@ export default function Tier({ currentTier }) {
     setTimeout(() => {
       lottie?.destroy();
       setIsLottieVisible(false);
-    }, 1000);
+    }, 600);
   }, []);
 
   return (
