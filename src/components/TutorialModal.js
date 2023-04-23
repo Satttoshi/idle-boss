@@ -2,6 +2,7 @@ import styled, { keyframes, css } from "styled-components";
 import MoneyButton from "./MoneyButton";
 import Milestones from "./Milestones";
 import useStore, { milestones } from "~/src/zustand/store";
+import ChevronAnimation from "./ChevronAnimation";
 
 export default function TutorialModal() {
   const { getTierById, clickTimer } = useStore();
@@ -14,6 +15,7 @@ export default function TutorialModal() {
   return (
     <StyledDimmer>
       <StyledArticleBox>
+        <ChevronAnimation />
         <p>To begin earning money, tap on the Wordpress button.</p>
       </StyledArticleBox>
       <StyledButtonContainer>
@@ -43,7 +45,7 @@ function PulseAnimation() {
 
 const StyledArticleBox = styled.article`
   position: absolute;
-  top: 300px;
+  top: 250px;
   left: 50%;
   transform: translateX(-50%);
   width: 320px;
@@ -61,6 +63,7 @@ const StyledArticleBox = styled.article`
     font-size: 20px;
     font-weight: 400;
     text-align: center;
+    line-height: 1.4;
   }
 `;
 

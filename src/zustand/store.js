@@ -10,6 +10,7 @@ const useStore = createStore((set, get) => ({
   availableFloors: [1, 2, 3],
   username: "The Boss",
   tiers: tierData,
+  isTutorialModalOpen: true,
   isManagerModalOpen: false,
   selectedManager: 1,
 

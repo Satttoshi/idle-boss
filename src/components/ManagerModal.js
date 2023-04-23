@@ -4,8 +4,8 @@ import Logo from "./TierLogo";
 import formatNumbers from "~/src/utils/format-numbers";
 import ManagerButton from "./ManagerButton";
 import useStore from "~/src/zustand/store";
-import ChevronLeft from "~/src/assets/chevron-left.svg";
-import ChevronRight from "~/src/assets/chevron-right.svg";
+import ChevronLeft from "~/src/assets/chevron-left-box.svg";
+import ChevronRight from "~/src/assets/chevron-right-box.svg";
 import Application from "./Application";
 import MoneyButtonAnimation from "./MoneyButtonAnimation";
 
