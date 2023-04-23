@@ -6,32 +6,39 @@ import ChevronAnimation from "./ChevronAnimation";
 
 export default function TutorialModal() {
   const { getTierById, clickTimer } = useStore();
+  const currentTutorial = useStore((state) => state.currentTutorial);
+  const exitTutorial = useStore((state) => state.exitTutorial);
   const currentTier = getTierById("tier1");
   const { investCount, milestoneIndex } = currentTier;
 
   function handleMoneyButtonClick() {
     clickTimer(currentTier.id);
+    exitTutorial();
   }
-  return (
-    <StyledDimmer>
-      <StyledArticleBox>
-        <ChevronAnimation />
-        <p>To begin earning money, tap on the Wordpress button.</p>
-      </StyledArticleBox>
-      <StyledButtonContainer>
-        <MoneyButton
-          onMoneyButtonClick={handleMoneyButtonClick}
-          tier={currentTier}
-        />
-        <Milestones
-          investCount={investCount}
-          currentMilestone={milestones[milestoneIndex]}
-          tier={currentTier}
-        />
-        <PulseAnimation />
-      </StyledButtonContainer>
-    </StyledDimmer>
-  );
+  if (currentTutorial === 0) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBox>
+          <ChevronAnimation />
+          <p>To begin earning money, tap on the Wordpress button.</p>
+        </StyledArticleBox>
+        <StyledButtonContainer>
+          <MoneyButton
+            onMoneyButtonClick={handleMoneyButtonClick}
+            tier={currentTier}
+          />
+          <Milestones
+            investCount={investCount}
+            currentMilestone={milestones[milestoneIndex]}
+            tier={currentTier}
+          />
+          <PulseAnimation />
+        </StyledButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  return null;
 }
 
 function PulseAnimation() {
@@ -122,7 +129,7 @@ const StyledDimmer = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 200;
 `;
 

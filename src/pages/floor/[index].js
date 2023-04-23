@@ -12,6 +12,7 @@ export default function HomePage() {
   const availableFloors = useStore((state) => state.availableFloors);
   const currentBossFloor = availableFloors.length;
 
+  const isTutorialActive = useStore((state) => state.isTutorialActive);
   const isManagerModalOpen = useStore((state) => state.isManagerModalOpen);
   const userName = useStore((state) => state.username);
 
@@ -30,8 +31,6 @@ export default function HomePage() {
   }
 
   const { floor1, floor2, bossFloor } = getPosition();
-
-  const isTutorialActive = true;
 
   return (
     <>
