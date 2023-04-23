@@ -39,13 +39,37 @@ const StyledButton = styled.button`
   cursor: pointer;
   color: var(--5);
   background-color: var(--1);
+  border-radius: 40px 40px;
+
+  font-family: var(--font1);
 
   h2 {
     font-size: 18px;
+    font-weight: 500;
+    margin: 0px;
+  }
+
+  h3 {
+    font-weight: 700;
+    margin: 0px;
   }
 
   :disabled {
     cursor: default;
-    background-color: var(--4);
+    background-color: transparent;
+    border: 3px solid var(--5);
+    opacity: 0.7;
+  }
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+    }
   }
 `;

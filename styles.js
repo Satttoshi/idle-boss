@@ -13,7 +13,7 @@ const theme0 = {
   "--3": "#b8da66",
   "--4": "#329691",
   "--5": "#185362",
-  "--6": "#092726",
+  "--6": "#06161B",
 };
 
 const theme1 = {
@@ -78,8 +78,9 @@ export default createGlobalStyle`
     background-color: var(--6);
     color: var(--1);
     overflow: hidden;
-    
   }
+
+
 
   input,
   textarea,

@@ -1,6 +1,5 @@
 import useStore from "~/src/zustand/store";
 import styled from "styled-components";
-import ThemeSwitch from "./ThemeSwitch";
 import formatNumbers from "~/src/utils/format-numbers";
 
 export default function MoneyDisplay() {

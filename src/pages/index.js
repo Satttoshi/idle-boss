@@ -79,7 +79,7 @@ const StyledModal = styled.div`
   left: 50%;
   bottom: 260px;
   transform: translateX(-50%);
-  width: 80%;
+  width: 300px;
   height: 180px;
   background-color: var(--5);
   border-radius: 50px;
