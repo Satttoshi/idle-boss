@@ -66,7 +66,7 @@ const StyledContentHider = styled.div`
   top: 1440px;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
+  width: 375px;
   height: 800px;
   z-index: 95;
 `;

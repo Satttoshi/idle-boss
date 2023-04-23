@@ -78,8 +78,14 @@ export default createGlobalStyle`
     background-color: var(--6);
     color: var(--1);
     overflow: hidden;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
     
   }
+
+
 
   input,
   textarea,
