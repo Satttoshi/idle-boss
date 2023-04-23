@@ -28,15 +28,14 @@ const PopupAnimation = keyframes`
 const StyledPopup = styled.span`
   position: absolute;
   width: 225px;
-  top: 11px;
+  top: 13px;
   left: 21px;
   z-index: 10;
   color: var(--1);
   font-family: var(--font1);
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  text-align: center;
 
   text-shadow: -1px -1px 0 var(--5), 1px -1px 0 var(--5), -1px 1px 0 var(--5),
     1px 1px 0 var(--5);

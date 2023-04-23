@@ -56,15 +56,14 @@ const StyledWrapper = styled.div`
 const StyledIncome = styled.span`
   position: absolute;
   width: 225px;
-  top: 11px;
+  top: 13px;
   left: 21px;
   z-index: 10;
   color: var(--5);
   font-family: var(--font1);
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  text-align: center;
 
   -webkit-user-select: none;
   -ms-user-select: none;

@@ -40,15 +40,4 @@ const StyledButton = styled.button`
     cursor: default;
     background-color: var(--3);
   }
-
-  @media (hover: hover) {
-    &:hover {
-    }
-  }
-
-  @media (hover: none) {
-    &:active,
-    &:focus {
-    }
-  }
 `;
