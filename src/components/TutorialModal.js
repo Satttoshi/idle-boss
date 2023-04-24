@@ -167,6 +167,10 @@ const StyledArticleBox = styled.article`
     font-weight: 400;
     text-align: center;
     line-height: 1.4;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;
 
