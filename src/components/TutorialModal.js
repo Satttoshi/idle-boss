@@ -3,18 +3,23 @@ import MoneyButton from "./MoneyButton";
 import Milestones from "./Milestones";
 import useStore, { milestones } from "~/src/zustand/store";
 import ChevronAnimation from "./ChevronAnimation";
+import InvestButton from "./InvestButton";
 
 export default function TutorialModal() {
-  const { getTierById, clickTimer } = useStore();
   const currentTutorial = useStore((state) => state.currentTutorial);
   const exitTutorial = useStore((state) => state.exitTutorial);
+  const money = useStore((state) => state.money);
+  const getTierById = useStore((state) => state.getTierById);
+  const clickTimer = useStore((state) => state.clickTimer);
+  const invest = useStore((state) => state.invest);
   const currentTier = getTierById("tier1");
-  const { investCount, milestoneIndex } = currentTier;
+  const { investCount, milestoneIndex, id, investPrice } = currentTier;
 
   function handleMoneyButtonClick() {
     clickTimer(currentTier.id);
     exitTutorial();
   }
+
   if (currentTutorial === 0) {
     return (
       <StyledDimmer>
@@ -22,7 +27,7 @@ export default function TutorialModal() {
           <ChevronAnimation />
           <p>To begin earning money, tap on the Wordpress button.</p>
         </StyledArticleBox>
-        <StyledButtonContainer>
+        <StyledMoneyButtonContainer>
           <MoneyButton
             onMoneyButtonClick={handleMoneyButtonClick}
             tier={currentTier}
@@ -32,8 +37,46 @@ export default function TutorialModal() {
             currentMilestone={milestones[milestoneIndex]}
             tier={currentTier}
           />
-          <PulseAnimation />
-        </StyledButtonContainer>
+          <PulseAnimation
+            boxSize={{ width: "80px", heigth: "80px" }}
+            borderRadius={"50%"}
+            top={"4px"}
+            left={"0px"}
+          />
+        </StyledMoneyButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  function handleInvestButtonClick() {
+    try {
+      invest(id);
+    } catch (error) {
+      console.error(error.message);
+    }
+    exitTutorial();
+  }
+
+  if (currentTutorial === 1 && money > 40) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBox>
+          <ChevronAnimation />
+          <p>You can invest into your product</p>
+        </StyledArticleBox>
+        <StyledInvestButtonContainer>
+          <InvestButton
+            onInvest={handleInvestButtonClick}
+            money={money}
+            investPrice={investPrice}
+          />
+          <PulseAnimation
+            boxSize={{ width: "150px", heigth: "28px" }}
+            borderRadius={"20px"}
+            top={"0px"}
+            left={"-5px"}
+          />
+        </StyledInvestButtonContainer>
       </StyledDimmer>
     );
   }
@@ -41,11 +84,23 @@ export default function TutorialModal() {
   return null;
 }
 
-function PulseAnimation() {
+function PulseAnimation({ boxSize, top, left, borderRadius }) {
   return (
     <>
-      <PulseBox variant={0} />
-      <PulseBox variant={1} />
+      <PulseBox
+        variant={0}
+        boxSize={boxSize}
+        top={top}
+        left={left}
+        borderRadius={borderRadius}
+      />
+      <PulseBox
+        variant={1}
+        boxSize={boxSize}
+        top={top}
+        left={left}
+        borderRadius={borderRadius}
+      />
     </>
   );
 }
@@ -106,12 +161,12 @@ const pulse2 = keyframes`
 
 const PulseBox = styled.div`
   position: absolute;
-  top: 4px;
-  left: 0;
-  width: 80px;
-  height: 80px;
+  top: ${({ top }) => top};
+  left: ${({ left }) => left};
+  width: ${({ boxSize }) => boxSize.width};
+  height: ${({ boxSize }) => boxSize.heigth};
   background-color: var(--3);
-  border-radius: 50%;
+  border-radius: ${({ borderRadius }) => borderRadius};
   z-index: 0;
 
   animation: ${({ variant }) =>
@@ -144,7 +199,7 @@ const StyledDimmer = styled.div`
   animation: ${fadeIn} 0.5s ease-in-out;
 `;
 
-const StyledButtonContainer = styled.section`
+const StyledMoneyButtonContainer = styled.div`
   height: 94px;
   width: 307px;
   margin: 15px;
@@ -153,5 +208,16 @@ const StyledButtonContainer = styled.section`
   position: absolute;
   top: 80px;
   left: 50%;
-  transform: translateX(-55%);
+  transform: translateX(-54.8%);
+`;
+
+const StyledInvestButtonContainer = styled.div`
+  height: 28px;
+  width: 150px;
+  min-width: 150px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 161px;
+  left: 50%;
+  transform: translateX(2.5%);
 `;

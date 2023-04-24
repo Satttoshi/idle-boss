@@ -9,9 +9,7 @@ export default function InvestButton({ onInvest, money, investPrice }) {
     <StyledButton
       type="button"
       disabled={money < investPrice}
-      onClick={() => {
-        onInvest();
-      }}
+      onClick={onInvest}
     >
       <InvestIcon width="24" height="24" fill="var(--5)" />
       <p>{displayPrice}</p>
@@ -29,6 +27,7 @@ const StyledButton = styled.button`
   width: 150px;
   border-radius: 17px;
   box-shadow: var(--shadow1);
+  z-index: 10;
 
   display: flex;
   align-items: center;

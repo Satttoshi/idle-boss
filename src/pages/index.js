@@ -128,7 +128,7 @@ const StyledSection = styled.section`
   bottom: 0;
   width: 100%;
   height: 280px;
-  border-radius: 50px 50px 0 0;
+  border-radius: 30px 30px 0 0;
   background-color: var(--5);
 
   span {
