@@ -24,9 +24,9 @@ const StyledButton = styled.button`
   border: none;
   position: absolute;
   bottom: 0;
-  right: 15px;
+  right: 5px;
   height: 28px;
-  width: 140px;
+  width: 150px;
   border-radius: 17px;
 
   display: flex;
@@ -45,7 +45,7 @@ const StyledButton = styled.button`
 
   p {
     margin: 0;
-    width: 105px;
+    width: 115px;
   }
 
   :disabled {
