@@ -9,9 +9,7 @@ export default function InvestButton({ onInvest, money, investPrice }) {
     <StyledButton
       type="button"
       disabled={money < investPrice}
-      onClick={() => {
-        onInvest();
-      }}
+      onClick={onInvest}
     >
       <InvestIcon width="24" height="24" fill="var(--5)" />
       <p>{displayPrice}</p>
@@ -24,10 +22,12 @@ const StyledButton = styled.button`
   border: none;
   position: absolute;
   bottom: 0;
-  right: 15px;
+  right: 5px;
   height: 28px;
-  width: 140px;
+  width: 150px;
   border-radius: 17px;
+  box-shadow: var(--shadow1);
+  z-index: 10;
 
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ const StyledButton = styled.button`
   transition: background-color 0.1s ease-in-out;
   color: var(--5);
   font-family: var(--font1);
-  font-weight: 600;
+  font-weight: 590;
   cursor: pointer;
 
   -webkit-user-select: none;
@@ -45,7 +45,7 @@ const StyledButton = styled.button`
 
   p {
     margin: 0;
-    width: 105px;
+    width: 115px;
   }
 
   :disabled {

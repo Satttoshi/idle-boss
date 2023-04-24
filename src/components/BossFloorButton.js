@@ -22,7 +22,9 @@ const StyledButton = styled.button`
 
   font-family: var(--font1);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 590;
+
+  box-shadow: var(--shadow1);
 
   @media (hover: hover) {
     &:hover:enabled {

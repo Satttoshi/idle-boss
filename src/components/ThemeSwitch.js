@@ -37,8 +37,9 @@ const StyledSpan = styled.span`
   font-weight: 500;
   color: var(--1);
   text-align: right;
-
   width: 87px;
+
+  text-shadow: var(--shadow1);
 `;
 
 const StyledPalette = styled.div`
@@ -56,6 +57,7 @@ const StyledColor = styled.div`
   background: var(--${({ color }) => color});
   border: 2px solid var(--1);
   border-radius: 4px;
+  box-shadow: var(--shadow1);
 `;
 
 const StyledField = styled.div`
@@ -79,9 +81,11 @@ const StyledButton = styled.button`
   background-color: var(--1);
   border-radius: 3px;
 
+  box-shadow: var(--shadow1);
+
   font-family: var(--font1);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 590;
   line-height: 16px;
   color: var(--5);
 

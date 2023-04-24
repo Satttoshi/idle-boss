@@ -5,10 +5,15 @@ import formatNumbers from "~/src/utils/format-numbers";
 export default function TierLocked({ currentTier }) {
   const unlock = useStore((state) => state.unlock);
   const money = useStore((state) => state.money);
+  const exitTutorial = useStore((state) => state.exitTutorial);
+  const isTutorialActive = useStore((state) => state.isTutorialActive);
 
   function handleUnlock(tierId) {
     try {
       unlock(tierId);
+      if (isTutorialActive) {
+        exitTutorial();
+      }
     } catch (error) {
       // do something when not enough money
       console.error(error.message);
@@ -32,6 +37,7 @@ export default function TierLocked({ currentTier }) {
 }
 
 const StyledButton = styled.button`
+  position: absolute;
   appearance: none;
   border: none;
   height: 94px;
@@ -40,17 +46,20 @@ const StyledButton = styled.button`
   color: var(--5);
   background-color: var(--1);
   border-radius: 40px 40px;
+  box-shadow: var(--shadow1);
+  z-index: 10;
 
   font-family: var(--font1);
 
   h2 {
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 500;
     margin: 0px;
   }
 
   h3 {
-    font-weight: 700;
+    font-weight: 590;
+    font-size: 1.3rem;
     margin: 0px;
   }
 

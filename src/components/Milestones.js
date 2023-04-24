@@ -46,6 +46,7 @@ const StyledBox = styled.div`
   height: 24px;
   display: grid;
   place-items: center;
+  box-shadow: var(--shadow1);
 
   h3 {
     font-weight: 600;

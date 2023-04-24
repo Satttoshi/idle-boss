@@ -28,6 +28,7 @@ const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--shadow2);
 
   div {
     transform: translateX(30px);
@@ -37,9 +38,10 @@ const StyledHeader = styled.header`
     font-family: var(--font2);
     color: var(--3);
     margin: 0;
-    width: 280px;
+    width: 290px;
     font-weight: 400;
     font-size: 1.7rem;
+    text-shadow: var(--shadow2);
   }
 
   h2 {
@@ -47,5 +49,6 @@ const StyledHeader = styled.header`
     margin: 0;
     font-weight: 500;
     font-size: 0.9rem;
+    text-shadow: var(--shadow2);
   }
 `;

@@ -1,7 +1,20 @@
 import styled from "styled-components";
+import useStore from "~/src/zustand/store";
 
 export default function StyledPageSection({ children, floor }) {
-  return <StyledSection floor={floor}>{children}</StyledSection>;
+  const currentTutorialStep = useStore((state) => state.currentTutorial);
+
+  let scrollBehavior = "scroll";
+
+  if (currentTutorialStep < 3) {
+    scrollBehavior = "hidden";
+  }
+
+  return (
+    <StyledSection scrollBehavior={scrollBehavior} floor={floor}>
+      {children}
+    </StyledSection>
+  );
 }
 
 const StyledSection = styled.section`
@@ -16,7 +29,7 @@ const StyledSection = styled.section`
   align-items: center;
   padding: 0;
   transition: top 0.5s ease-in-out;
-  overflow: scroll;
+  overflow: ${({ scrollBehavior }) => scrollBehavior};
 
   @media (min-height: 740px) {
     height: 600px;

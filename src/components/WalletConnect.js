@@ -106,7 +106,7 @@ const StyledNetworkButton = styled.button`
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: var(--font1);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.67rem;
 
   display: flex;
@@ -131,6 +131,7 @@ const StyledAddressButton = styled.button`
   font-family: var(--font1);
   font-weight: 500;
   font-size: 1rem;
+  box-shadow: var(--shadow1);
 `;
 
 const StyledButton = styled.button`
@@ -147,8 +148,10 @@ const StyledButton = styled.button`
 
   font-family: var(--font1);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--5);
+
+  box-shadow: var(--shadow1);
 
   @media (hover: hover) {
     &:hover:enabled {

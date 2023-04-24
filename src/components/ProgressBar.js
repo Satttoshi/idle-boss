@@ -45,6 +45,8 @@ const StyledProgressBar = styled.div`
   right: 0;
   background-color: var(--5);
   border-radius: 0px 10px 10px 0px;
+
+  box-shadow: var(--shadow1);
 `;
 
 const StyledWrapper = styled.div`
@@ -63,7 +65,7 @@ const StyledIncome = styled.span`
   font-family: var(--font1);
   text-align: center;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 590;
 
   -webkit-user-select: none;
   -ms-user-select: none;
