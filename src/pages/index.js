@@ -49,7 +49,7 @@ export default function HomePage() {
           </StyledDimmer>
         )}
         <WalletConnect />
-        <span>idle boss - version 0.2.27</span>
+        <span>idle boss - version 0.3.16</span>
       </StyledSection>
     </>
   );
@@ -160,6 +160,8 @@ const StyledButton = styled.button`
   font-size: 40px;
   color: var(--5);
 
+  box-shadow: var(--shadow1);
+
   @media (hover: hover) {
     &:hover:enabled {
       background-color: var(--3);
@@ -186,5 +188,6 @@ const StyledMain = styled.main`
     font-family: var(--font2);
     font-weight: 400;
     font-size: 40px;
+    text-shadow: var(--shadow1);
   }
 `;
