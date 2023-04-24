@@ -10,19 +10,19 @@ const carterOne = localfont({
 const theme0 = {
   "--1": "#f2ffda",
   "--2": "#d0f086",
-  "--3": "#03C988",
-  "--4": "#1C82AD",
-  "--5": "#00337C",
-  "--6": "#13005A",
+  "--3": "#b8da66",
+  "--4": "#329691",
+  "--5": "#185362",
+  "--6": "#06161B",
 };
 
 const theme1 = {
   "--1": "#f2ffda",
   "--2": "#d0f086",
-  "--3": "#b8da66",
-  "--4": "#329691",
-  "--5": "#185362",
-  "--6": "#06161B",
+  "--3": "#03C988",
+  "--4": "#1C82AD",
+  "--5": "#00337C",
+  "--6": "#13005A",
 };
 
 const theme2 = {
@@ -54,7 +54,7 @@ export default createGlobalStyle`
     --font1: ${fredoka.style.fontFamily}, serif;
     --font2: ${carterOne.style.fontFamily}, serif;
 
-    --shadow1: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    --shadow1: 0px 4px 4px rgba(0, 0, 0, 0.4);
     --shadow2: 0px 2px 2px rgba(0, 0, 0, 0.3);
   }
 

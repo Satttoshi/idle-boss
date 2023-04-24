@@ -38,7 +38,7 @@ const StyledHeader = styled.header`
     font-family: var(--font2);
     color: var(--3);
     margin: 0;
-    width: 280px;
+    width: 290px;
     font-weight: 400;
     font-size: 1.7rem;
     text-shadow: var(--shadow2);
