@@ -96,6 +96,7 @@ const StyledNavigation = styled.nav`
     font-weight: 590;
     cursor: pointer;
     padding: 0;
+    box-shadow: var(--shadow2);
 
     &:disabled {
       background-color: rgba(255, 255, 255, 0.3);
@@ -120,5 +121,6 @@ const StyledNavigation = styled.nav`
     width: 164px;
     text-align: center;
     font-family: var(--font2);
+    text-shadow: var(--shadow2);
   }
 `;

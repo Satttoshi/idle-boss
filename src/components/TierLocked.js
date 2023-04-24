@@ -40,6 +40,7 @@ const StyledButton = styled.button`
   color: var(--5);
   background-color: var(--1);
   border-radius: 40px 40px;
+  box-shadow: var(--shadow1);
 
   font-family: var(--font1);
 

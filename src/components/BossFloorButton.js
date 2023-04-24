@@ -24,6 +24,8 @@ const StyledButton = styled.button`
   font-size: 1rem;
   font-weight: 590;
 
+  box-shadow: var(--shadow1);
+
   @media (hover: hover) {
     &:hover:enabled {
       background-color: var(--3);

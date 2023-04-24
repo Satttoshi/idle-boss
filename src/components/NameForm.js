@@ -59,6 +59,8 @@ const StyledLabel = styled.label`
   color: var(--1);
   text-align: right;
 
+  text-shadow: var(--shadow1);
+
   width: 87px;
 `;
 
@@ -74,6 +76,7 @@ const StyledInput = styled.input`
   border-radius: 4px;
 
   background-color: var(--1);
+  box-shadow: var(--shadow1);
 
   text-align: center;
   font-family: var(--font1);
@@ -96,6 +99,7 @@ const StyledButton = styled.button`
 
   background-color: var(--1);
   border-radius: 3px;
+  box-shadow: var(--shadow1);
 
   font-family: var(--font1);
   font-size: 0.8rem;

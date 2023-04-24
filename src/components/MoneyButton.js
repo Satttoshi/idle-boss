@@ -33,6 +33,8 @@ const StyledButton = styled.button`
   color: var(--5);
   cursor: pointer;
 
+  box-shadow: var(--shadow1);
+
   display: grid;
   place-items: center;
 

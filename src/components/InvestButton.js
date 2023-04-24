@@ -28,6 +28,7 @@ const StyledButton = styled.button`
   height: 28px;
   width: 150px;
   border-radius: 17px;
+  box-shadow: var(--shadow1);
 
   display: flex;
   align-items: center;

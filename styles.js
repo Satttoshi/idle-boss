@@ -53,6 +53,9 @@ export default createGlobalStyle`
 
     --font1: ${fredoka.style.fontFamily}, serif;
     --font2: ${carterOne.style.fontFamily}, serif;
+
+    --shadow1: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    --shadow2: 0px 2px 2px rgba(0, 0, 0, 0.3);
   }
 
   [data-theme="theme1"] {

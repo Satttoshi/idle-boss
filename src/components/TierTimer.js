@@ -25,6 +25,7 @@ const StyledTimer = styled.div`
   font-family: var(--font1);
   font-weight: 500;
   font-size: 0.8rem;
+  box-shadow: var(--shadow1);
 
   display: flex;
   align-items: center;
