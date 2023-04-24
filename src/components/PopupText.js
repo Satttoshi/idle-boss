@@ -35,7 +35,7 @@ const StyledPopup = styled.span`
   font-family: var(--font1);
   text-align: center;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 590;
 
   text-shadow: -1px -1px 0 var(--5), 1px -1px 0 var(--5), -1px 1px 0 var(--5),
     1px 1px 0 var(--5);

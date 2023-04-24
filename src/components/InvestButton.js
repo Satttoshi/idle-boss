@@ -36,7 +36,7 @@ const StyledButton = styled.button`
   transition: background-color 0.1s ease-in-out;
   color: var(--5);
   font-family: var(--font1);
-  font-weight: 600;
+  font-weight: 590;
   cursor: pointer;
 
   -webkit-user-select: none;

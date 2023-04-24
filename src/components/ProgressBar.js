@@ -63,7 +63,7 @@ const StyledIncome = styled.span`
   font-family: var(--font1);
   text-align: center;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 590;
 
   -webkit-user-select: none;
   -ms-user-select: none;
