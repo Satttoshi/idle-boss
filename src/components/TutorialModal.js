@@ -4,6 +4,7 @@ import Milestones from "./Milestones";
 import useStore, { milestones } from "~/src/zustand/store";
 import ChevronAnimation from "./ChevronAnimation";
 import InvestButton from "./InvestButton";
+import TierLocked from "./TierLocked";
 
 export default function TutorialModal() {
   const currentTutorial = useStore((state) => state.currentTutorial);
@@ -12,7 +13,21 @@ export default function TutorialModal() {
   const getTierById = useStore((state) => state.getTierById);
   const clickTimer = useStore((state) => state.clickTimer);
   const invest = useStore((state) => state.invest);
-  const currentTier = getTierById("tier1");
+
+  function tierSelector(currentTutorial) {
+    switch (currentTutorial) {
+      case 0:
+        return "tier1";
+      case 1:
+        return "tier1";
+      case 2:
+        return "tier2";
+      default:
+        return "tier1";
+    }
+  }
+
+  const currentTier = getTierById(tierSelector(currentTutorial));
   const { investCount, milestoneIndex, id, investPrice } = currentTier;
 
   function handleMoneyButtonClick() {
@@ -59,7 +74,7 @@ export default function TutorialModal() {
     exitTutorial();
   }
 
-  if (currentTutorial === 1 && money > 40) {
+  if (currentTutorial === 1 && money >= 50) {
     return (
       <StyledDimmer>
         <StyledArticleBox variant={{ top: "250px", heigth: "120px" }}>
@@ -81,6 +96,28 @@ export default function TutorialModal() {
             left={"-5px"}
           />
         </StyledInvestButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  if (currentTutorial === 2 && money >= 600) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBox variant={{ top: "370px", heigth: "120px" }}>
+          <ChevronAnimation
+            variant={{ top: "-60px", left: "139px", rotation: "0deg" }}
+          />
+          <p>Expand your product line by unlocking the next item!</p>
+        </StyledArticleBox>
+        <StyledUnlockButtonContainer>
+          <TierLocked currentTier={currentTier} />
+          <PulseAnimation
+            boxSize={{ width: "307px", heigth: "94px" }}
+            borderRadius={"40px"}
+            top={"0px"}
+            left={"0"}
+          />
+        </StyledUnlockButtonContainer>
       </StyledDimmer>
     );
   }
@@ -171,7 +208,6 @@ const PulseBox = styled.div`
   height: ${({ boxSize }) => boxSize.heigth};
   background-color: var(--3);
   border-radius: ${({ borderRadius }) => borderRadius};
-  z-index: 0;
 
   animation: ${({ variant }) =>
       variant === 0
@@ -224,4 +260,13 @@ const StyledInvestButtonContainer = styled.div`
   top: 161px;
   left: 50%;
   transform: translateX(2.5%);
+`;
+
+const StyledUnlockButtonContainer = styled.div`
+  min-width: 150px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 219px;
+  left: 50%;
+  transform: translateX(-102%);
 `;

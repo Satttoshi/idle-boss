@@ -2,7 +2,6 @@ import styled, { keyframes } from "styled-components";
 import Chevron from "~/src/assets/chevron-up.svg";
 
 export default function ChevronAnimation({ variant }) {
-  console.log(variant);
   return (
     <StyledChevronContainer variant={variant}>
       <StyledChevron variant={0} />
