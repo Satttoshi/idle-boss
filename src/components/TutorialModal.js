@@ -23,8 +23,10 @@ export default function TutorialModal() {
   if (currentTutorial === 0) {
     return (
       <StyledDimmer>
-        <StyledArticleBox>
-          <ChevronAnimation />
+        <StyledArticleBox variant={{ top: "250px", heigth: "120px" }}>
+          <ChevronAnimation
+            variant={{ top: "-50px", left: "53px", rotation: "-30deg" }}
+          />
           <p>To begin earning money, tap on the Wordpress button.</p>
         </StyledArticleBox>
         <StyledMoneyButtonContainer>
@@ -60,9 +62,11 @@ export default function TutorialModal() {
   if (currentTutorial === 1 && money > 40) {
     return (
       <StyledDimmer>
-        <StyledArticleBox>
-          <ChevronAnimation />
-          <p>You can invest into your product</p>
+        <StyledArticleBox variant={{ top: "250px", heigth: "120px" }}>
+          <ChevronAnimation
+            variant={{ top: "-60px", left: "210px", rotation: "20deg" }}
+          />
+          <p>Invest in your product to increase profitability!</p>
         </StyledArticleBox>
         <StyledInvestButtonContainer>
           <InvestButton
@@ -107,11 +111,11 @@ function PulseAnimation({ boxSize, top, left, borderRadius }) {
 
 const StyledArticleBox = styled.article`
   position: absolute;
-  top: 250px;
+  top: ${({ variant }) => variant.top};
   left: 50%;
   transform: translateX(-50%);
   width: 320px;
-  height: 120px;
+  height: ${({ variant }) => variant.heigth};
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 

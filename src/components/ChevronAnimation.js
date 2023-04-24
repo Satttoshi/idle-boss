@@ -1,9 +1,10 @@
 import styled, { keyframes } from "styled-components";
 import Chevron from "~/src/assets/chevron-up.svg";
 
-export default function ChevronAnimation() {
+export default function ChevronAnimation({ variant }) {
+  console.log(variant);
   return (
-    <StyledChevronContainer>
+    <StyledChevronContainer variant={variant}>
       <StyledChevron variant={0} />
       <StyledChevron variant={1} />
       <StyledChevron variant={2} />
@@ -14,9 +15,9 @@ export default function ChevronAnimation() {
 const StyledChevronContainer = styled.div`
   position: absolute;
 
-  top: -50px;
-  left: 53px;
-  transform: rotate(-30deg);
+  top: ${({ variant }) => variant.top};
+  left: ${({ variant }) => variant.left};
+  transform: rotate(${({ variant }) => variant.rotation});
 `;
 
 const move = keyframes`
