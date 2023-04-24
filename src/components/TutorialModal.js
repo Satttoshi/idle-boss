@@ -125,12 +125,23 @@ const PulseBox = styled.div`
     2s ease-in-out infinite;
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    }
+  100% {
+    opacity: 1;
+    }
+      `;
+
 const StyledDimmer = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 200;
+
+  animation: ${fadeIn} 0.5s ease-in-out;
 `;
 
 const StyledButtonContainer = styled.section`
