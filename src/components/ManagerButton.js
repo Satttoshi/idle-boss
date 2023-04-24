@@ -35,19 +35,21 @@ const StyledButton = styled.button`
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
+  background-color: var(--1);
 
   border-radius: 15px;
 
   width: 123px;
   height: 44px;
 
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-family: var(--font1);
   font-weight: 600;
   color: var(--5);
 
   :disabled {
     cursor: default;
+    opacity: 0.3;
   }
 
   @media (hover: hover) {

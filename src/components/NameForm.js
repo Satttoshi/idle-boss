@@ -98,9 +98,8 @@ const StyledButton = styled.button`
   border-radius: 3px;
 
   font-family: var(--font1);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 16px;
+  font-size: 0.8rem;
+  font-weight: 590;
   color: var(--5);
 
   @media (hover: hover) {

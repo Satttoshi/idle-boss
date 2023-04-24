@@ -44,13 +44,14 @@ const StyledButton = styled.button`
   font-family: var(--font1);
 
   h2 {
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 500;
     margin: 0px;
   }
 
   h3 {
-    font-weight: 700;
+    font-weight: 590;
+    font-size: 1.3rem;
     margin: 0px;
   }
 

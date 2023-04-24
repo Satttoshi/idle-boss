@@ -147,7 +147,7 @@ const StyledButton = styled.button`
 
   font-family: var(--font1);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--5);
 
   @media (hover: hover) {

@@ -92,7 +92,8 @@ const StyledNavigation = styled.nav`
     background-color: var(--1);
     color: var(--5);
     font-family: var(--font1);
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 590;
     cursor: pointer;
     padding: 0;
 

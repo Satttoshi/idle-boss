@@ -80,8 +80,8 @@ const StyledButton = styled.button`
   border-radius: 3px;
 
   font-family: var(--font1);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 590;
   line-height: 16px;
   color: var(--5);
 

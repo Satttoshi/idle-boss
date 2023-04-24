@@ -235,7 +235,7 @@ const StyledPrevButton = styled.button`
   z-index: 300;
 
   &:disabled {
-    opacity: 0.4;
+    opacity: 0.3;
     cursor: default;
   }
 

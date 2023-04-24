@@ -113,7 +113,7 @@ const StyledModal = styled.div`
     transform: translateX(-50%);
 
     font-family: var(--font1);
-    font-weight: 600;
+    font-weight: 550;
     font-size: 0.9rem;
     color: var(--5);
 
