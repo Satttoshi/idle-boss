@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-export default function Timer({ delay, isFilling }) {
-  const [timeRemaining, setTimeRemaining] = useState(Math.floor(delay));
+export default function Timer({ delay, trigger }) {
+  const [timeRemaining, setTimeRemaining] = useState(delay);
+
+  const triggerState = trigger;
 
   useEffect(() => {
     let intervalId;
@@ -13,6 +15,10 @@ export default function Timer({ delay, isFilling }) {
           clearInterval(intervalId);
           return 0;
         }
+        if (triggerState !== trigger) {
+          clearInterval(intervalId);
+          return 0;
+        }
         return prevTimeRemaining - 1000;
       });
     };
@@ -20,11 +26,11 @@ export default function Timer({ delay, isFilling }) {
     intervalId = setInterval(tick, 1000);
 
     return () => clearInterval(intervalId);
-  }, [timeRemaining]);
+  }, [timeRemaining, trigger, triggerState]);
 
   useEffect(() => {
     setTimeRemaining(Math.floor(delay));
-  }, [delay, isFilling]);
+  }, [trigger, delay]);
 
   const formatTime = (time) => {
     if (time < 1) return "0s";
@@ -46,11 +52,9 @@ export default function Timer({ delay, isFilling }) {
 
   return (
     <StyledTimer>
-      {isFilling && (
-        <StyledCountdown>
-          {formatTime(Math.floor(timeRemaining / 1000))}
-        </StyledCountdown>
-      )}
+      <StyledCountdown>
+        {formatTime(Math.floor(timeRemaining / 1000))}
+      </StyledCountdown>
     </StyledTimer>
   );
 }
