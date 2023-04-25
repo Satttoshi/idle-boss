@@ -4,6 +4,7 @@ import ProgressStars from "./ProgressStars";
 import PopupText from "./PopupText";
 import formatNumbers from "~/src/utils/format-numbers";
 import ProgressBarAnimation from "./ProgressBarAnimation";
+import TierTimer from "./TierTimer";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income, isPerSecond, incomePerSecond, trigger } = tier;
@@ -21,6 +22,7 @@ export default function ProgressBar({ tier, isFilling }) {
   return (
     <StyledProgressBar>
       <ProgressStars tier={tier} />
+      <TierTimer delay={currentDelay} isFilling={isFilling} />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <PopupText tier={tier} />

@@ -1,64 +1,61 @@
 import styled from "styled-components";
 import Countdown from "react-countdown";
 
-import useStore from "~/src/zustand/store";
-
 const renderer = ({ days, hours, minutes, seconds, total, completed }) => {
-  console.log(total);
-
-  if (total < 60000) {
-    return <StyledCountdown>0 : {seconds} s</StyledCountdown>;
+  function convertTo2Digits(number) {
+    return number < 10 ? `0${number}` : number;
   }
 
-  if (total < 3600000) {
+  if (completed) {
+    return <StyledCountdown>00 : 00 s</StyledCountdown>;
+  }
+
+  if (total < 60000) {
+    return <StyledCountdown>0 : {convertTo2Digits(seconds)} s</StyledCountdown>;
+  } else if (total < 3600000) {
     return (
       <StyledCountdown>
-        {minutes} : {seconds} m
+        {minutes} : {convertTo2Digits(seconds)} s
       </StyledCountdown>
     );
   } else if (total < 86400000) {
     return (
       <StyledCountdown>
-        {hours} : {minutes} h
+        {hours} : {convertTo2Digits(minutes)} m
       </StyledCountdown>
     );
   } else if (total < 604800000) {
     return (
       <StyledCountdown>
-        {days} : {hours} d
+        {days} : {convertTo2Digits(hours)} h
       </StyledCountdown>
     );
   }
 };
-export default function Timer() {
+
+export default function Timer({ delay, isFilling }) {
   return (
     <>
-      <Countdown date={Date.now() + 6000} renderer={renderer} />
       <StyledTimer>
-        <StyledNumber>0</StyledNumber>
-        <StyledSymbol>:</StyledSymbol>
-        <StyledNumber>00</StyledNumber>
-        <StyledSymbol>s</StyledSymbol>
+        {isFilling ? (
+          <Countdown date={Date.now() + delay} renderer={renderer} />
+        ) : null}
       </StyledTimer>
     </>
   );
 }
 
 const StyledCountdown = styled.span`
-  position: absolute;
-
-  z-index: 20;
-  top: 100px;
-
   font-family: var(--font1);
   font-weight: 500;
   font-size: 0.8rem;
+  word-spacing: -1px;
 `;
 
 const StyledTimer = styled.div`
   position: absolute;
-  bottom: 0px;
-  left: 80px;
+  bottom: -36px;
+  left: 21px;
 
   width: 66px;
   height: 28px;

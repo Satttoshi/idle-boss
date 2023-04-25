@@ -3,7 +3,6 @@ import ProgressBar from "./ProgressBar";
 import useStore, { milestones } from "~/src/zustand/store";
 import InvestButton from "./InvestButton";
 import Milestones from "./Milestones";
-import TierTimer from "./TierTimer";
 
 import Lottie from "lottie-react";
 import animationData from "~/src/assets/animation/unlock.json";
@@ -62,7 +61,7 @@ export default function Tier({ currentTier }) {
         currentMilestone={milestones[milestoneIndex]}
         tier={currentTier}
       />
-      <TierTimer tier={currentTier} />
+
       <InvestButton
         onInvest={handleInvest}
         money={money}
