@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useEffect, useState } from "react";
 import useStore from "~/src/zustand/store";
 
@@ -67,13 +67,13 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
   const timeRemainingInSeconds = Math.floor(timeRemaining / 1000);
 
   return isFilling ? (
-    <StyledTimer>
+    <StyledTimer isFilling={true}>
       <StyledCountdown>
         {formatTime(Math.floor(timeRemainingInSeconds))}
       </StyledCountdown>
     </StyledTimer>
   ) : (
-    <StyledTimer>
+    <StyledTimer isFilling={false}>
       <StyledCountdown>
         {formatTime(Math.floor(delayInSeconds))}
       </StyledCountdown>
@@ -83,13 +83,21 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
 
 const StyledCountdown = styled.span`
   font-family: var(--font1);
-  font-weight: 500;
+  font-weight: 490;
   font-size: 0.8rem;
-  word-spacing: -1px;
 
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+`;
+
+const flash = keyframes`
+  0% {
+    background-color: var(--4)
+  };
+  100% {
+    background-color: var(--5);
+  };
 `;
 
 const StyledTimer = styled.div`
@@ -100,13 +108,17 @@ const StyledTimer = styled.div`
   width: 66px;
   height: 28px;
   border-radius: 17px;
-  background-color: var(--4);
-  border: 3px solid var(--5);
-  color: var(--5);
+  background-color: var(--5);
+  border: 3px solid var(--4);
+  color: ${(props) => (props.isFilling ? "var(--1)" : "var(--4)")};
   font-family: var(--font1);
   font-weight: 500;
   font-size: 0.8rem;
   box-shadow: var(--shadow1);
+
+  animation-name: ${(props) => (props.isFilling ? flash : "")};
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
 
   display: flex;
   align-items: center;

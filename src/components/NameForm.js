@@ -62,6 +62,10 @@ const StyledLabel = styled.label`
   text-shadow: var(--shadow1);
 
   width: 87px;
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const StyledInput = styled.input`
@@ -105,6 +109,10 @@ const StyledButton = styled.button`
   font-size: 0.8rem;
   font-weight: 590;
   color: var(--5);
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   @media (hover: hover) {
     &:hover:enabled {

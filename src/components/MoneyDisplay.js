@@ -30,6 +30,10 @@ const StyledHeader = styled.header`
   justify-content: center;
   box-shadow: var(--shadow2);
 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   div {
     transform: translateX(30px);
   }
@@ -42,9 +46,6 @@ const StyledHeader = styled.header`
     font-weight: 400;
     font-size: 1.7rem;
     text-shadow: var(--shadow2);
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
 
   h2 {
@@ -53,8 +54,5 @@ const StyledHeader = styled.header`
     font-weight: 500;
     font-size: 0.9rem;
     text-shadow: var(--shadow2);
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
 `;
