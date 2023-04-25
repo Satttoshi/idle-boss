@@ -5,7 +5,7 @@ import setSpeed from "./speedSheet";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 1000000000,
+  money: 0.5,
   currentFloor: 1,
   availableFloors: [1, 2, 3],
   username: "The Boss",
