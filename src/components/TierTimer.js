@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-export default function Timer({ delay, trigger, isFilling, tier }) {
-  const [timeRemaining, setTimeRemaining] = useState(delay);
+export default function Timer({ settedDelay, trigger, isFilling, delay }) {
+  const [timeRemaining, setTimeRemaining] = useState(settedDelay);
 
   const triggerState = trigger;
+  const delayInSeconds = Math.floor(delay / 1000);
 
   useEffect(() => {
     let intervalId;
@@ -15,7 +16,7 @@ export default function Timer({ delay, trigger, isFilling, tier }) {
           clearInterval(intervalId);
           return 0;
         }
-        if (triggerState !== trigger) {
+        if (!isFilling) {
           clearInterval(intervalId);
           return 0;
         }
@@ -26,11 +27,12 @@ export default function Timer({ delay, trigger, isFilling, tier }) {
     intervalId = setInterval(tick, 1000);
 
     return () => clearInterval(intervalId);
-  }, [timeRemaining, trigger, triggerState]);
+  }, [timeRemaining, triggerState, isFilling]);
 
   useEffect(() => {
-    setTimeRemaining(Math.floor(delay));
-  }, [trigger, delay]);
+    setTimeRemaining(Math.floor(settedDelay));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFilling]);
 
   const formatTime = (time) => {
     if (time < 1) return "0s";
@@ -60,7 +62,9 @@ export default function Timer({ delay, trigger, isFilling, tier }) {
     </StyledTimer>
   ) : (
     <StyledTimer>
-      <StyledCountdown>0s</StyledCountdown>
+      <StyledCountdown>
+        {formatTime(Math.floor(delayInSeconds))}
+      </StyledCountdown>
     </StyledTimer>
   );
 }

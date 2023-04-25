@@ -12,6 +12,7 @@ export default function ProgressBar({ tier, isFilling }) {
 
   useEffect(() => {
     setCurrentDelay(Math.max(delay, 250));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger]);
 
   const displayIncome =
@@ -22,10 +23,10 @@ export default function ProgressBar({ tier, isFilling }) {
     <StyledProgressBar>
       <ProgressStars tier={tier} />
       <TierTimer
-        delay={currentDelay}
-        tier={tier}
+        settedDelay={currentDelay}
         trigger={trigger}
         isFilling={isFilling}
+        delay={delay}
       />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
