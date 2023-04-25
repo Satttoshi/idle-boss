@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-export default function Timer({ delay, trigger }) {
+export default function Timer({ delay, trigger, isFilling, tier }) {
   const [timeRemaining, setTimeRemaining] = useState(delay);
 
   const triggerState = trigger;
@@ -50,11 +50,17 @@ export default function Timer({ delay, trigger }) {
     return formattedTime.trim();
   };
 
-  return (
+  const timeRemainingInSeconds = Math.floor(timeRemaining / 1000);
+
+  return isFilling ? (
     <StyledTimer>
       <StyledCountdown>
-        {formatTime(Math.floor(timeRemaining / 1000))}
+        {formatTime(Math.floor(timeRemainingInSeconds))}
       </StyledCountdown>
+    </StyledTimer>
+  ) : (
+    <StyledTimer>
+      <StyledCountdown>0s</StyledCountdown>
     </StyledTimer>
   );
 }
