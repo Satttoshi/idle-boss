@@ -7,7 +7,6 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
 
   const triggerState = trigger;
   const delayInSeconds = Math.floor(delay / 1000);
-  const delayInMillis = delay;
 
   useEffect(() => {
     let intervalId;
@@ -37,7 +36,7 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
   }, [isFilling]);
 
   const formatTime = (time) => {
-    if (delayInMillis <= 1000) return (delayInMillis / 1000).toFixed(1) + "s";
+    if (time < 1) return "0s";
 
     let remainingSeconds = time;
 
