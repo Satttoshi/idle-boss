@@ -1,50 +1,8 @@
 import styled from "styled-components";
-import Countdown from "react-countdown";
 import { useEffect, useState } from "react";
-import useStore from "~/src/zustand/store";
-
-// const renderer = ({ days, hours, minutes, seconds, total, completed }) => {
-//   function convertTo2Digits(number) {
-//     return number < 10 ? `0${number}` : number;
-//   }
-
-//   if (completed) {
-//     return <StyledCountdown>00 : 00 s</StyledCountdown>;
-//   }
-
-//   if (total < 60000) {
-//     return <StyledCountdown>0 : {convertTo2Digits(seconds)} s</StyledCountdown>;
-//   } else if (total < 3600000) {
-//     return (
-//       <StyledCountdown>
-//         {minutes} : {convertTo2Digits(seconds)} m
-//       </StyledCountdown>
-//     );
-//   } else if (total < 86400000) {
-//     return (
-//       <StyledCountdown>
-//         {hours} : {convertTo2Digits(minutes)} h
-//       </StyledCountdown>
-//     );
-//   } else if (total < 604800000) {
-//     return (
-//       <StyledCountdown>
-//         {days} : {convertTo2Digits(hours)} d
-//       </StyledCountdown>
-//     );
-//   }
-// };
-
-// export default function Timer({ delay, isFilling }) {
-//   return (
-//     <StyledTimer>
-//       {isFilling && <Countdown date={Date.now() + delay} renderer={renderer} />}
-//     </StyledTimer>
-//   );
-// }
 
 export default function Timer({ delay, isFilling }) {
-  const [timeRemaining, setTimeRemaining] = useState(Math.floor(delay / 1000));
+  const [timeRemaining, setTimeRemaining] = useState(Math.floor(delay));
 
   useEffect(() => {
     let intervalId;
@@ -55,7 +13,7 @@ export default function Timer({ delay, isFilling }) {
           clearInterval(intervalId);
           return 0;
         }
-        return prevTimeRemaining - 1;
+        return prevTimeRemaining - 1000;
       });
     };
 
@@ -64,9 +22,35 @@ export default function Timer({ delay, isFilling }) {
     return () => clearInterval(intervalId);
   }, [timeRemaining]);
 
+  useEffect(() => {
+    setTimeRemaining(Math.floor(delay));
+  }, [delay, isFilling]);
+
+  const formatTime = (time) => {
+    if (time < 1) return "0s";
+    let remainingSeconds = time;
+    const days = Math.floor(remainingSeconds / 86400);
+    remainingSeconds -= days * 86400;
+    const hours = Math.floor(remainingSeconds / 3600) % 24;
+    remainingSeconds -= hours * 3600;
+    const minutes = Math.floor(remainingSeconds / 60) % 60;
+    remainingSeconds -= minutes * 60;
+    const seconds = remainingSeconds % 60;
+    let formattedTime = "";
+    if (days > 0) formattedTime += `${days}d `;
+    if (hours > 0) formattedTime += `${hours}h `;
+    if (minutes > 0) formattedTime += `${minutes}m `;
+    if (seconds > 0) formattedTime += `${seconds}s`;
+    return formattedTime.trim();
+  };
+
   return (
     <StyledTimer>
-      {isFilling && <StyledCountdown>{timeRemaining}</StyledCountdown>}
+      {isFilling && (
+        <StyledCountdown>
+          {formatTime(Math.floor(timeRemaining / 1000))}
+        </StyledCountdown>
+      )}
     </StyledTimer>
   );
 }
