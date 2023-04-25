@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Countdown from "react-countdown";
 
 export default function Timer() {
   return (

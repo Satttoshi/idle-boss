@@ -56,7 +56,6 @@ const StyledForm2 = styled(Form2)`
   right: 18px;
   stroke: var(--4);
   opacity: 0.2;
-  backdrop-filter: blur(2px);
 
   animation: ${move} 4s linear infinite;
 `;
@@ -67,7 +66,6 @@ const StyledForm3 = styled(Form3)`
   right: 3px;
   stroke: var(--1);
   opacity: 0.7;
-  backdrop-filter: blur(1px);
 
   animation: ${move} 1.5s linear infinite;
 `;
