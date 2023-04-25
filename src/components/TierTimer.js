@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import useStore from "~/src/zustand/store";
 
 export default function Timer({ settedDelay, trigger, isFilling, delay }) {
   const [timeRemaining, setTimeRemaining] = useState(settedDelay);
 
   const triggerState = trigger;
   const delayInSeconds = Math.floor(delay / 1000);
+  const delayInMillis = delay;
 
   useEffect(() => {
     let intervalId;
@@ -35,8 +37,10 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
   }, [isFilling]);
 
   const formatTime = (time) => {
-    if (time < 1) return "0s";
+    if (delayInMillis <= 1000) return (delayInMillis / 1000).toFixed(1) + "s";
+
     let remainingSeconds = time;
+
     const days = Math.floor(remainingSeconds / 86400);
     remainingSeconds -= days * 86400;
     const hours = Math.floor(remainingSeconds / 3600) % 24;
@@ -44,11 +48,20 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
     const minutes = Math.floor(remainingSeconds / 60) % 60;
     remainingSeconds -= minutes * 60;
     const seconds = remainingSeconds % 60;
-    let formattedTime = "";
-    if (days > 0) formattedTime += `${days}d `;
-    if (hours > 0) formattedTime += `${hours}h `;
-    if (minutes > 0) formattedTime += `${minutes}m `;
-    if (seconds > 0) formattedTime += `${seconds}s`;
+
+    const stringArray = [];
+    if (seconds > 0) stringArray.unshift(`${seconds}s`);
+    if (minutes > 0) stringArray.unshift(`${minutes}m `);
+    if (hours > 0) {
+      stringArray.unshift(`${hours}h `);
+      stringArray.pop();
+    }
+    if (days > 0) {
+      stringArray.unshift(`${days}d `);
+      stringArray.pop();
+    }
+    const formattedTime = stringArray.join("");
+
     return formattedTime.trim();
   };
 
