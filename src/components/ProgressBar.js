@@ -27,6 +27,7 @@ export default function ProgressBar({ tier, isFilling }) {
         trigger={trigger}
         isFilling={isFilling}
         delay={delay}
+        isPerSecond={isPerSecond}
       />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>

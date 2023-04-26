@@ -1,8 +1,14 @@
 import styled, { keyframes } from "styled-components";
 import { useEffect, useState } from "react";
-import useStore from "~/src/zustand/store";
+import Rocket from "~/src/assets/fast-forward.svg";
 
-export default function Timer({ settedDelay, trigger, isFilling, delay }) {
+export default function Timer({
+  settedDelay,
+  trigger,
+  isFilling,
+  delay,
+  isPerSecond,
+}) {
   const [timeRemaining, setTimeRemaining] = useState(settedDelay);
 
   const triggerState = trigger;
@@ -75,11 +81,25 @@ export default function Timer({ settedDelay, trigger, isFilling, delay }) {
   ) : (
     <StyledTimer isFilling={false}>
       <StyledCountdown>
-        {formatTime(Math.floor(delayInSeconds))}
+        {isPerSecond ? (
+          <StyledRocket />
+        ) : (
+          formatTime(Math.floor(delayInSeconds))
+        )}
       </StyledCountdown>
     </StyledTimer>
   );
 }
+
+const StyledRocket = styled(Rocket)`
+  width: 20px;
+  height: 20px;
+  fill: var(--1);
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 const StyledCountdown = styled.span`
   font-family: var(--font1);
