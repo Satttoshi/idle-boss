@@ -5,6 +5,7 @@ import useStore, { milestones } from "~/src/zustand/store";
 import ChevronAnimation from "./ChevronAnimation";
 import InvestButton from "./InvestButton";
 import TierLocked from "./TierLocked";
+import NavigationButton from "./NavigationButton";
 
 export default function TutorialModal() {
   const currentTutorial = useStore((state) => state.currentTutorial);
@@ -17,7 +18,6 @@ export default function TutorialModal() {
   function tierSelector(currentTutorial) {
     switch (currentTutorial) {
       case 0:
-        return "tier1";
       case 1:
         return "tier1";
       case 2:
@@ -122,29 +122,100 @@ export default function TutorialModal() {
     );
   }
 
+  if (currentTutorial === 3 && money >= 3000) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBoxBottom variant={{ bottom: "120px", heigth: "150px" }}>
+          <ChevronAnimation
+            variant={{ top: "210px", left: "285px", rotation: "150deg" }}
+          />
+          <p>It is time to go upstairs!</p>
+        </StyledArticleBoxBottom>
+        <StyledNavigationButtonContainer>
+          <NavigationButton variant={2} />
+          <PulseAnimation
+            boxSize={{ width: "84px", heigth: "30px" }}
+            borderRadius={"5px"}
+            bot={"0"}
+            left={"0"}
+          />
+        </StyledNavigationButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
   return null;
 }
 
-function PulseAnimation({ boxSize, top, left, borderRadius }) {
-  return (
-    <>
-      <PulseBox
-        variant={0}
-        boxSize={boxSize}
-        top={top}
-        left={left}
-        borderRadius={borderRadius}
-      />
-      <PulseBox
-        variant={1}
-        boxSize={boxSize}
-        top={top}
-        left={left}
-        borderRadius={borderRadius}
-      />
-    </>
-  );
+function PulseAnimation({ boxSize, top, bot, left, borderRadius }) {
+  if (!bot) {
+    return (
+      <>
+        <PulseBox
+          variant={0}
+          boxSize={boxSize}
+          top={top}
+          left={left}
+          borderRadius={borderRadius}
+        />
+        <PulseBox
+          variant={1}
+          boxSize={boxSize}
+          top={top}
+          left={left}
+          borderRadius={borderRadius}
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <PulseBoxBottom
+          variant={0}
+          boxSize={boxSize}
+          bot={bot}
+          left={left}
+          borderRadius={borderRadius}
+        />
+        <PulseBoxBottom
+          variant={1}
+          boxSize={boxSize}
+          bot={bot}
+          left={left}
+          borderRadius={borderRadius}
+        />
+      </>
+    );
+  }
 }
+
+const StyledArticleBoxBottom = styled.article`
+  position: absolute;
+  bottom: ${({ variant }) => variant.bottom};
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: ${({ variant }) => variant.heigth};
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+
+  display: grid;
+  place-items: center;
+
+  p {
+    margin: 0;
+    padding: 25px;
+    font-family: var(--font1);
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.4;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+`;
 
 const StyledArticleBox = styled.article`
   position: absolute;
@@ -224,6 +295,26 @@ const PulseBox = styled.div`
     2s ease-in-out infinite;
 `;
 
+const PulseBoxBottom = styled.div`
+  position: absolute;
+  bottom: ${({ bot }) => bot};
+  left: ${({ left }) => left};
+  width: ${({ boxSize }) => boxSize.width};
+  height: ${({ boxSize }) => boxSize.heigth};
+  background-color: var(--3);
+  border-radius: ${({ borderRadius }) => borderRadius};
+
+  animation: ${({ variant }) =>
+      variant === 0
+        ? css`
+            ${pulse1}
+          `
+        : css`
+            ${pulse2}
+          `}
+    2s ease-in-out infinite;
+`;
+
 const fadeIn = keyframes`
   0% {
     opacity: 0;
@@ -273,4 +364,13 @@ const StyledUnlockButtonContainer = styled.div`
   top: 219px;
   left: 50%;
   transform: translateX(-102%);
+`;
+
+const StyledNavigationButtonContainer = styled.div`
+  min-width: 84px;
+  flex-shrink: 0;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(97.5%);
 `;
