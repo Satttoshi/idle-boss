@@ -4,6 +4,7 @@ import ProgressStars from "./ProgressStars";
 import PopupText from "./PopupText";
 import formatNumbers from "~/src/utils/format-numbers";
 import ProgressBarAnimation from "./ProgressBarAnimation";
+import TierTimer from "./TierTimer";
 
 export default function ProgressBar({ tier, isFilling }) {
   const { delay, income, isPerSecond, incomePerSecond, trigger } = tier;
@@ -21,6 +22,13 @@ export default function ProgressBar({ tier, isFilling }) {
   return (
     <StyledProgressBar>
       <ProgressStars tier={tier} />
+      <TierTimer
+        settedDelay={currentDelay}
+        trigger={trigger}
+        isFilling={isFilling}
+        delay={delay}
+        isPerSecond={isPerSecond}
+      />
       <StyledWrapper>
         <StyledIncome>{displayIncome}</StyledIncome>
         <PopupText tier={tier} />
@@ -29,9 +37,9 @@ export default function ProgressBar({ tier, isFilling }) {
             <StyledFlowBar>
               <ProgressBarAnimation />
             </StyledFlowBar>
-          ) : isFilling ? (
-            <StyledBar delay={currentDelay} tier={tier} />
-          ) : null}
+          ) : (
+            isFilling && <StyledBar delay={currentDelay} />
+          )}
           <StyledUnfilledBar />
         </StyledContainer>
       </StyledWrapper>
@@ -102,7 +110,7 @@ const StyledBar = styled.div`
   overflow: hidden;
   animation-name: ${fillingAnimation};
   animation-duration: ${({ delay }) => delay}ms;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
   animation-timing-function: linear;
 `;
 

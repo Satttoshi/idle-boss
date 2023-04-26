@@ -318,4 +318,8 @@ const StyledDimmer = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 200;
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;

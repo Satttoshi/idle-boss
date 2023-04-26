@@ -5,7 +5,7 @@ import setSpeed from "./speedSheet";
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 
 const useStore = createStore((set, get) => ({
-  money: 0,
+  money: 0.5,
   currentFloor: 1,
   availableFloors: [1, 2, 3],
   username: "The Boss",
@@ -104,7 +104,7 @@ const useStore = createStore((set, get) => ({
   },
 
   clickTimer: (tierId) => {
-    const { getTierById, onTimerStart, onTimerEnd } = get();
+    const { getTierById, onTimerStart, onTimerEnd, setTier } = get();
     const currentTier = getTierById(tierId);
     const delay = Math.max(currentTier.delay, 250);
 
@@ -113,6 +113,13 @@ const useStore = createStore((set, get) => ({
     setTimeout(() => {
       onTimerEnd(currentTier.id);
     }, delay);
+
+    setTimeout(() => {
+      setTier({
+        id: tierId,
+        isFilling: false,
+      });
+    }, delay - 10);
   },
 
   onTimerStart: (tier) => {
@@ -126,7 +133,7 @@ const useStore = createStore((set, get) => ({
   onTimerEnd: (tierId) => {
     const { setMoney, setTier, clickTimer, getTierById } = get();
     const tier = getTierById(tierId);
-    setTier({ id: tier.id, isFilling: false, trigger: !tier.trigger });
+    setTier({ id: tier.id, trigger: !tier.trigger });
 
     if (tier.isPerSecond) {
       setMoney(tier.incomePerSecond / 4);

@@ -98,6 +98,10 @@ const StyledNavigation = styled.nav`
     padding: 0;
     box-shadow: var(--shadow2);
 
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     &:disabled {
       background-color: rgba(255, 255, 255, 0.3);
       cursor: default;
@@ -122,5 +126,9 @@ const StyledNavigation = styled.nav`
     text-align: center;
     font-family: var(--font2);
     text-shadow: var(--shadow2);
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 `;

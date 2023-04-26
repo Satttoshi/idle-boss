@@ -39,6 +39,10 @@ const StyledSpan = styled.span`
   text-align: right;
   width: 87px;
 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   text-shadow: var(--shadow1);
 `;
 
@@ -88,6 +92,10 @@ const StyledButton = styled.button`
   font-weight: 590;
   line-height: 16px;
   color: var(--5);
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   @media (hover: hover) {
     &:hover:enabled {

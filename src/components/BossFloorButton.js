@@ -26,6 +26,10 @@ const StyledButton = styled.button`
 
   box-shadow: var(--shadow1);
 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   @media (hover: hover) {
     &:hover:enabled {
       background-color: var(--3);
