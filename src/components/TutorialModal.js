@@ -6,6 +6,8 @@ import ChevronAnimation from "./ChevronAnimation";
 import InvestButton from "./InvestButton";
 import TierLocked from "./TierLocked";
 import NavigationButton from "./NavigationButton";
+import BossFloorButton from "./BossFloorButton";
+import Chevron from "~/src/assets/chevron-right.svg";
 
 export default function TutorialModal() {
   const currentTutorial = useStore((state) => state.currentTutorial);
@@ -18,6 +20,8 @@ export default function TutorialModal() {
   const availableFloors = useStore((state) => state.availableFloors);
   const currentFloor = useStore((state) => state.currentFloor);
   const currentLastFloor = availableFloors.length;
+
+  const setManagerModal = useStore((state) => state.setManagerModal);
 
   function tierSelector(currentTutorial) {
     switch (currentTutorial) {
@@ -148,24 +152,50 @@ export default function TutorialModal() {
     );
   }
 
+  function handleJobApplicationClick() {
+    setManagerModal(true);
+    exitTutorial();
+  }
+
   if (currentTutorial === 4 && currentLastFloor === currentFloor) {
     return (
       <StyledDimmer>
-        <StyledArticleBoxBottom variant={{ bottom: "120px", heigth: "150px" }}>
+        <StyledArticleBox variant={{ top: "150px", heigth: "220px" }}>
+          <p>
+            Welcome to your executives office, also known as the BOSS FLOOR!
+            Here you do all the Bossy things.
+          </p>
+          <StyledNextButton>
+            next
+            <StyledChevron />
+          </StyledNextButton>
+        </StyledArticleBox>
+        <StyledBossButtonContainer></StyledBossButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  if (currentTutorial === 5 && currentLastFloor === currentFloor) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBox variant={{ top: "330px", heigth: "120px" }}>
           <ChevronAnimation
-            variant={{ top: "210px", left: "285px", rotation: "150deg" }}
+            variant={{ top: "-60px", left: "140px", rotation: "0deg" }}
           />
-          <p>It is time to go upstairs!</p>
-        </StyledArticleBoxBottom>
-        <StyledNavigationButtonContainer>
-          <NavigationButton variant={2} />
+          <p>Looks like you got a Job Application!</p>
+        </StyledArticleBox>
+        <StyledBossButtonContainer>
+          <BossFloorButton
+            label={"Job Applications"}
+            onClick={handleJobApplicationClick}
+          />
           <PulseAnimation
-            boxSize={{ width: "84px", heigth: "30px" }}
-            borderRadius={"5px"}
-            bot={"0"}
-            left={"0"}
+            boxSize={{ width: "215px", heigth: "40px" }}
+            borderRadius={"10px"}
+            top={"10px"}
+            left={"80px"}
           />
-        </StyledNavigationButtonContainer>
+        </StyledBossButtonContainer>
       </StyledDimmer>
     );
   }
@@ -215,6 +245,64 @@ function PulseAnimation({ boxSize, top, bot, left, borderRadius }) {
   }
 }
 
+const NextAnimation = keyframes`
+  0% {
+    transform: translateX(0px);
+    }
+  100% {
+    transform: translateX(3px);
+    }
+`;
+
+const StyledChevron = styled(Chevron)`
+  width: 20px;
+  height: 20px;
+
+  animation: ${NextAnimation} 0.5s ease-out infinite alternate;
+`;
+
+const StyledNextButton = styled.button`
+  appearance: none;
+  border: 2px solid var(--1);
+  cursor: pointer;
+  bottom: 10px;
+  width: 75px;
+  height: 30px;
+  border-radius: 25px;
+  z-index: 10;
+  background-color: transparent;
+  margin-bottom: 20px;
+  fill: var(--1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--font1);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--1);
+  line-height: 1px;
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+      color: var(--6);
+      fill: var(--6);
+      border: 2px solid var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+      color: var(--6);
+      fill: var(--6);
+      border: 2px solid var(--3);
+    }
+  }
+`;
+
 const StyledArticleBoxBottom = styled.article`
   position: absolute;
   bottom: ${({ variant }) => variant.bottom};
@@ -250,11 +338,13 @@ const StyledArticleBox = styled.article`
   transform: translateX(-50%);
   width: 320px;
   height: ${({ variant }) => variant.heigth};
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   border-radius: 20px;
 
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   p {
     margin: 0;
@@ -399,4 +489,13 @@ const StyledNavigationButtonContainer = styled.div`
   bottom: 15px;
   left: 50%;
   transform: translateX(97.5%);
+`;
+
+const StyledBossButtonContainer = styled.div`
+  min-width: 215px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
