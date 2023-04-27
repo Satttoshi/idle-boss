@@ -1,23 +1,19 @@
 import styled, { keyframes } from "styled-components";
-import { useState } from "react";
 
 export default function Building({ availableFloors }) {
-  const [wasAnimationPlayed, setWasAnimationPlayed] = useState(false);
   function renderFloors() {
     const floors = [];
     for (let i = availableFloors.length; i > 0; i--) {
-      floors.push(
-        <StyledFloor asAnimationPlayed={wasAnimationPlayed} key={"floor" + i}>
-          {i}
-        </StyledFloor>
-      );
+      i === availableFloors.length
+        ? floors.push(<StyledFloor key={"floor" + i}>BOSS FLOOR</StyledFloor>)
+        : floors.push(<StyledFloor key={"floor" + i}>{i}</StyledFloor>);
     }
     return floors;
   }
 
   return (
     <StyledFloorContainer>
-      <StyledRoof>
+      <StyledRoof availableFloors={availableFloors}>
         {renderFloors()}
         <StyledTriangle />
       </StyledRoof>
@@ -47,10 +43,13 @@ const StyledFloorContainer = styled.div`
 `;
 
 const FlexAnimation = keyframes`
-  from {
-    transform: translateY(30px);
+  0% {
+    transform: translateY(40px);
+    }  
+    35% {
+    transform: translateY(40px);
     }
-    to {
+    100% {
     transform: translateY(0);
     }
 `;
@@ -58,6 +57,7 @@ const FlexAnimation = keyframes`
 const StyledFloor = styled.div`
   width: 200px;
   height: 30px;
+  min-height: 30px;
   border: 3px solid var(--1);
   border-radius: 5px;
   background-color: var(--6);
@@ -67,11 +67,12 @@ const StyledFloor = styled.div`
   font-size: 0.8rem;
   color: var(--1);
 
-  display: grid;
-  place-items: center;
   margin: 5px 0 5px 0;
 
-  animation: ${FlexAnimation} 0.5s linear 1;
+  display: grid;
+  place-items: center;
+
+  animation: ${FlexAnimation} 0.6s ease-out 1;
 `;
 
 const StyledRoof = styled.div`
@@ -80,13 +81,15 @@ const StyledRoof = styled.div`
   transform: translateX(-50%);
   bottom: 0;
   width: 220px;
+  height: ${(props) => props.availableFloors.length * 40}px;
+  transition: height 0.5s ease-out;
   background-color: var(--4);
   z-index: -1;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 
   animation: height 1s linear 1;
 `;
