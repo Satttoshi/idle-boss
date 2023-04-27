@@ -38,6 +38,10 @@ export default function TutorialModal() {
   const currentTier = getTierById(tierSelector(currentTutorial));
   const { investCount, milestoneIndex, id, investPrice } = currentTier;
 
+  function handleNextClick() {
+    exitTutorial();
+  }
+
   function handleMoneyButtonClick() {
     clickTimer(currentTier.id);
     exitTutorial();
@@ -152,11 +156,6 @@ export default function TutorialModal() {
     );
   }
 
-  function handleJobApplicationClick() {
-    setManagerModal(true);
-    exitTutorial();
-  }
-
   if (currentTutorial === 4 && currentLastFloor === currentFloor) {
     return (
       <StyledDimmer>
@@ -165,7 +164,7 @@ export default function TutorialModal() {
             Welcome to your executives office, also known as the BOSS FLOOR!
             Here you do all the Bossy things.
           </p>
-          <StyledNextButton>
+          <StyledNextButton type="button" onClick={handleNextClick}>
             next
             <StyledChevron />
           </StyledNextButton>
@@ -173,6 +172,11 @@ export default function TutorialModal() {
         <StyledBossButtonContainer></StyledBossButtonContainer>
       </StyledDimmer>
     );
+  }
+
+  function handleJobApplicationClick() {
+    setManagerModal(true);
+    exitTutorial();
   }
 
   if (currentTutorial === 5 && currentLastFloor === currentFloor) {
