@@ -27,22 +27,23 @@ export default function ConstructionModal() {
   }
 
   const currentFloorPrice = floorPrices[currentFloorBuilder];
-  const reachedLastFloor = currentFloorBuilder === floorPrices.length;
+  const reachedLastPurchasableFloor =
+    currentFloorBuilder === floorPrices.length;
 
   return (
     <StyledDimmer onClick={handleConstructionModalClose}>
       <StyledModal onClick={preventClosing}>
         <StyledButton
-          disabled={money < currentFloorPrice}
+          disabled={money < currentFloorPrice || reachedLastPurchasableFloor}
           onClick={handleBuildFloor}
         >
           Build new Floor!
         </StyledButton>
         <StyledPrice variant={0}>
-          {reachedLastFloor ? "no more" : "Construction price"}
+          {reachedLastPurchasableFloor ? "no more" : "Construction price"}
         </StyledPrice>
         <StyledPrice variant={1}>
-          {reachedLastFloor
+          {reachedLastPurchasableFloor
             ? "floors."
             : formatNumbers(currentFloorPrice) + " €"}
         </StyledPrice>
