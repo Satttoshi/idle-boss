@@ -8,6 +8,7 @@ export default function ConstructionModal() {
   const availableFloors = useStore((state) => state.availableFloors);
   const unlockFloor = useStore((state) => state.unlockFloor);
   const currentFloorBuilder = useStore((state) => state.currentFloorBuilder);
+  const money = useStore((state) => state.money);
 
   function handleConstructionModalClose() {
     setConstructionModal(false);
@@ -31,12 +32,19 @@ export default function ConstructionModal() {
   return (
     <StyledDimmer onClick={handleConstructionModalClose}>
       <StyledModal onClick={preventClosing}>
-        <StyledButton onClick={handleBuildFloor}>Build new Floor!</StyledButton>
+        <StyledButton
+          disabled={money < currentFloorPrice}
+          onClick={handleBuildFloor}
+        >
+          Build new Floor!
+        </StyledButton>
         <StyledPrice variant={0}>
           {reachedLastFloor ? "no more" : "Construction price"}
         </StyledPrice>
         <StyledPrice variant={1}>
-          {reachedLastFloor ? "floors." : formatNumbers(currentFloorPrice)}
+          {reachedLastFloor
+            ? "floors."
+            : formatNumbers(currentFloorPrice) + " €"}
         </StyledPrice>
         <Building
           onConstructionModalClose={handleConstructionModalClose}
@@ -80,6 +88,11 @@ const StyledButton = styled.button`
   font-weight: 590;
   font-size: 1rem;
   color: var(--5);
+
+  :disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
 
   @media (hover: hover) {
     &:hover:enabled {
