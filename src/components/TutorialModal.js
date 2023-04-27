@@ -141,7 +141,7 @@ export default function TutorialModal() {
           <ChevronAnimation
             variant={{ top: "210px", left: "285px", rotation: "150deg" }}
           />
-          <p>It is time to go upstairs!</p>
+          <p>It is time to go upstairs to your office!</p>
         </StyledArticleBoxBottom>
         <StyledNavigationButtonContainer>
           <NavigationButton variant={2} />
@@ -159,10 +159,10 @@ export default function TutorialModal() {
   if (currentTutorial === 4 && currentLastFloor === currentFloor) {
     return (
       <StyledDimmer>
-        <StyledArticleBox variant={{ top: "150px", heigth: "220px" }}>
+        <StyledArticleBox variant={{ top: "100px", heigth: "270px" }}>
           <p>
-            Welcome to your executives office, also known as the BOSS FLOOR!
-            Here you do all the Bossy things.
+            Welcome to your executive office, which is also referred to as the
+            boss floor. Bossy things can be done here.
           </p>
           <StyledNextButton type="button" onClick={handleNextClick}>
             next
@@ -186,7 +186,7 @@ export default function TutorialModal() {
           <ChevronAnimation
             variant={{ top: "-60px", left: "140px", rotation: "0deg" }}
           />
-          <p>Looks like you got a Job Application!</p>
+          <p>You seem to have received a job application!</p>
         </StyledArticleBox>
         <StyledBossButtonContainer>
           <BossFloorButton
@@ -314,7 +314,7 @@ const StyledArticleBoxBottom = styled.article`
   transform: translateX(-50%);
   width: 320px;
   height: ${({ variant }) => variant.heigth};
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
 
   display: grid;
@@ -342,7 +342,7 @@ const StyledArticleBox = styled.article`
   transform: translateX(-50%);
   width: 320px;
   height: ${({ variant }) => variant.heigth};
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
 
   display: flex;
