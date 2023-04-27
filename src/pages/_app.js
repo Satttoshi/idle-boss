@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }) {
           >
             <GlobalStyle />
             <Component {...pageProps} />
-          </ThemeProvider>{" "}
+          </ThemeProvider>
         </RainbowKitProvider>
       </WagmiConfig>
     </>

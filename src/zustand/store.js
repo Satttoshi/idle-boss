@@ -16,6 +16,7 @@ const useStore = createStore((set, get) => ({
   currentTutorial: 0,
   isManagerModalOpen: false,
   selectedManager: 1,
+  isConstructionModalOpen: false,
 
   exitTutorial: () => {
     const { setTutorialActive, setCurrentTutorial, currentTutorial } = get();
@@ -32,6 +33,8 @@ const useStore = createStore((set, get) => ({
   setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
   setSelectedManager: (managerId) =>
     set(() => ({ selectedManager: managerId })),
+  setConstructionModal: (isOpen) =>
+    set(() => ({ isConstructionModalOpen: isOpen })),
 
   getTierById: (tierId) => {
     const { tiers } = get();
