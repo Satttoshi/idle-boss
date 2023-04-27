@@ -9,7 +9,7 @@ export default function NavigationButton({ variant }) {
   const currentBossFloor = availableFloors.length;
 
   const exitTutorial = useStore((state) => state.exitTutorial);
-  const isTutorialActive = useStore((state) => state.isTutorialActive);
+  const currentTutorial = useStore((state) => state.currentTutorial);
 
   const router = useRouter();
 
@@ -23,7 +23,7 @@ export default function NavigationButton({ variant }) {
   }
 
   function handleUpstairs() {
-    if (isTutorialActive) {
+    if (currentTutorial === 3) {
       exitTutorial();
     }
     if (currentFloor === currentBossFloor) {

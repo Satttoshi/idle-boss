@@ -15,6 +15,10 @@ export default function TutorialModal() {
   const clickTimer = useStore((state) => state.clickTimer);
   const invest = useStore((state) => state.invest);
 
+  const availableFloors = useStore((state) => state.availableFloors);
+  const currentFloor = useStore((state) => state.currentFloor);
+  const currentLastFloor = availableFloors.length;
+
   function tierSelector(currentTutorial) {
     switch (currentTutorial) {
       case 0:
@@ -123,6 +127,28 @@ export default function TutorialModal() {
   }
 
   if (currentTutorial === 3 && money >= 3000) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBoxBottom variant={{ bottom: "120px", heigth: "150px" }}>
+          <ChevronAnimation
+            variant={{ top: "210px", left: "285px", rotation: "150deg" }}
+          />
+          <p>It is time to go upstairs!</p>
+        </StyledArticleBoxBottom>
+        <StyledNavigationButtonContainer>
+          <NavigationButton variant={2} />
+          <PulseAnimation
+            boxSize={{ width: "84px", heigth: "30px" }}
+            borderRadius={"5px"}
+            bot={"0"}
+            left={"0"}
+          />
+        </StyledNavigationButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  if (currentTutorial === 4 && currentLastFloor === currentFloor) {
     return (
       <StyledDimmer>
         <StyledArticleBoxBottom variant={{ bottom: "120px", heigth: "150px" }}>
