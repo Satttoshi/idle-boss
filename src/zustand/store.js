@@ -3,7 +3,7 @@ import tierData from "./tierData";
 import setSpeed from "./speedSheet";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
-export const floorPrices = [0, 12000000, 4400000000000000];
+export const floorPrices = [0, 7000000, 4400000000000000];
 
 const useStore = createStore((set, get) => ({
   money: 0.5,

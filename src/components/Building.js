@@ -1,14 +1,30 @@
 import styled, { keyframes } from "styled-components";
 import ordinalSuffix from "~/src/utils/ordinal-suffix";
+import useStore from "~/src/zustand/store";
 
-export default function Building({ availableFloors }) {
+export default function Building({
+  availableFloors,
+  onConstructionModalClose,
+}) {
+  const currentFloor = useStore((state) => state.currentFloor);
+  const setCurrentFloor = useStore((state) => state.setCurrentFloor);
+
+  function handleSwitchFloor(i) {
+    setCurrentFloor(-currentFloor + i);
+    onConstructionModalClose();
+  }
+
   function renderFloors() {
     const floors = [];
     for (let i = availableFloors.length; i > 0; i--) {
       i === availableFloors.length
-        ? floors.push(<StyledFloor key={"floor" + i}>BOSS FLOOR</StyledFloor>)
+        ? floors.push(
+            <StyledFloor onClick={onConstructionModalClose} key={"floor" + i}>
+              BOSS FLOOR
+            </StyledFloor>
+          )
         : floors.push(
-            <StyledFloor key={"floor" + i}>
+            <StyledFloor onClick={() => handleSwitchFloor(i)} key={"floor" + i}>
               {ordinalSuffix(i) + " floor"}
             </StyledFloor>
           );
@@ -59,7 +75,9 @@ const FlexAnimation = keyframes`
     }
 `;
 
-const StyledFloor = styled.div`
+const StyledFloor = styled.button`
+  appearance: none;
+  cursor: pointer;
   width: 200px;
   height: 30px;
   min-height: 30px;
@@ -78,6 +96,22 @@ const StyledFloor = styled.div`
   place-items: center;
 
   animation: ${FlexAnimation} 0.6s ease-out 1;
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+      border: 3px solid var(--6);
+      color: var(--6);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+      border: 3px solid var(--6);
+      color: var(--6);
+    }
+  }
 `;
 
 const StyledRoof = styled.div`

@@ -38,7 +38,10 @@ export default function ConstructionModal() {
         <StyledPrice variant={1}>
           {reachedLastFloor ? "floors." : formatNumbers(currentFloorPrice)}
         </StyledPrice>
-        <Building availableFloors={availableFloors} />
+        <Building
+          onConstructionModalClose={handleConstructionModalClose}
+          availableFloors={availableFloors}
+        />
         <StyledCloseButton type="button" onClick={handleConstructionModalClose}>
           close
         </StyledCloseButton>
