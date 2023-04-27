@@ -1,12 +1,13 @@
 import styled, { keyframes } from "styled-components";
-import useStore from "~/src/zustand/store";
+import useStore, { floorPrices } from "~/src/zustand/store";
 import Building from "./Building";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function ConstructionModal() {
   const setConstructionModal = useStore((state) => state.setConstructionModal);
-  const addFloor = useStore((state) => state.addFloor);
-  const setCurrentFloor = useStore((state) => state.setCurrentFloor);
   const availableFloors = useStore((state) => state.availableFloors);
+  const unlockFloor = useStore((state) => state.unlockFloor);
+  const currentFloorBuilder = useStore((state) => state.currentFloorBuilder);
 
   function handleConstructionModalClose() {
     setConstructionModal(false);
@@ -17,16 +18,23 @@ export default function ConstructionModal() {
   }
 
   function handleBuildFloor() {
-    addFloor();
-    setCurrentFloor(1);
+    try {
+      unlockFloor();
+    } catch (error) {
+      console.log(error);
+    }
   }
+
+  const currentFloorPrice = floorPrices[currentFloorBuilder];
 
   return (
     <StyledDimmer onClick={handleConstructionModalClose}>
       <StyledModal onClick={preventClosing}>
         <StyledButton onClick={handleBuildFloor}>Build new Floor!</StyledButton>
         <StyledPrice variant={0}>Construction price</StyledPrice>
-        <StyledPrice variant={1}>10.000.000,00 €</StyledPrice>
+        <StyledPrice variant={1}>
+          {formatNumbers(currentFloorPrice)}
+        </StyledPrice>
         <Building availableFloors={availableFloors} />
         <StyledCloseButton type="button" onClick={handleConstructionModalClose}>
           close

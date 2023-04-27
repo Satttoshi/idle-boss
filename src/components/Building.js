@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import ordinalSuffix from "~/src/utils/ordinal-suffix";
 
 export default function Building({ availableFloors }) {
   function renderFloors() {
@@ -6,7 +7,11 @@ export default function Building({ availableFloors }) {
     for (let i = availableFloors.length; i > 0; i--) {
       i === availableFloors.length
         ? floors.push(<StyledFloor key={"floor" + i}>BOSS FLOOR</StyledFloor>)
-        : floors.push(<StyledFloor key={"floor" + i}>{i}</StyledFloor>);
+        : floors.push(
+            <StyledFloor key={"floor" + i}>
+              {ordinalSuffix(i) + " floor"}
+            </StyledFloor>
+          );
     }
     return floors;
   }

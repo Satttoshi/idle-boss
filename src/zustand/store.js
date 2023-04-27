@@ -3,12 +3,14 @@ import tierData from "./tierData";
 import setSpeed from "./speedSheet";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
+export const floorPrices = [0, 12000000, 4400000000000000];
 
 const useStore = createStore((set, get) => ({
   money: 0.5,
   currentFloor: 1,
   availableFloors: [1, 2],
-  floorPrices: [0, 12000000],
+  currentFloorBuilder: 1,
+
   username: "The Boss",
 
   tiers: tierData,
@@ -28,6 +30,26 @@ const useStore = createStore((set, get) => ({
         state.availableFloors.length + 1,
       ],
     })),
+  setCurrentFloorBuilder: (amount) =>
+    set(() => ({ currentFloorBuilder: amount })),
+
+  unlockFloor: () => {
+    const {
+      money,
+      setMoney,
+      setCurrentFloor,
+      currentFloorBuilder,
+      setCurrentFloorBuilder,
+      addFloor,
+    } = get();
+    if (floorPrices[currentFloorBuilder] > money) {
+      throw new Error("not enough money");
+    }
+    setMoney(-floorPrices[currentFloorBuilder]);
+    setCurrentFloorBuilder(currentFloorBuilder + 1);
+    addFloor();
+    setCurrentFloor(1);
+  },
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),
