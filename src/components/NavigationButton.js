@@ -8,6 +8,9 @@ export default function NavigationButton({ variant }) {
   const setCurrentFloor = useStore((state) => state.setCurrentFloor);
   const currentBossFloor = availableFloors.length;
 
+  const exitTutorial = useStore((state) => state.exitTutorial);
+  const isTutorialActive = useStore((state) => state.isTutorialActive);
+
   const router = useRouter();
 
   function handleDownstairs() {
@@ -20,6 +23,9 @@ export default function NavigationButton({ variant }) {
   }
 
   function handleUpstairs() {
+    if (isTutorialActive) {
+      exitTutorial();
+    }
     if (currentFloor === currentBossFloor) {
       return;
     } else {
