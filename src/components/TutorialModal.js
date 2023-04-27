@@ -159,7 +159,7 @@ export default function TutorialModal() {
   if (currentTutorial === 4 && currentLastFloor === currentFloor) {
     return (
       <StyledDimmer>
-        <StyledArticleBox variant={{ top: "300px", heigth: "270px" }}>
+        <StyledArticleBox delay={2} variant={{ top: "300px", heigth: "270px" }}>
           <p>
             Welcome to your executive office, which is also referred to as the
             boss floor. Bossy things can be done here.
@@ -249,6 +249,15 @@ function PulseAnimation({ boxSize, top, bot, left, borderRadius }) {
   }
 }
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    }
+  100% {
+    opacity: 1;
+    }
+      `;
+
 const NextAnimation = keyframes`
   0% {
     transform: translateX(0px);
@@ -335,6 +344,18 @@ const StyledArticleBoxBottom = styled.article`
   }
 `;
 
+const fadeInWithDelay = keyframes`
+  0% {
+    opacity: 0;
+    }
+  50% {
+    opacity: 0;
+    }
+  100% {
+    opacity: 1;
+    }
+`;
+
 const StyledArticleBox = styled.article`
   position: absolute;
   top: ${({ variant }) => variant.top};
@@ -349,6 +370,14 @@ const StyledArticleBox = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  animation-name: ${({ delay }) =>
+    delay
+      ? css`
+          ${fadeInWithDelay}
+        `
+      : "none"};
+  animation-duration: ${({ delay }) => delay + "s"};
 
   p {
     margin: 0;
@@ -434,15 +463,6 @@ const PulseBoxBottom = styled.div`
           `}
     2s ease-in-out infinite;
 `;
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-    }
-  100% {
-    opacity: 1;
-    }
-      `;
 
 const StyledDimmer = styled.div`
   position: fixed;

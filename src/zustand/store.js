@@ -15,42 +15,11 @@ const useStore = createStore((set, get) => ({
 
   tiers: tierData,
 
-  isTutorialActive: false,
-  currentTutorial: 5,
+  isTutorialActive: true,
+  currentTutorial: 0,
   isManagerModalOpen: false,
   selectedManager: 1,
   isConstructionModalOpen: false,
-
-  setCurrentFloor: (amount) =>
-    set((state) => ({ currentFloor: state.currentFloor + amount })),
-  addFloor: () =>
-    set((state) => ({
-      availableFloors: [
-        ...state.availableFloors,
-        state.availableFloors.length + 1,
-      ],
-    })),
-  setCurrentFloorBuilder: (amount) =>
-    set(() => ({ currentFloorBuilder: amount })),
-
-  unlockFloor: () => {
-    const {
-      money,
-      setMoney,
-      setCurrentFloor,
-      currentFloorBuilder,
-      setCurrentFloorBuilder,
-      addFloor,
-    } = get();
-    if (floorPrices.length === currentFloorBuilder) return;
-    if (floorPrices[currentFloorBuilder] > money) {
-      throw new Error("not enough money");
-    }
-    setMoney(-floorPrices[currentFloorBuilder]);
-    setCurrentFloorBuilder(currentFloorBuilder + 1);
-    addFloor();
-    setCurrentFloor(1);
-  },
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),
@@ -63,6 +32,18 @@ const useStore = createStore((set, get) => ({
     if (currentTutorial === 5) return setTutorialActive(false);
     setCurrentTutorial(currentTutorial + 1);
   },
+
+  setCurrentFloor: (amount) =>
+    set((state) => ({ currentFloor: state.currentFloor + amount })),
+  addFloor: () =>
+    set((state) => ({
+      availableFloors: [
+        ...state.availableFloors,
+        state.availableFloors.length + 1,
+      ],
+    })),
+  setCurrentFloorBuilder: (amount) =>
+    set(() => ({ currentFloorBuilder: amount })),
 
   setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
   setSelectedManager: (managerId) =>
@@ -106,6 +87,25 @@ const useStore = createStore((set, get) => ({
       id: tierId,
       isUnlocked: true,
     });
+  },
+
+  unlockFloor: () => {
+    const {
+      money,
+      setMoney,
+      setCurrentFloor,
+      currentFloorBuilder,
+      setCurrentFloorBuilder,
+      addFloor,
+    } = get();
+    if (floorPrices.length === currentFloorBuilder) return;
+    if (floorPrices[currentFloorBuilder] > money) {
+      throw new Error("not enough money");
+    }
+    setMoney(-floorPrices[currentFloorBuilder]);
+    setCurrentFloorBuilder(currentFloorBuilder + 1);
+    addFloor();
+    setCurrentFloor(1);
   },
 
   buyManager: (tierId) => {
