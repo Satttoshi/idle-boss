@@ -42,6 +42,7 @@ const useStore = createStore((set, get) => ({
       setCurrentFloorBuilder,
       addFloor,
     } = get();
+    if (floorPrices.length === currentFloorBuilder) return;
     if (floorPrices[currentFloorBuilder] > money) {
       throw new Error("not enough money");
     }

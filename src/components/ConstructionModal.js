@@ -21,19 +21,22 @@ export default function ConstructionModal() {
     try {
       unlockFloor();
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
     }
   }
 
   const currentFloorPrice = floorPrices[currentFloorBuilder];
+  const reachedLastFloor = currentFloorBuilder === floorPrices.length;
 
   return (
     <StyledDimmer onClick={handleConstructionModalClose}>
       <StyledModal onClick={preventClosing}>
         <StyledButton onClick={handleBuildFloor}>Build new Floor!</StyledButton>
-        <StyledPrice variant={0}>Construction price</StyledPrice>
+        <StyledPrice variant={0}>
+          {reachedLastFloor ? "no more" : "Construction price"}
+        </StyledPrice>
         <StyledPrice variant={1}>
-          {formatNumbers(currentFloorPrice)}
+          {reachedLastFloor ? "floors." : formatNumbers(currentFloorPrice)}
         </StyledPrice>
         <Building availableFloors={availableFloors} />
         <StyledCloseButton type="button" onClick={handleConstructionModalClose}>
