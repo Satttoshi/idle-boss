@@ -142,21 +142,3 @@ const StyledCloseButton = styled.button`
     }
   }
 `;
-
-const StyledRoof = styled.div`
-  position: relative;
-  width: 200px;
-  height: 100px;
-  background-color: #ccc;
-`;
-
-const StyledTriangle = styled.div`
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 100px solid transparent;
-  border-right: 100px solid transparent;
-  border-bottom: 50px solid #ccc;
-`;

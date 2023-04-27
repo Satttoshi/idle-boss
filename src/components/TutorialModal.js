@@ -159,7 +159,7 @@ export default function TutorialModal() {
   if (currentTutorial === 4 && currentLastFloor === currentFloor) {
     return (
       <StyledDimmer>
-        <StyledArticleBox variant={{ top: "100px", heigth: "270px" }}>
+        <StyledArticleBox variant={{ top: "300px", heigth: "270px" }}>
           <p>
             Welcome to your executive office, which is also referred to as the
             boss floor. Bossy things can be done here.

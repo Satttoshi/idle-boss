@@ -8,6 +8,7 @@ const useStore = createStore((set, get) => ({
   money: 0.5,
   currentFloor: 1,
   availableFloors: [1, 2],
+  floorPrices: [0, 12000000],
   username: "The Boss",
 
   tiers: tierData,
@@ -18,21 +19,32 @@ const useStore = createStore((set, get) => ({
   selectedManager: 1,
   isConstructionModalOpen: false,
 
+  setCurrentFloor: (amount) =>
+    set((state) => ({ currentFloor: state.currentFloor + amount })),
+  addFloor: () =>
+    set((state) => ({
+      availableFloors: [
+        ...state.availableFloors,
+        state.availableFloors.length + 1,
+      ],
+    })),
+
+  setMoney: (amount) => set((state) => ({ money: state.money + amount })),
+  setUsername: (username) => set(() => ({ username })),
+
+  setTutorialActive: (isActive) => set(() => ({ isTutorialActive: isActive })),
+  setCurrentTutorial: (index) => set(() => ({ currentTutorial: index })),
+
   exitTutorial: () => {
     const { setTutorialActive, setCurrentTutorial, currentTutorial } = get();
     if (currentTutorial === 5) return setTutorialActive(false);
     setCurrentTutorial(currentTutorial + 1);
   },
 
-  setMoney: (amount) => set((state) => ({ money: state.money + amount })),
-  setUsername: (username) => set(() => ({ username })),
-  setCurrentFloor: (amount) =>
-    set((state) => ({ currentFloor: state.currentFloor + amount })),
-  setTutorialActive: (isActive) => set(() => ({ isTutorialActive: isActive })),
-  setCurrentTutorial: (index) => set(() => ({ currentTutorial: index })),
   setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
   setSelectedManager: (managerId) =>
     set(() => ({ selectedManager: managerId })),
+
   setConstructionModal: (isOpen) =>
     set(() => ({ isConstructionModalOpen: isOpen })),
 
