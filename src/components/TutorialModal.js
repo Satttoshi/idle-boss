@@ -5,6 +5,9 @@ import useStore, { milestones } from "~/src/zustand/store";
 import ChevronAnimation from "./ChevronAnimation";
 import InvestButton from "./InvestButton";
 import TierLocked from "./TierLocked";
+import NavigationButton from "./NavigationButton";
+import BossFloorButton from "./BossFloorButton";
+import Chevron from "~/src/assets/chevron-right.svg";
 
 export default function TutorialModal() {
   const currentTutorial = useStore((state) => state.currentTutorial);
@@ -14,10 +17,15 @@ export default function TutorialModal() {
   const clickTimer = useStore((state) => state.clickTimer);
   const invest = useStore((state) => state.invest);
 
+  const availableFloors = useStore((state) => state.availableFloors);
+  const currentFloor = useStore((state) => state.currentFloor);
+  const currentLastFloor = availableFloors.length;
+
+  const setManagerModal = useStore((state) => state.setManagerModal);
+
   function tierSelector(currentTutorial) {
     switch (currentTutorial) {
       case 0:
-        return "tier1";
       case 1:
         return "tier1";
       case 2:
@@ -29,6 +37,10 @@ export default function TutorialModal() {
 
   const currentTier = getTierById(tierSelector(currentTutorial));
   const { investCount, milestoneIndex, id, investPrice } = currentTier;
+
+  function handleNextClick() {
+    exitTutorial();
+  }
 
   function handleMoneyButtonClick() {
     clickTimer(currentTier.id);
@@ -122,29 +134,206 @@ export default function TutorialModal() {
     );
   }
 
+  if (currentTutorial === 3 && money >= 3000) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBoxBottom variant={{ bottom: "120px", heigth: "150px" }}>
+          <ChevronAnimation
+            variant={{ top: "210px", left: "285px", rotation: "150deg" }}
+          />
+          <p>It is time to go upstairs to your office!</p>
+        </StyledArticleBoxBottom>
+        <StyledNavigationButtonContainer>
+          <NavigationButton variant={2} />
+          <PulseAnimation
+            boxSize={{ width: "84px", heigth: "30px" }}
+            borderRadius={"5px"}
+            bot={"0"}
+            left={"0"}
+          />
+        </StyledNavigationButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  if (currentTutorial === 4 && currentLastFloor === currentFloor) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBox variant={{ top: "100px", heigth: "270px" }}>
+          <p>
+            Welcome to your executive office, which is also referred to as the
+            boss floor. Bossy things can be done here.
+          </p>
+          <StyledNextButton type="button" onClick={handleNextClick}>
+            next
+            <StyledChevron />
+          </StyledNextButton>
+        </StyledArticleBox>
+        <StyledBossButtonContainer></StyledBossButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
+  function handleJobApplicationClick() {
+    setManagerModal(true);
+    exitTutorial();
+  }
+
+  if (currentTutorial === 5 && currentLastFloor === currentFloor) {
+    return (
+      <StyledDimmer>
+        <StyledArticleBox variant={{ top: "330px", heigth: "120px" }}>
+          <ChevronAnimation
+            variant={{ top: "-60px", left: "140px", rotation: "0deg" }}
+          />
+          <p>You seem to have received a job application!</p>
+        </StyledArticleBox>
+        <StyledBossButtonContainer>
+          <BossFloorButton
+            label={"Job Applications"}
+            onClick={handleJobApplicationClick}
+          />
+          <PulseAnimation
+            boxSize={{ width: "215px", heigth: "40px" }}
+            borderRadius={"10px"}
+            top={"10px"}
+            left={"80px"}
+          />
+        </StyledBossButtonContainer>
+      </StyledDimmer>
+    );
+  }
+
   return null;
 }
 
-function PulseAnimation({ boxSize, top, left, borderRadius }) {
-  return (
-    <>
-      <PulseBox
-        variant={0}
-        boxSize={boxSize}
-        top={top}
-        left={left}
-        borderRadius={borderRadius}
-      />
-      <PulseBox
-        variant={1}
-        boxSize={boxSize}
-        top={top}
-        left={left}
-        borderRadius={borderRadius}
-      />
-    </>
-  );
+function PulseAnimation({ boxSize, top, bot, left, borderRadius }) {
+  if (!bot) {
+    return (
+      <>
+        <PulseBox
+          variant={0}
+          boxSize={boxSize}
+          top={top}
+          left={left}
+          borderRadius={borderRadius}
+        />
+        <PulseBox
+          variant={1}
+          boxSize={boxSize}
+          top={top}
+          left={left}
+          borderRadius={borderRadius}
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <PulseBoxBottom
+          variant={0}
+          boxSize={boxSize}
+          bot={bot}
+          left={left}
+          borderRadius={borderRadius}
+        />
+        <PulseBoxBottom
+          variant={1}
+          boxSize={boxSize}
+          bot={bot}
+          left={left}
+          borderRadius={borderRadius}
+        />
+      </>
+    );
+  }
 }
+
+const NextAnimation = keyframes`
+  0% {
+    transform: translateX(0px);
+    }
+  100% {
+    transform: translateX(3px);
+    }
+`;
+
+const StyledChevron = styled(Chevron)`
+  width: 20px;
+  height: 20px;
+
+  animation: ${NextAnimation} 0.5s ease-out infinite alternate;
+`;
+
+const StyledNextButton = styled.button`
+  appearance: none;
+  border: 2px solid var(--1);
+  cursor: pointer;
+  bottom: 10px;
+  width: 75px;
+  height: 30px;
+  border-radius: 25px;
+  z-index: 10;
+  background-color: transparent;
+  margin-bottom: 20px;
+  fill: var(--1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--font1);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--1);
+  line-height: 1px;
+
+  @media (hover: hover) {
+    &:hover:enabled {
+      background-color: var(--3);
+      color: var(--6);
+      fill: var(--6);
+      border: 2px solid var(--3);
+    }
+  }
+
+  @media (hover: none) {
+    &:active:enabled {
+      background-color: var(--3);
+      color: var(--6);
+      fill: var(--6);
+      border: 2px solid var(--3);
+    }
+  }
+`;
+
+const StyledArticleBoxBottom = styled.article`
+  position: absolute;
+  bottom: ${({ variant }) => variant.bottom};
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: ${({ variant }) => variant.heigth};
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 20px;
+
+  display: grid;
+  place-items: center;
+
+  p {
+    margin: 0;
+    padding: 25px;
+    font-family: var(--font1);
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.4;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+`;
 
 const StyledArticleBox = styled.article`
   position: absolute;
@@ -153,11 +342,13 @@ const StyledArticleBox = styled.article`
   transform: translateX(-50%);
   width: 320px;
   height: ${({ variant }) => variant.heigth};
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 20px;
 
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   p {
     margin: 0;
@@ -224,6 +415,26 @@ const PulseBox = styled.div`
     2s ease-in-out infinite;
 `;
 
+const PulseBoxBottom = styled.div`
+  position: absolute;
+  bottom: ${({ bot }) => bot};
+  left: ${({ left }) => left};
+  width: ${({ boxSize }) => boxSize.width};
+  height: ${({ boxSize }) => boxSize.heigth};
+  background-color: var(--3);
+  border-radius: ${({ borderRadius }) => borderRadius};
+
+  animation: ${({ variant }) =>
+      variant === 0
+        ? css`
+            ${pulse1}
+          `
+        : css`
+            ${pulse2}
+          `}
+    2s ease-in-out infinite;
+`;
+
 const fadeIn = keyframes`
   0% {
     opacity: 0;
@@ -273,4 +484,22 @@ const StyledUnlockButtonContainer = styled.div`
   top: 219px;
   left: 50%;
   transform: translateX(-102%);
+`;
+
+const StyledNavigationButtonContainer = styled.div`
+  min-width: 84px;
+  flex-shrink: 0;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(97.5%);
+`;
+
+const StyledBossButtonContainer = styled.div`
+  min-width: 215px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 220px;
+  left: 50%;
+  transform: translateX(-50%);
 `;

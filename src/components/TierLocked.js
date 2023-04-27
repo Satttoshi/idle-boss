@@ -48,6 +48,9 @@ const StyledButton = styled.button`
   border-radius: 40px 40px;
   box-shadow: var(--shadow1);
   z-index: 10;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   font-family: var(--font1);
 

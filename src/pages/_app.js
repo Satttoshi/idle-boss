@@ -1,3 +1,4 @@
+import Head from "next/head";
 import GlobalStyle from "~/styles";
 import { ThemeProvider } from "next-themes";
 import { useEffect } from "react";
@@ -32,16 +33,22 @@ export default function App({ Component, pageProps }) {
   }, [setMoney]);
 
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
-        <ThemeProvider
-          defaultTheme="theme0"
-          themes={["theme0", "theme1", "theme2"]}
-        >
-          <GlobalStyle />
-          <Component {...pageProps} />
-        </ThemeProvider>{" "}
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <>
+      <Head>
+        <title>IDLE BOSS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <ThemeProvider
+            defaultTheme="theme0"
+            themes={["theme0", "theme1", "theme2"]}
+          >
+            <GlobalStyle />
+            <Component {...pageProps} />
+          </ThemeProvider>{" "}
+        </RainbowKitProvider>
+      </WagmiConfig>
+    </>
   );
 }

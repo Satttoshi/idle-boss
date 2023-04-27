@@ -34,9 +34,8 @@ export default function HomePage() {
 
   return (
     <>
-      {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isTutorialActive && <TutorialModal />}
-
+      {isManagerModalOpen && <ManagerModal userName={userName} />}
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>
