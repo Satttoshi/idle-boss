@@ -7,7 +7,7 @@ export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 const useStore = createStore((set, get) => ({
   money: 0.5,
   currentFloor: 1,
-  availableFloors: [1, 2, 3],
+  availableFloors: [1, 2],
   username: "The Boss",
 
   tiers: tierData,

@@ -15,6 +15,7 @@ export default function BossFloor() {
       <NameForm />
       <ThemeSwitch />
       <Button label="Job Applications" onClick={handleManagerModal} />
+      <Button label="Construct new Floor" />
     </>
   );
 }
