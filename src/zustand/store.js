@@ -13,8 +13,8 @@ const useStore = createStore((set, get) => ({
 
   tiers: tierData,
 
-  isTutorialActive: true,
-  currentTutorial: 0,
+  isTutorialActive: false,
+  currentTutorial: 5,
   isManagerModalOpen: false,
   selectedManager: 1,
   isConstructionModalOpen: false,

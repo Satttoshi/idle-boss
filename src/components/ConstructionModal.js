@@ -4,6 +4,9 @@ import Building from "./Building";
 
 export default function ConstructionModal() {
   const setConstructionModal = useStore((state) => state.setConstructionModal);
+  const addFloor = useStore((state) => state.addFloor);
+  const setCurrentFloor = useStore((state) => state.setCurrentFloor);
+  const availableFloors = useStore((state) => state.availableFloors);
 
   function handleConstructionModalClose() {
     setConstructionModal(false);
@@ -13,13 +16,18 @@ export default function ConstructionModal() {
     event.stopPropagation();
   }
 
+  function handleBuildFloor() {
+    addFloor();
+    setCurrentFloor(1);
+  }
+
   return (
     <StyledDimmer onClick={handleConstructionModalClose}>
       <StyledModal onClick={preventClosing}>
-        <StyledButton>Build new Floor!</StyledButton>
+        <StyledButton onClick={handleBuildFloor}>Build new Floor!</StyledButton>
         <StyledPrice variant={0}>Construction price</StyledPrice>
         <StyledPrice variant={1}>10.000.000,00 €</StyledPrice>
-        <Building />
+        <Building availableFloors={availableFloors} />
         <StyledCloseButton type="button" onClick={handleConstructionModalClose}>
           close
         </StyledCloseButton>
