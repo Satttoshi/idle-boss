@@ -54,6 +54,9 @@ const useStore = createStore((set, get) => ({
   },
 
   loadGame: () => {
+    if (typeof localStorage === "undefined") {
+      return;
+    }
     const game = JSON.parse(localStorage.getItem("game"));
     if (!game) return;
     set((state) => ({

@@ -19,6 +19,7 @@ export default function HomePage() {
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
+  const saveGame = useStore((state) => state.saveGame);
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
@@ -38,6 +39,12 @@ export default function HomePage() {
 
   return (
     <>
+      <button
+        onClick={saveGame}
+        style={{ zIndex: "999", position: "fixed", top: "70%", left: "30%" }}
+      >
+        SAVEGAME
+      </button>
       {isTutorialActive && <TutorialModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}

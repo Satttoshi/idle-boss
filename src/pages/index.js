@@ -3,10 +3,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import WalletConnect from "~/src/components/WalletConnect";
 import { useAccount } from "wagmi";
+import useStore from "~/src/zustand/store";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isConnected } = useAccount();
+  const loadGame = useStore((state) => state.loadGame);
+  loadGame();
 
   function handleButtonClick() {
     if (!isConnected) {
