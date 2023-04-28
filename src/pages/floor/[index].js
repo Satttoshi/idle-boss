@@ -7,8 +7,6 @@ import ManagerModal from "../../components/ManagerModal";
 import StyledPageSection from "../../components/StyledPageSection";
 import TutorialModal from "~/src/components/TutorialModal";
 import ConstructionModal from "~/src/components/ConstructionModal";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -21,19 +19,6 @@ export default function HomePage() {
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
-  const isLocalStorageLoaded = useStore((state) => state.isLocalStorageLoaded);
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLocalStorageLoaded) {
-      router.push("/");
-    }
-  }, [router, isLocalStorageLoaded]);
-
-  if (!isLocalStorageLoaded) {
-    return null;
-  }
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {

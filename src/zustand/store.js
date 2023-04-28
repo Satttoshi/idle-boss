@@ -12,7 +12,6 @@ const useStore = createStore((set, get) => ({
   currentFloorBuilder: 1,
 
   username: "The Boss",
-
   tiers: tierData,
 
   isTutorialActive: true,
@@ -29,7 +28,6 @@ const useStore = createStore((set, get) => ({
   saveGame: () => {
     const {
       money,
-      currentFloor,
       availableFloors,
       currentFloorBuilder,
       username,
@@ -44,7 +42,6 @@ const useStore = createStore((set, get) => ({
       "game",
       JSON.stringify({
         money,
-        currentFloor,
         availableFloors,
         currentFloorBuilder,
         username,
