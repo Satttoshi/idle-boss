@@ -7,6 +7,7 @@ export default function BossFloor() {
   const setManagerModal = useStore((state) => state.setManagerModal);
   const setConstructionModal = useStore((state) => state.setConstructionModal);
   const saveGame = useStore((state) => state.saveGame);
+  const runLoadingToast = useStore((state) => state.runLoadingToast);
 
   function handleManagerModal() {
     setManagerModal(true);
@@ -18,6 +19,7 @@ export default function BossFloor() {
 
   function handleSaveGame() {
     saveGame();
+    runLoadingToast();
   }
 
   function handleResetSaveFile() {

@@ -27,9 +27,6 @@ export default function HomePage() {
   );
 
   const isLoadingToastActive = useStore((state) => state.isLoadingToastActive);
-  const setIsLoadingToastActive = useStore(
-    (state) => state.setIsLoadingToastActive
-  );
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {

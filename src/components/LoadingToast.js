@@ -27,7 +27,7 @@ const fadeIn = keyframes`
 
 const StyledLoadingToast = styled.div`
   position: fixed;
-  top: 15px;
+  top: 10px;
   right: 20px;
   z-index: 115;
 
