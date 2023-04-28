@@ -7,6 +7,7 @@ export default function GameStart() {
   );
   const onGameStart = useStore((state) => state.onGameStart);
   const userName = useStore((state) => state.username);
+  const isFreshStart = useStore((state) => state.isFreshStart);
 
   function preventClosing(event) {
     event.stopPropagation();
@@ -20,12 +21,27 @@ export default function GameStart() {
   return (
     <StyledDimmer onClick={handleGameStart}>
       <StyledModal onClick={preventClosing}>
-        <StyledDescription>Welcome {userName},</StyledDescription>
-        <StyledDescription>
-          to your own IT company where you can build and sell your amazing tech
-          apps and products!
-        </StyledDescription>
-        <StyledButton onClick={handleGameStart}>{"Let's go!"}</StyledButton>
+        {isFreshStart ? (
+          <>
+            <StyledDescription>Welcome {userName},</StyledDescription>
+            <StyledDescription>
+              to your own IT company where you can build and sell your amazing
+              tech apps and products!
+            </StyledDescription>
+            <StyledButton onClick={handleGameStart}>{"Let's go!"}</StyledButton>
+          </>
+        ) : (
+          <>
+            <StyledDescription variant={0}>
+              Welcome back {userName},
+            </StyledDescription>
+            <StyledDescription>
+              It{"'"}s nice seeing you again! Let{"'"}s continue building your
+              IT empire!
+            </StyledDescription>
+            <StyledButton onClick={handleGameStart}>{"Let's go!"}</StyledButton>
+          </>
+        )}
       </StyledModal>
     </StyledDimmer>
   );
@@ -37,6 +53,7 @@ const StyledDescription = styled.p`
   text-align: center;
   font-size: 1.4rem;
   margin: 0;
+  font-weight: ${(props) => (props.variant === 0 ? 590 : 400)};
 
   padding: 0 20px;
 

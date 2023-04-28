@@ -21,11 +21,8 @@ const useStore = createStore((set, get) => ({
   isConstructionModalOpen: false,
 
   isGameStartModalActive: true,
-  didGameStart: false,
   isFreshStart: true,
   isLocalStorageLoaded: false,
-
-  setDidGameStart: (didGameStart) => set(() => ({ didGameStart })),
 
   setLocalStorageLoaded: (isLoaded) =>
     set(() => ({ isLocalStorageLoaded: isLoaded })),
@@ -69,6 +66,7 @@ const useStore = createStore((set, get) => ({
         isManagerModalOpen,
         selectedManager,
         isConstructionModalOpen,
+        isFreshStart: false,
       })
     );
   },
