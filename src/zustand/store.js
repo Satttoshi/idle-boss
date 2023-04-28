@@ -21,6 +21,47 @@ const useStore = createStore((set, get) => ({
   selectedManager: 1,
   isConstructionModalOpen: false,
 
+  saveGame: () => {
+    const {
+      money,
+      currentFloor,
+      availableFloors,
+      currentFloorBuilder,
+      username,
+      tiers,
+      isTutorialActive,
+      currentTutorial,
+      isManagerModalOpen,
+      selectedManager,
+      isConstructionModalOpen,
+    } = get();
+    localStorage.setItem(
+      "game",
+      JSON.stringify({
+        money,
+        currentFloor,
+        availableFloors,
+        currentFloorBuilder,
+        username,
+        tiers,
+        isTutorialActive,
+        currentTutorial,
+        isManagerModalOpen,
+        selectedManager,
+        isConstructionModalOpen,
+      })
+    );
+  },
+
+  loadGame: () => {
+    const game = JSON.parse(localStorage.getItem("game"));
+    if (!game) return;
+    set((state) => ({
+      ...state,
+      ...game,
+    }));
+  },
+
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),
 

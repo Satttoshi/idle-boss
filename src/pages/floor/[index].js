@@ -41,6 +41,7 @@ export default function HomePage() {
       {isTutorialActive && <TutorialModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}
+
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>

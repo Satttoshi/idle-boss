@@ -1,7 +1,6 @@
 import useStore from "~/src/zustand/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { useState } from "react";
 
 export default function NavigationButton({ variant }) {
   const currentFloor = useStore((state) => state.currentFloor);
