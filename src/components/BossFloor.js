@@ -8,6 +8,7 @@ export default function BossFloor() {
   const setConstructionModal = useStore((state) => state.setConstructionModal);
   const saveGame = useStore((state) => state.saveGame);
   const runLoadingToast = useStore((state) => state.runLoadingToast);
+  const setApprovalModalOpen = useStore((state) => state.setApprovalModalOpen);
 
   function handleManagerModal() {
     setManagerModal(true);
@@ -23,8 +24,7 @@ export default function BossFloor() {
   }
 
   function handleResetSaveFile() {
-    localStorage.removeItem("game");
-    location.reload();
+    setApprovalModalOpen(true);
   }
 
   return (

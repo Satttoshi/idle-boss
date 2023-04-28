@@ -36,6 +36,10 @@ const StyledLoadingToast = styled.div`
   align-items: center;
   gap: 5px;
 
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   animation: ${fadeIn} 2s ease-in-out 1 forwards;
 `;
 

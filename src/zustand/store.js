@@ -19,18 +19,14 @@ const useStore = createStore((set, get) => ({
   isManagerModalOpen: false,
   selectedManager: 1,
   isConstructionModalOpen: false,
-
+  isApprovalModalOpen: false,
   isGameStartModalActive: true,
   isFreshStart: true,
   isLocalStorageLoaded: false,
   isLoadingToastActive: false,
 
-  runLoadingToast: () => {
-    set(() => ({ isLoadingToastActive: true }));
-    setTimeout(() => {
-      set(() => ({ isLoadingToastActive: false }));
-    }, 2000);
-  },
+  setApprovalModalOpen: (isOpen) =>
+    set(() => ({ isApprovalModalOpen: isOpen })),
 
   setLocalStorageLoaded: (isLoaded) =>
     set(() => ({ isLocalStorageLoaded: isLoaded })),
@@ -92,6 +88,13 @@ const useStore = createStore((set, get) => ({
       ...state,
       ...game,
     }));
+  },
+
+  runLoadingToast: () => {
+    set(() => ({ isLoadingToastActive: true }));
+    setTimeout(() => {
+      set(() => ({ isLoadingToastActive: false }));
+    }, 2000);
   },
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
