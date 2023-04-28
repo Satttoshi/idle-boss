@@ -1,6 +1,7 @@
 import useStore from "~/src/zustand/store";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function NavigationButton({ variant }) {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -54,7 +55,7 @@ export default function NavigationButton({ variant }) {
     return (
       <button
         type="button"
-        disabled={currentFloor === currentBossFloor || currentTutorial < 3}
+        disabled={currentFloor === currentBossFloor || currentTutorial < 4}
         onClick={handleUpstairs}
       >
         upstairs
