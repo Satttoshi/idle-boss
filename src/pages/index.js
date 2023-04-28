@@ -43,8 +43,9 @@ export default function HomePage() {
           <StyledDimmer onClick={handleModalClose}>
             <StyledModal>
               <p>
-                Your wallet is currently not connected, Game Progress won
-                {"'"}t be saved!
+                Your wallet is currently not connected, Game Progress will only
+                be saved on your current device. Clearing browser data, will
+                delete your progress.
               </p>
               <button type="button" onClick={handleModalSubmit}>
                 I do understand. Let me in.
@@ -84,7 +85,7 @@ const StyledModal = styled.div`
   bottom: 260px;
   transform: translateX(-50%);
   width: 300px;
-  height: 180px;
+  height: 240px;
   background-color: var(--5);
   border-radius: 50px;
   z-index: 1;
