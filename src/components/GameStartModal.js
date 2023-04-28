@@ -1,13 +1,25 @@
 import styled, { keyframes } from "styled-components";
 import useStore from "~/src/zustand/store";
+import { useState, useEffect } from "react";
 
 export default function GameStart() {
+  const [isLoading, setIsLoading] = useState(true);
   const setGameStartModalActive = useStore(
     (state) => state.setGameStartModalActive
   );
   const onGameStart = useStore((state) => state.onGameStart);
   const userName = useStore((state) => state.username);
   const isFreshStart = useStore((state) => state.isFreshStart);
+  const loadGame = useStore((state) => state.loadGame);
+
+  useEffect(() => {
+    setIsLoading(false);
+    loadGame();
+  }, [loadGame]);
+
+  if (isLoading) {
+    return null;
+  }
 
   function preventClosing(event) {
     event.stopPropagation();

@@ -21,6 +21,7 @@ export default function BossFloor() {
   }
 
   function handleResetSaveFile() {
+    localStorage.removeItem("game");
     location.reload();
   }
 
