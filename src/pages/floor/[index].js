@@ -6,6 +6,7 @@ import BossFloor from "../../components/BossFloor";
 import ManagerModal from "../../components/ManagerModal";
 import StyledPageSection from "../../components/StyledPageSection";
 import TutorialModal from "~/src/components/TutorialModal";
+import ConstructionModal from "~/src/components/ConstructionModal";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -14,6 +15,9 @@ export default function HomePage() {
 
   const isTutorialActive = useStore((state) => state.isTutorialActive);
   const isManagerModalOpen = useStore((state) => state.isManagerModalOpen);
+  const isConstructionModalOpen = useStore(
+    (state) => state.isConstructionModalOpen
+  );
   const userName = useStore((state) => state.username);
 
   function getPosition() {
@@ -36,6 +40,7 @@ export default function HomePage() {
     <>
       {isTutorialActive && <TutorialModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
+      {isConstructionModalOpen && <ConstructionModal />}
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>

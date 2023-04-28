@@ -3,11 +3,14 @@ import tierData from "./tierData";
 import setSpeed from "./speedSheet";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
+export const floorPrices = [0, 7000000, 4400000000000000];
 
 const useStore = createStore((set, get) => ({
   money: 0.5,
   currentFloor: 1,
-  availableFloors: [1, 2, 3],
+  availableFloors: [1, 2],
+  currentFloorBuilder: 1,
+
   username: "The Boss",
 
   tiers: tierData,
@@ -16,6 +19,13 @@ const useStore = createStore((set, get) => ({
   currentTutorial: 0,
   isManagerModalOpen: false,
   selectedManager: 1,
+  isConstructionModalOpen: false,
+
+  setMoney: (amount) => set((state) => ({ money: state.money + amount })),
+  setUsername: (username) => set(() => ({ username })),
+
+  setTutorialActive: (isActive) => set(() => ({ isTutorialActive: isActive })),
+  setCurrentTutorial: (index) => set(() => ({ currentTutorial: index })),
 
   exitTutorial: () => {
     const { setTutorialActive, setCurrentTutorial, currentTutorial } = get();
@@ -23,15 +33,24 @@ const useStore = createStore((set, get) => ({
     setCurrentTutorial(currentTutorial + 1);
   },
 
-  setMoney: (amount) => set((state) => ({ money: state.money + amount })),
-  setUsername: (username) => set(() => ({ username })),
   setCurrentFloor: (amount) =>
     set((state) => ({ currentFloor: state.currentFloor + amount })),
-  setTutorialActive: (isActive) => set(() => ({ isTutorialActive: isActive })),
-  setCurrentTutorial: (index) => set(() => ({ currentTutorial: index })),
+  addFloor: () =>
+    set((state) => ({
+      availableFloors: [
+        ...state.availableFloors,
+        state.availableFloors.length + 1,
+      ],
+    })),
+  setCurrentFloorBuilder: (amount) =>
+    set(() => ({ currentFloorBuilder: amount })),
+
   setManagerModal: (isOpen) => set(() => ({ isManagerModalOpen: isOpen })),
   setSelectedManager: (managerId) =>
     set(() => ({ selectedManager: managerId })),
+
+  setConstructionModal: (isOpen) =>
+    set(() => ({ isConstructionModalOpen: isOpen })),
 
   getTierById: (tierId) => {
     const { tiers } = get();
@@ -68,6 +87,25 @@ const useStore = createStore((set, get) => ({
       id: tierId,
       isUnlocked: true,
     });
+  },
+
+  unlockFloor: () => {
+    const {
+      money,
+      setMoney,
+      setCurrentFloor,
+      currentFloorBuilder,
+      setCurrentFloorBuilder,
+      addFloor,
+    } = get();
+    if (floorPrices.length === currentFloorBuilder) return;
+    if (floorPrices[currentFloorBuilder] > money) {
+      throw new Error("not enough money");
+    }
+    setMoney(-floorPrices[currentFloorBuilder]);
+    setCurrentFloorBuilder(currentFloorBuilder + 1);
+    addFloor();
+    setCurrentFloor(1);
   },
 
   buyManager: (tierId) => {
