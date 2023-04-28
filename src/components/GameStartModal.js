@@ -35,7 +35,9 @@ export default function GameStart() {
       <StyledModal onClick={preventClosing}>
         {isFreshStart ? (
           <>
-            <StyledDescription>Welcome {userName},</StyledDescription>
+            <StyledDescription variant={0}>
+              Welcome {userName},
+            </StyledDescription>
             <StyledDescription>
               to your own IT company where you can build and sell your amazing
               tech apps and products!
