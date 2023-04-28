@@ -47,6 +47,8 @@ const StyledButton = styled.button`
   font-weight: 600;
   color: var(--5);
 
+  box-shadow: var(--shadow1);
+
   :disabled {
     cursor: default;
     opacity: 0.3;

@@ -88,6 +88,8 @@ const StyledButton = styled.button`
   font-size: 1.5rem;
   color: var(--5);
 
+  box-shadow: var(--shadow1);
+
   :disabled {
     cursor: default;
     opacity: 0.3;

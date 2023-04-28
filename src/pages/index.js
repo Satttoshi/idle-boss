@@ -123,6 +123,8 @@ const StyledModal = styled.div`
     font-size: 0.9rem;
     color: var(--5);
 
+    box-shadow: var(--shadow1);
+
     @media (hover: hover) {
       &:hover:enabled {
         background-color: var(--3);

@@ -172,6 +172,8 @@ const StyledCloseButton = styled.button`
   color: var(--1);
   line-height: 1px;
 
+  box-shadow: var(--shadow1);
+
   @media (hover: hover) {
     &:hover:enabled {
       border-color: var(--3);
@@ -198,6 +200,9 @@ const StyledNextButton = styled.button`
   position: absolute;
   bottom: 65px;
   right: 31px;
+
+  border-radius: 10px;
+  box-shadow: var(--shadow2);
 
   &:disabled {
     opacity: 0.3;
@@ -233,6 +238,8 @@ const StyledPrevButton = styled.button`
   bottom: 65px;
   left: 31px;
   z-index: 300;
+  border-radius: 10px;
+  box-shadow: var(--shadow2);
 
   &:disabled {
     opacity: 0.3;
