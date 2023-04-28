@@ -6,12 +6,12 @@ export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 export const floorPrices = [0, 7000000, 4400000000000000];
 
 const useStore = createStore((set, get) => ({
-  money: 0.5,
+  money: 4000,
   currentFloor: 1,
   availableFloors: [1, 2],
   currentFloorBuilder: 1,
 
-  username: "The Boss",
+  username: "Boss",
   tiers: tierData,
 
   isTutorialActive: true,
@@ -20,10 +20,26 @@ const useStore = createStore((set, get) => ({
   selectedManager: 1,
   isConstructionModalOpen: false,
 
+  isGameStartModalActive: true,
+  didGameStart: false,
+  isFreshStart: true,
   isLocalStorageLoaded: false,
+
+  setDidGameStart: (didGameStart) => set(() => ({ didGameStart })),
 
   setLocalStorageLoaded: (isLoaded) =>
     set(() => ({ isLocalStorageLoaded: isLoaded })),
+
+  setGameStartModalActive: (isActive) =>
+    set(() => ({ isGameStartModalActive: isActive })),
+
+  onGameStart: () => {
+    const { tiers, clickTimer } = get();
+    const tiersWithActiveManagers = tiers.filter((tier) => tier.hasManager);
+    tiersWithActiveManagers.forEach((tier) => {
+      clickTimer(tier.id);
+    });
+  },
 
   saveGame: () => {
     const {
@@ -45,7 +61,9 @@ const useStore = createStore((set, get) => ({
         availableFloors,
         currentFloorBuilder,
         username,
-        tiers,
+        tiers: tiers.map((tier) => {
+          return { ...tier, isFilling: false };
+        }),
         isTutorialActive,
         currentTutorial,
         isManagerModalOpen,

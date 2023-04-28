@@ -7,6 +7,7 @@ import ManagerModal from "../../components/ManagerModal";
 import StyledPageSection from "../../components/StyledPageSection";
 import TutorialModal from "~/src/components/TutorialModal";
 import ConstructionModal from "~/src/components/ConstructionModal";
+import GameStartModal from "~/src/components/GameStartModal";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -19,6 +20,10 @@ export default function HomePage() {
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
+
+  const isGameStartModalActive = useStore(
+    (state) => state.isGameStartModalActive
+  );
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
@@ -38,7 +43,8 @@ export default function HomePage() {
 
   return (
     <>
-      {isTutorialActive && <TutorialModal />}
+      {isGameStartModalActive && <GameStartModal />}
+      {isTutorialActive && !isGameStartModalActive && <TutorialModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}
 

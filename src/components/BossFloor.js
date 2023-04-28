@@ -2,13 +2,11 @@ import NameForm from "./NameForm";
 import ThemeSwitch from "./ThemeSwitch";
 import Button from "./BossFloorButton";
 import useStore from "~/src/zustand/store";
-import { useRouter } from "next/router";
 
 export default function BossFloor() {
   const setManagerModal = useStore((state) => state.setManagerModal);
   const setConstructionModal = useStore((state) => state.setConstructionModal);
   const saveGame = useStore((state) => state.saveGame);
-  const router = useRouter();
 
   function handleManagerModal() {
     setManagerModal(true);
