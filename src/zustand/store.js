@@ -6,7 +6,7 @@ export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 export const floorPrices = [0, 7000000, 4400000000000000];
 
 const useStore = createStore((set, get) => ({
-  money: 4000,
+  money: 0,
   currentFloor: 1,
   availableFloors: [1, 2],
   currentFloorBuilder: 1,
