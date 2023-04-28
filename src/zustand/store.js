@@ -23,6 +23,10 @@ const useStore = createStore((set, get) => ({
   isGameStartModalActive: true,
   isFreshStart: true,
   isLocalStorageLoaded: false,
+  isLoadingToastActive: true,
+
+  setIsLoadingToastActive: (isActive) =>
+    set(() => ({ isLoadingToastActive: isActive })),
 
   setLocalStorageLoaded: (isLoaded) =>
     set(() => ({ isLocalStorageLoaded: isLoaded })),

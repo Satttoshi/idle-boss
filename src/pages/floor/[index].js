@@ -8,6 +8,7 @@ import StyledPageSection from "../../components/StyledPageSection";
 import TutorialModal from "~/src/components/TutorialModal";
 import ConstructionModal from "~/src/components/ConstructionModal";
 import GameStartModal from "~/src/components/GameStartModal";
+import LoadingToast from "~/src/components/LoadingToast";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -23,6 +24,11 @@ export default function HomePage() {
 
   const isGameStartModalActive = useStore(
     (state) => state.isGameStartModalActive
+  );
+
+  const isLoadingToastActive = useStore((state) => state.isLoadingToastActive);
+  const setIsLoadingToastActive = useStore(
+    (state) => state.setIsLoadingToastActive
   );
 
   function getPosition() {
@@ -43,6 +49,7 @@ export default function HomePage() {
 
   return (
     <>
+      {isLoadingToastActive && <LoadingToast />}
       {isGameStartModalActive && <GameStartModal />}
       {isTutorialActive && !isGameStartModalActive && <TutorialModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
