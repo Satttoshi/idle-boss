@@ -7,6 +7,8 @@ import ManagerModal from "../../components/ManagerModal";
 import StyledPageSection from "../../components/StyledPageSection";
 import TutorialModal from "~/src/components/TutorialModal";
 import ConstructionModal from "~/src/components/ConstructionModal";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -19,7 +21,19 @@ export default function HomePage() {
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
-  const saveGame = useStore((state) => state.saveGame);
+  const isLocalStorageLoaded = useStore((state) => state.isLocalStorageLoaded);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLocalStorageLoaded) {
+      router.push("/");
+    }
+  }, [router, isLocalStorageLoaded]);
+
+  if (!isLocalStorageLoaded) {
+    return null;
+  }
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
@@ -39,12 +53,6 @@ export default function HomePage() {
 
   return (
     <>
-      <button
-        onClick={saveGame}
-        style={{ zIndex: "999", position: "fixed", top: "70%", left: "30%" }}
-      >
-        SAVEGAME
-      </button>
       {isTutorialActive && <TutorialModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}

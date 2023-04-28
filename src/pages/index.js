@@ -9,6 +9,7 @@ export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isConnected } = useAccount();
   const loadGame = useStore((state) => state.loadGame);
+
   loadGame();
 
   function handleButtonClick() {

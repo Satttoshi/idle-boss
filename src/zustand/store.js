@@ -21,6 +21,11 @@ const useStore = createStore((set, get) => ({
   selectedManager: 1,
   isConstructionModalOpen: false,
 
+  isLocalStorageLoaded: false,
+
+  setLocalStorageLoaded: (isLoaded) =>
+    set(() => ({ isLocalStorageLoaded: isLoaded })),
+
   saveGame: () => {
     const {
       money,
@@ -54,9 +59,12 @@ const useStore = createStore((set, get) => ({
   },
 
   loadGame: () => {
+    const { setLocalStorageLoaded } = get();
     if (typeof localStorage === "undefined") {
+      setLocalStorageLoaded(true);
       return;
     }
+    setLocalStorageLoaded(true);
     const game = JSON.parse(localStorage.getItem("game"));
     if (!game) return;
     set((state) => ({
