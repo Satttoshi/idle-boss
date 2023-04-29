@@ -26,7 +26,6 @@ const useStore = createStore((set, get) => ({
   isLocalStorageLoaded: false,
   isLoadingToastActive: false,
   currentSaveGameIntervalId: null,
-
   currentTime: null,
   lastTimeDifference: 0,
 
