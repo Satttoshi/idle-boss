@@ -28,16 +28,16 @@ const useStore = createStore((set, get) => ({
   currentSaveGameIntervalId: null,
 
   currentTime: null,
+  lastTimeDifference: 0,
 
-  getTimeDifference: async () => {
+  setTimeDifference: async () => {
     const { currentTime } = get();
     const now = await fetchTime();
     if (currentTime) {
       const difference = now - currentTime;
-      console.log("timedif: " + difference);
-      return difference;
+      set(() => ({ lastTimeDifference: difference }));
     }
-    return 0;
+    set(() => ({ lastTimeDifference: 0 }));
   },
 
   setCurrentTime: (time) => set(() => ({ currentTime: time })),
@@ -101,7 +101,7 @@ const useStore = createStore((set, get) => ({
   },
 
   loadGame: () => {
-    const { setLocalStorageLoaded } = get();
+    const { setLocalStorageLoaded, setTimeDifference } = get();
     if (typeof localStorage === "undefined") {
       setLocalStorageLoaded(true);
       return;
@@ -113,6 +113,7 @@ const useStore = createStore((set, get) => ({
       ...state,
       ...game,
     }));
+    setTimeDifference();
   },
 
   runLoadingToast: () => {
