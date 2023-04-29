@@ -36,8 +36,9 @@ const useStore = createStore((set, get) => ({
     if (currentTime) {
       const difference = now - currentTime;
       set(() => ({ lastTimeDifference: difference }));
+    } else {
+      set(() => ({ lastTimeDifference: 0 }));
     }
-    set(() => ({ lastTimeDifference: 0 }));
   },
 
   setCurrentTime: (time) => set(() => ({ currentTime: time })),
@@ -100,7 +101,7 @@ const useStore = createStore((set, get) => ({
     runLoadingToast();
   },
 
-  loadGame: () => {
+  loadGame: async () => {
     const { setLocalStorageLoaded, setTimeDifference } = get();
     if (typeof localStorage === "undefined") {
       setLocalStorageLoaded(true);
@@ -113,7 +114,7 @@ const useStore = createStore((set, get) => ({
       ...state,
       ...game,
     }));
-    setTimeDifference();
+    await setTimeDifference();
   },
 
   runLoadingToast: () => {

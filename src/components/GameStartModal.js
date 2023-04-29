@@ -11,6 +11,7 @@ export default function GameStart() {
   const userName = useStore((state) => state.username);
   const isFreshStart = useStore((state) => state.isFreshStart);
   const loadGame = useStore((state) => state.loadGame);
+  const lastTimeDifference = useStore((state) => state.lastTimeDifference);
 
   useEffect(() => {
     setIsLoading(false);
@@ -47,7 +48,7 @@ export default function GameStart() {
         ) : (
           <>
             <StyledDescription variant={0}>
-              Welcome back {userName},
+              Welcome back {userName},{lastTimeDifference}
             </StyledDescription>
             <StyledDescription>
               It{"'"}s nice seeing you again! Let{"'"}s continue building your
