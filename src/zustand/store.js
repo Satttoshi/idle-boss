@@ -106,7 +106,7 @@ const useStore = createStore((set, get) => ({
     if (currentSaveGameIntervalId) clearInterval(currentSaveGameIntervalId);
     const intervalId = setInterval(() => {
       saveGame();
-    }, 30000);
+    }, 60000);
     set(() => ({ currentSaveGameIntervalId: intervalId }));
   },
 
