@@ -11,6 +11,7 @@ export default function GameStart() {
   const userName = useStore((state) => state.username);
   const isFreshStart = useStore((state) => state.isFreshStart);
   const loadGame = useStore((state) => state.loadGame);
+  const getTimeDifference = useStore((state) => state.getTimeDifference);
 
   useEffect(() => {
     setIsLoading(false);
@@ -20,6 +21,8 @@ export default function GameStart() {
   if (isLoading) {
     return null;
   }
+
+  getTimeDifference();
 
   function preventClosing(event) {
     event.stopPropagation();

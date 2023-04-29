@@ -1,6 +1,7 @@
 import { create as createStore } from "zustand";
 import tierData from "./tierData";
 import setSpeed from "./speedSheet";
+import fetchTime from "../utils/fetch-time";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 export const floorPrices = [0, 7000000, 4400000000000000];
@@ -28,11 +29,18 @@ const useStore = createStore((set, get) => ({
 
   currentTime: null,
 
-  fetchTime: async () => {
-    const res = await fetch("/api/time/get-time");
-    const { time } = await res.json();
-    set(() => ({ currentTime: time }));
+  getTimeDifference: async () => {
+    const { currentTime } = get();
+    const now = await fetchTime();
+    if (currentTime) {
+      const difference = now - currentTime;
+      console.log("timedif: " + difference);
+      return difference;
+    }
+    return 0;
   },
+
+  setCurrentTime: (time) => set(() => ({ currentTime: time })),
 
   setApprovalModalOpen: (isOpen) =>
     set(() => ({ isApprovalModalOpen: isOpen })),
@@ -65,9 +73,10 @@ const useStore = createStore((set, get) => ({
       selectedManager,
       isConstructionModalOpen,
       runLoadingToast,
-      fetchTime,
+      setCurrentTime,
     } = get();
-    await fetchTime();
+    const time = await fetchTime();
+    setCurrentTime(time);
     const { currentTime } = get();
     localStorage.setItem(
       "game",
