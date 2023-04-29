@@ -1,12 +1,13 @@
 import Head from "next/head";
 import GlobalStyle from "~/styles";
 import { ThemeProvider } from "next-themes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useStore from "~/src/zustand/store";
 import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { createClient, WagmiConfig } from "wagmi";
 import ConfigureChains, { connectors } from "./api/wagmi/ConfigureChains";
+import IdleTimer from "~/src/utils/idle-timer";
 
 const { chains, provider } = ConfigureChains;
 

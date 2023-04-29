@@ -10,6 +10,8 @@ import ConstructionModal from "~/src/components/ConstructionModal";
 import GameStartModal from "~/src/components/GameStartModal";
 import LoadingToast from "~/src/components/LoadingToast";
 import ApprovalModal from "~/src/components/ApprovalModal";
+import IdleTimer from "~/src/utils/idle-timer";
+import { useEffect } from "react";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
@@ -28,6 +30,22 @@ export default function HomePage() {
   );
 
   const isLoadingToastActive = useStore((state) => state.isLoadingToastActive);
+
+  useEffect(() => {
+    const timer = new IdleTimer({
+      timeout: 10,
+      onTimeout: () => {
+        console.log("timeout");
+      },
+      onExpired: () => {
+        console.log("expired");
+      },
+    });
+
+    return () => {
+      timer.cleanUp();
+    };
+  }, []);
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
