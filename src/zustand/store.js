@@ -36,11 +36,12 @@ const useStore = createStore((set, get) => ({
     set(() => ({ isGameStartModalActive: isActive })),
 
   onGameStart: () => {
-    const { tiers, clickTimer } = get();
+    const { tiers, clickTimer, runAutoSave } = get();
     const tiersWithActiveManagers = tiers.filter((tier) => tier.hasManager);
     tiersWithActiveManagers.forEach((tier) => {
       clickTimer(tier.id);
     });
+    runAutoSave();
   },
 
   saveGame: () => {
