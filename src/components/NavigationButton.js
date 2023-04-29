@@ -54,7 +54,7 @@ export default function NavigationButton({ variant }) {
     return (
       <button
         type="button"
-        disabled={currentFloor === currentBossFloor || currentTutorial < 3}
+        disabled={currentFloor === currentBossFloor || currentTutorial < 4}
         onClick={handleUpstairs}
       >
         upstairs

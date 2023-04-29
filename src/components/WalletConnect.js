@@ -145,6 +145,7 @@ const StyledButton = styled.button`
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: var(--1);
 
   font-family: var(--font1);
   font-weight: 700;

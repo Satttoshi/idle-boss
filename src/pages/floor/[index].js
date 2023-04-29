@@ -7,18 +7,27 @@ import ManagerModal from "../../components/ManagerModal";
 import StyledPageSection from "../../components/StyledPageSection";
 import TutorialModal from "~/src/components/TutorialModal";
 import ConstructionModal from "~/src/components/ConstructionModal";
+import GameStartModal from "~/src/components/GameStartModal";
+import LoadingToast from "~/src/components/LoadingToast";
+import ApprovalModal from "~/src/components/ApprovalModal";
 
 export default function HomePage() {
   const currentFloor = useStore((state) => state.currentFloor);
   const availableFloors = useStore((state) => state.availableFloors);
   const currentBossFloor = availableFloors.length;
-
   const isTutorialActive = useStore((state) => state.isTutorialActive);
   const isManagerModalOpen = useStore((state) => state.isManagerModalOpen);
+  const isApprovalModalOpen = useStore((state) => state.isApprovalModalOpen);
   const isConstructionModalOpen = useStore(
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
+
+  const isGameStartModalActive = useStore(
+    (state) => state.isGameStartModalActive
+  );
+
+  const isLoadingToastActive = useStore((state) => state.isLoadingToastActive);
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
@@ -38,9 +47,13 @@ export default function HomePage() {
 
   return (
     <>
-      {isTutorialActive && <TutorialModal />}
+      {isLoadingToastActive && <LoadingToast />}
+      {isGameStartModalActive && <GameStartModal />}
+      {isTutorialActive && !isGameStartModalActive && <TutorialModal />}
+      {isApprovalModalOpen && <ApprovalModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}
+
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>

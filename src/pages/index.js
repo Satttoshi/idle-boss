@@ -3,10 +3,14 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import WalletConnect from "~/src/components/WalletConnect";
 import { useAccount } from "wagmi";
+import useStore from "~/src/zustand/store";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isConnected } = useAccount();
+  const loadGame = useStore((state) => state.loadGame);
+
+  loadGame();
 
   function handleButtonClick() {
     if (!isConnected) {
@@ -39,8 +43,9 @@ export default function HomePage() {
           <StyledDimmer onClick={handleModalClose}>
             <StyledModal>
               <p>
-                Your wallet is currently not connected, Game Progress won
-                {"'"}t be saved!
+                Your wallet is currently not connected, Game Progress will only
+                be saved on your current device. Clearing browser data, will
+                delete your progress.
               </p>
               <button type="button" onClick={handleModalSubmit}>
                 I do understand. Let me in.
@@ -49,7 +54,7 @@ export default function HomePage() {
           </StyledDimmer>
         )}
         <WalletConnect />
-        <span>idle boss - version 0.3.16</span>
+        <span>idle boss - version 0.4.27</span>
       </StyledSection>
     </>
   );
@@ -80,7 +85,7 @@ const StyledModal = styled.div`
   bottom: 260px;
   transform: translateX(-50%);
   width: 300px;
-  height: 180px;
+  height: 240px;
   background-color: var(--5);
   border-radius: 50px;
   z-index: 1;
@@ -113,12 +118,23 @@ const StyledModal = styled.div`
     transform: translateX(-50%);
 
     font-family: var(--font1);
+    background-color: var(--1);
     font-weight: 550;
     font-size: 0.9rem;
     color: var(--5);
 
-    :hover {
-      background-color: var(--3);
+    box-shadow: var(--shadow1);
+
+    @media (hover: hover) {
+      &:hover:enabled {
+        background-color: var(--3);
+      }
+    }
+
+    @media (hover: none) {
+      &:active:enabled {
+        background-color: var(--3);
+      }
     }
   }
 `;
@@ -154,6 +170,7 @@ const StyledButton = styled.button`
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-color: var(--1);
 
   font-family: var(--font1);
   font-weight: 700;
@@ -184,6 +201,7 @@ const StyledMain = styled.main`
   overflow-y: auto;
 
   h1 {
+    color: var(--1);
     margin: 0;
     font-family: var(--font2);
     font-weight: 400;

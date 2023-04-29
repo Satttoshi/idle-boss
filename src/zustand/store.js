@@ -6,13 +6,12 @@ export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 export const floorPrices = [0, 7000000, 4400000000000000];
 
 const useStore = createStore((set, get) => ({
-  money: 0.5,
+  money: 0,
   currentFloor: 1,
   availableFloors: [1, 2],
   currentFloorBuilder: 1,
 
-  username: "The Boss",
-
+  username: "Boss",
   tiers: tierData,
 
   isTutorialActive: true,
@@ -20,6 +19,83 @@ const useStore = createStore((set, get) => ({
   isManagerModalOpen: false,
   selectedManager: 1,
   isConstructionModalOpen: false,
+  isApprovalModalOpen: false,
+  isGameStartModalActive: true,
+  isFreshStart: true,
+  isLocalStorageLoaded: false,
+  isLoadingToastActive: false,
+
+  setApprovalModalOpen: (isOpen) =>
+    set(() => ({ isApprovalModalOpen: isOpen })),
+
+  setLocalStorageLoaded: (isLoaded) =>
+    set(() => ({ isLocalStorageLoaded: isLoaded })),
+
+  setGameStartModalActive: (isActive) =>
+    set(() => ({ isGameStartModalActive: isActive })),
+
+  onGameStart: () => {
+    const { tiers, clickTimer } = get();
+    const tiersWithActiveManagers = tiers.filter((tier) => tier.hasManager);
+    tiersWithActiveManagers.forEach((tier) => {
+      clickTimer(tier.id);
+    });
+  },
+
+  saveGame: () => {
+    const {
+      money,
+      availableFloors,
+      currentFloorBuilder,
+      username,
+      tiers,
+      isTutorialActive,
+      currentTutorial,
+      isManagerModalOpen,
+      selectedManager,
+      isConstructionModalOpen,
+    } = get();
+    localStorage.setItem(
+      "game",
+      JSON.stringify({
+        money,
+        availableFloors,
+        currentFloorBuilder,
+        username,
+        tiers: tiers.map((tier) => {
+          return { ...tier, isFilling: false };
+        }),
+        isTutorialActive,
+        currentTutorial,
+        isManagerModalOpen,
+        selectedManager,
+        isConstructionModalOpen,
+        isFreshStart: false,
+      })
+    );
+  },
+
+  loadGame: () => {
+    const { setLocalStorageLoaded } = get();
+    if (typeof localStorage === "undefined") {
+      setLocalStorageLoaded(true);
+      return;
+    }
+    setLocalStorageLoaded(true);
+    const game = JSON.parse(localStorage.getItem("game"));
+    if (!game) return;
+    set((state) => ({
+      ...state,
+      ...game,
+    }));
+  },
+
+  runLoadingToast: () => {
+    set(() => ({ isLoadingToastActive: true }));
+    setTimeout(() => {
+      set(() => ({ isLoadingToastActive: false }));
+    }, 2000);
+  },
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
   setUsername: (username) => set(() => ({ username })),

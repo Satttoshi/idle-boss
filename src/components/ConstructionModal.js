@@ -69,6 +69,8 @@ const StyledPrice = styled.span`
   transform: translateX(-50%);
   text-align: center;
   font-size: ${(props) => (props.variant === 0 ? "1rem" : "1.4rem")};
+
+  text-shadow: var(--shadow2);
 `;
 
 const StyledButton = styled.button`
@@ -89,6 +91,8 @@ const StyledButton = styled.button`
   font-weight: 590;
   font-size: 1rem;
   color: var(--5);
+
+  box-shadow: var(--shadow1);
 
   :disabled {
     cursor: default;
@@ -163,6 +167,8 @@ const StyledCloseButton = styled.button`
   font-size: 1rem;
   color: var(--1);
   line-height: 1px;
+
+  box-shadow: var(--shadow1);
 
   @media (hover: hover) {
     &:hover:enabled {

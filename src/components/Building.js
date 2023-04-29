@@ -95,6 +95,8 @@ const StyledFloor = styled.button`
   display: grid;
   place-items: center;
 
+  box-shadow: var(--shadow1);
+
   animation: ${FlexAnimation} 0.6s ease-out 1;
 
   @media (hover: hover) {
@@ -124,6 +126,8 @@ const StyledRoof = styled.div`
   transition: height 0.5s ease-out;
   background-color: var(--4);
   z-index: -1;
+
+  box-shadow: var(--shadow1);
 
   display: flex;
   flex-direction: column;
