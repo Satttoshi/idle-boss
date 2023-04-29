@@ -29,7 +29,7 @@ const useStore = createStore((set, get) => ({
   currentTime: null,
 
   fetchTime: async () => {
-    const res = await fetch("/api/getTime");
+    const res = await fetch("/api/time/get-time");
     const { time } = await res.json();
     set(() => ({ currentTime: time }));
   },
@@ -52,7 +52,7 @@ const useStore = createStore((set, get) => ({
     runAutoSave();
   },
 
-  saveGame: () => {
+  saveGame: async () => {
     const {
       money,
       availableFloors,
@@ -65,7 +65,10 @@ const useStore = createStore((set, get) => ({
       selectedManager,
       isConstructionModalOpen,
       runLoadingToast,
+      fetchTime,
     } = get();
+    await fetchTime();
+    const { currentTime } = get();
     localStorage.setItem(
       "game",
       JSON.stringify({
@@ -81,6 +84,7 @@ const useStore = createStore((set, get) => ({
         isManagerModalOpen,
         selectedManager,
         isConstructionModalOpen,
+        currentTime,
         isFreshStart: false,
       })
     );
