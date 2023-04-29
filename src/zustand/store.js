@@ -26,6 +26,14 @@ const useStore = createStore((set, get) => ({
   isLoadingToastActive: false,
   currentSaveGameIntervalId: null,
 
+  currentTime: null,
+
+  fetchTime: async () => {
+    const res = await fetch("/api/getTime");
+    const { time } = await res.json();
+    set(() => ({ currentTime: time }));
+  },
+
   setApprovalModalOpen: (isOpen) =>
     set(() => ({ isApprovalModalOpen: isOpen })),
 
