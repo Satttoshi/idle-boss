@@ -30,13 +30,14 @@ const useStore = createStore((set, get) => ({
   lastTimeDifference: 0,
 
   applyIdleEarnings: () => {
-    const { tiers, lastTimeDifference, setMoney } = get();
+    const { tiers, lastTimeDifference, setMoney, saveGame } = get();
     const tiersWithActiveManagers = tiers.filter((tier) => tier.hasManager);
     tiersWithActiveManagers.forEach((tier) => {
       const earnings =
         tier.incomePerSecond * Math.floor(lastTimeDifference / 1000);
       setMoney(earnings);
     });
+    saveGame();
   },
 
   setTimeDifference: async () => {
