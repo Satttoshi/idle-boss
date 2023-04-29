@@ -33,12 +33,9 @@ export default function HomePage() {
 
   useEffect(() => {
     const timer = new IdleTimer({
-      timeout: 10,
+      timeout: 600,
       onTimeout: () => {
-        console.log("timeout");
-      },
-      onExpired: () => {
-        console.log("expired");
+        window.location.reload();
       },
     });
 
