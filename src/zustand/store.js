@@ -1,6 +1,7 @@
 import { create as createStore } from "zustand";
 import tierData from "./tierData";
 import setSpeed from "./speedSheet";
+import fetchTime from "../utils/fetch-time";
 
 export const milestones = [10, 25, 50, 100, 200, 300, 400, "max"];
 export const floorPrices = [0, 7000000, 4400000000000000];
@@ -25,6 +26,32 @@ const useStore = createStore((set, get) => ({
   isLocalStorageLoaded: false,
   isLoadingToastActive: false,
   currentSaveGameIntervalId: null,
+  currentTime: null,
+  lastTimeDifference: 0,
+
+  applyIdleEarnings: () => {
+    const { tiers, lastTimeDifference, setMoney, saveGame } = get();
+    const tiersWithActiveManagers = tiers.filter((tier) => tier.hasManager);
+    tiersWithActiveManagers.forEach((tier) => {
+      const earnings =
+        tier.incomePerSecond * Math.floor(lastTimeDifference / 1000);
+      setMoney(earnings);
+    });
+    saveGame();
+  },
+
+  setTimeDifference: async () => {
+    const { currentTime } = get();
+    const now = await fetchTime();
+    if (currentTime) {
+      const difference = now - currentTime;
+      set(() => ({ lastTimeDifference: difference }));
+    } else {
+      set(() => ({ lastTimeDifference: 0 }));
+    }
+  },
+
+  setCurrentTime: (time) => set(() => ({ currentTime: time })),
 
   setApprovalModalOpen: (isOpen) =>
     set(() => ({ isApprovalModalOpen: isOpen })),
@@ -44,7 +71,7 @@ const useStore = createStore((set, get) => ({
     runAutoSave();
   },
 
-  saveGame: () => {
+  saveGame: async () => {
     const {
       money,
       availableFloors,
@@ -57,7 +84,11 @@ const useStore = createStore((set, get) => ({
       selectedManager,
       isConstructionModalOpen,
       runLoadingToast,
+      setCurrentTime,
     } = get();
+    const time = await fetchTime();
+    setCurrentTime(time);
+    const { currentTime } = get();
     localStorage.setItem(
       "game",
       JSON.stringify({
@@ -73,14 +104,15 @@ const useStore = createStore((set, get) => ({
         isManagerModalOpen,
         selectedManager,
         isConstructionModalOpen,
+        currentTime,
         isFreshStart: false,
       })
     );
     runLoadingToast();
   },
 
-  loadGame: () => {
-    const { setLocalStorageLoaded } = get();
+  loadGame: async () => {
+    const { setLocalStorageLoaded, setTimeDifference } = get();
     if (typeof localStorage === "undefined") {
       setLocalStorageLoaded(true);
       return;
@@ -92,6 +124,7 @@ const useStore = createStore((set, get) => ({
       ...state,
       ...game,
     }));
+    await setTimeDifference();
   },
 
   runLoadingToast: () => {

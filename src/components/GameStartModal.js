@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import useStore from "~/src/zustand/store";
 import { useState, useEffect } from "react";
+import formatNumbers from "~/src/utils/format-numbers";
 
 export default function GameStart() {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +12,9 @@ export default function GameStart() {
   const userName = useStore((state) => state.username);
   const isFreshStart = useStore((state) => state.isFreshStart);
   const loadGame = useStore((state) => state.loadGame);
+  const lastTimeDifference = useStore((state) => state.lastTimeDifference);
+  const tiers = useStore((state) => state.tiers);
+  const applyIdleEarnings = useStore((state) => state.applyIdleEarnings);
 
   useEffect(() => {
     setIsLoading(false);
@@ -30,6 +34,25 @@ export default function GameStart() {
     onGameStart();
   }
 
+  function handleIdleEarnings() {
+    applyIdleEarnings(calculateEarnings());
+    setGameStartModalActive(false);
+    onGameStart();
+  }
+
+  const lastTimeDifferenceInSeconds = Math.floor(lastTimeDifference / 1000);
+
+  function calculateEarnings() {
+    let earnings = 0;
+    const tiersWithActiveManagers = tiers.filter((tier) => tier.hasManager);
+    tiersWithActiveManagers.forEach((tier) => {
+      const earningsPerTier =
+        tier.incomePerSecond * lastTimeDifferenceInSeconds;
+      earnings += earningsPerTier;
+    });
+    return earnings;
+  }
+
   return (
     <StyledDimmer onClick={handleGameStart}>
       <StyledModal onClick={preventClosing}>
@@ -44,7 +67,7 @@ export default function GameStart() {
             </StyledDescription>
             <StyledButton onClick={handleGameStart}>{"Let's go!"}</StyledButton>
           </>
-        ) : (
+        ) : lastTimeDifferenceInSeconds < 30 ? (
           <>
             <StyledDescription variant={0}>
               Welcome back {userName},
@@ -55,6 +78,22 @@ export default function GameStart() {
             </StyledDescription>
             <StyledButton onClick={handleGameStart}>{"Let's go!"}</StyledButton>
           </>
+        ) : (
+          <>
+            <StyledDescription variant={0}>
+              Welcome back {userName},
+            </StyledDescription>
+            <StyledDescription>
+              Your managers worked hard for you while you were away and earned
+              you a total of:
+            </StyledDescription>
+            <StyledDescription variant={1}>
+              {formatNumbers(calculateEarnings()) + " €"}
+            </StyledDescription>
+            <StyledButton onClick={handleIdleEarnings}>
+              {"Let's go!"}
+            </StyledButton>
+          </>
         )}
       </StyledModal>
     </StyledDimmer>
@@ -62,12 +101,15 @@ export default function GameStart() {
 }
 
 const StyledDescription = styled.p`
-  color: var(--1);
+  color: ${(props) => (props.variant === 1 ? "var(--3)" : "var(--1)")};
   font-family: var(--font1);
   text-align: center;
-  font-size: 1.4rem;
+  font-size: ${(props) => (props.variant === 1 ? "1.6rem" : "1.4rem")};
   margin: 0;
-  font-weight: ${(props) => (props.variant === 0 ? 590 : 400)};
+  font-weight: ${({ variant }) => (variant === 0 || variant === 1 ? 590 : 400)};
+
+  text-shadow: ${({ variant }) =>
+    variant === 0 || variant === 1 ? "var(--shadow2)" : "none"};
 
   padding: 0 20px;
 
@@ -156,7 +198,7 @@ const StyledModal = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
 
   & > *:first-child {
     padding-top: 50px;
