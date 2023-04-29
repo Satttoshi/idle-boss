@@ -24,6 +24,7 @@ const useStore = createStore((set, get) => ({
   isFreshStart: true,
   isLocalStorageLoaded: false,
   isLoadingToastActive: false,
+  currentSaveGameIntervalId: null,
 
   setApprovalModalOpen: (isOpen) =>
     set(() => ({ isApprovalModalOpen: isOpen })),
@@ -54,6 +55,7 @@ const useStore = createStore((set, get) => ({
       isManagerModalOpen,
       selectedManager,
       isConstructionModalOpen,
+      runLoadingToast,
     } = get();
     localStorage.setItem(
       "game",
@@ -73,6 +75,7 @@ const useStore = createStore((set, get) => ({
         isFreshStart: false,
       })
     );
+    runLoadingToast();
   },
 
   loadGame: () => {
@@ -95,6 +98,15 @@ const useStore = createStore((set, get) => ({
     setTimeout(() => {
       set(() => ({ isLoadingToastActive: false }));
     }, 2000);
+  },
+
+  runAutoSave: () => {
+    const { saveGame, currentSaveGameIntervalId } = get();
+    if (currentSaveGameIntervalId) clearInterval(currentSaveGameIntervalId);
+    const intervalId = setInterval(() => {
+      saveGame();
+    }, 30000);
+    set(() => ({ currentSaveGameIntervalId: intervalId }));
   },
 
   setMoney: (amount) => set((state) => ({ money: state.money + amount })),
