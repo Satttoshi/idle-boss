@@ -19,7 +19,8 @@ But here's the best part - even when you're not playing, your company keeps on g
 
 Customize your game by choosing from 5 distinct color themes!
 
-![image](https://user-images.githubusercontent.com/109807794/235363631-5f941836-741f-4005-b966-a70c14bd5e39.png)
+![image](https://user-images.githubusercontent.com/109807794/235375696-f4f232cb-2392-4367-b316-2490d31a5c3c.png)
+
 
 ### Web3 Wallet-Connection
 
