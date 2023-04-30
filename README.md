@@ -9,7 +9,8 @@ Your ultimate goal is to create amazing products, sell them, and hire a talented
 
 ### The game
 
-![image](https://user-images.githubusercontent.com/109807794/235363615-f33789e6-63bf-44ce-ac24-bae800cbfd50.png)
+![image](https://user-images.githubusercontent.com/109807794/235375834-7d443f95-9612-44f9-ae36-5a07ab7de4d5.png)
+
 
 The ultimate money-making business simulation inspired by games like Adventure Capitalist, Idle Miner & Cookie Clicker! Tap on the buttons to start earning cash, and invest in your products to skyrocket your profits! Keep an eye out for talented job applicants to hire as your auto clickers and unlock more exciting products to build your business empire.
 
