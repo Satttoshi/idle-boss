@@ -6,7 +6,7 @@ export default function ThemeSwitch() {
 
   function toggleTheme() {
     const themeIndex = parseInt(theme.slice(-1));
-    const nextThemeIndex = (themeIndex + 1) % 3;
+    const nextThemeIndex = (themeIndex + 1) % 5;
     const nextTheme = `theme${nextThemeIndex}`;
     setTheme(nextTheme);
   }
