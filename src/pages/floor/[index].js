@@ -25,7 +25,6 @@ export default function HomePage() {
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
-
   const isGameStartModalActive = useStore(
     (state) => state.isGameStartModalActive
   );
@@ -34,12 +33,11 @@ export default function HomePage() {
 
   useEffect(() => {
     const timer = new IdleTimer({
-      timeout: 10,
+      timeout: 600,
       onTimeout: () => {
         setIsIdle(true);
       },
     });
-
     return () => {
       timer.cleanUp();
     };
@@ -48,7 +46,6 @@ export default function HomePage() {
   useEffect(() => {
     function handleVisibilityChange() {
       if (!document.hidden && isIdle) {
-        console.log("reload page!");
         window.location.reload();
       }
       return;
@@ -84,7 +81,6 @@ export default function HomePage() {
       {isApprovalModalOpen && <ApprovalModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}
-
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>

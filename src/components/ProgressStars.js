@@ -43,10 +43,10 @@ const StyledStar = styled(Star)`
 
 const StyledStarContainer = styled.div`
   height: 20px;
-  width: 200px;
+  width: 220px;
   z-index: 20;
   position: absolute;
-  left: 28px;
+  left: 25px;
   transform: translateY(-10px);
   display: flex;
   gap: 2px;

@@ -2,9 +2,14 @@ import { createGlobalStyle } from "styled-components";
 
 import localfont from "@next/font/local";
 
-const fredoka = localfont({ src: "/public/fonts/fredoka.ttf" });
+const fredoka = localfont({
+  src: "/public/fonts/fredoka.ttf",
+  display: "swap",
+});
 const carterOne = localfont({
-  src: [{ path: "/public/fonts/carter_one.ttf", weight: "400" }],
+  src: [
+    { path: "/public/fonts/carter_one.ttf", weight: "400", display: "swap" },
+  ],
 });
 
 const theme0 = {
