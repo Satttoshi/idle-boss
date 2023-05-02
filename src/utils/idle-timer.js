@@ -2,7 +2,6 @@ class IdleTimer {
   constructor({ timeout, onTimeout }) {
     this.timeout = timeout;
     this.onTimeout = onTimeout;
-
     this.eventHandler = this.updateExpiredTime.bind(this);
     this.tracker();
     this.startInterval();
