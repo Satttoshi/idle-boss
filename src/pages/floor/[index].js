@@ -11,9 +11,10 @@ import GameStartModal from "~/src/components/GameStartModal";
 import LoadingToast from "~/src/components/LoadingToast";
 import ApprovalModal from "~/src/components/ApprovalModal";
 import IdleTimer from "~/src/utils/idle-timer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [isIdle, setIsIdle] = useState(false);
   const currentFloor = useStore((state) => state.currentFloor);
   const availableFloors = useStore((state) => state.availableFloors);
   const currentBossFloor = availableFloors.length;
@@ -24,7 +25,6 @@ export default function HomePage() {
     (state) => state.isConstructionModalOpen
   );
   const userName = useStore((state) => state.username);
-
   const isGameStartModalActive = useStore(
     (state) => state.isGameStartModalActive
   );
@@ -35,14 +35,27 @@ export default function HomePage() {
     const timer = new IdleTimer({
       timeout: 600,
       onTimeout: () => {
-        window.location.reload();
+        setIsIdle(true);
       },
     });
-
     return () => {
       timer.cleanUp();
     };
   }, []);
+
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (!document.hidden && isIdle) {
+        window.location.reload();
+      }
+      return;
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [isIdle]);
 
   function getPosition() {
     if (currentFloor === currentBossFloor) {
@@ -68,7 +81,6 @@ export default function HomePage() {
       {isApprovalModalOpen && <ApprovalModal />}
       {isManagerModalOpen && <ManagerModal userName={userName} />}
       {isConstructionModalOpen && <ConstructionModal />}
-
       <Layout>
         <StyledMain>
           <StyledPageSection floor={bossFloor}>

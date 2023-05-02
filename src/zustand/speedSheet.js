@@ -11,6 +11,8 @@ export default function setSpeed(tierMilestoneIndex, tierIndex, tierDelay) {
           return Math.round(tierDelay / 10);
         case 4:
           return Math.round(tierDelay / 3);
+        case 5:
+          return Math.round(tierDelay / 5);
         default:
           return Math.round(tierDelay / 2);
       }
@@ -50,7 +52,7 @@ export default function setSpeed(tierMilestoneIndex, tierIndex, tierDelay) {
         case 1:
           return Math.round(tierDelay / Math.sqrt(2));
         case 3:
-          return Math.round(tierDelay / 3);
+          return Math.round(tierDelay / 6);
         default:
           return Math.round(tierDelay / 2);
       }

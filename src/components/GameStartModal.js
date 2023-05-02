@@ -17,8 +17,11 @@ export default function GameStart() {
   const applyIdleEarnings = useStore((state) => state.applyIdleEarnings);
 
   useEffect(() => {
-    setIsLoading(false);
-    loadGame();
+    async function handleLoadGame() {
+      await loadGame();
+      setIsLoading(false);
+    }
+    handleLoadGame();
   }, [loadGame]);
 
   if (isLoading) {
