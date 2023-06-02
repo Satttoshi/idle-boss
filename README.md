@@ -1,5 +1,9 @@
 # IDLE BOSS
 
+### Quicklink
+
+Play the game here: [IDLE BOSS](https://idle-boss.vercel.app/)
+
 ### Lore
 
 Are you ready to unleash your inner entrepreneur? In this thrilling idle game, you'll be stepping into the shoes of a startup founder and building your own business from scratch!
